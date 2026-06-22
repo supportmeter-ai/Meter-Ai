@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meter AI — Founder Control Center</title>
+  <link rel="stylesheet" href="admin-styles.css?v=1.0.1">
+  <!-- Google Fonts matching main website -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- LEFT SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a href="#" class="nav-brand">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="nav-logo-icon">
+          <path d="M20 20a8 8 0 0 0-16 0"/><line x1="12" y1="20" x2="16" y2="14"/><circle cx="12" cy="20" r="2"/>
+        </svg>
+        <span class="nav-logo-text">Meter AI</span>
+      </a>
+      <button id="sidebarCollapseBtn" class="btn-icon-sidebar" title="Toggle Sidebar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sidebar"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg>
+      </button>
+    </div>
+    
+    <nav class="sidebar-menu">
+      <ul>
+        <li class="menu-item">
+          <a href="#overview" class="menu-link active" id="link-overview">
+            <span class="menu-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-dashboard"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="10" rx="1"/><rect width="7" height="5" x="3" y="14" rx="1"/></svg>
+            </span>
+            <span>Overview</span>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="#users" class="menu-link" id="link-users">
+            <span class="menu-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </span>
+            <span>Users</span>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="#revenue" class="menu-link" id="link-revenue">
+            <span class="menu-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-credit-card"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+            </span>
+            <span>Revenue & Payments</span>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="#events" class="menu-link" id="link-events">
+            <span class="menu-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-activity"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </span>
+            <span>Activity & Webhooks</span>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="#feedback" class="menu-link" id="link-feedback">
+            <span class="menu-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-messages-square"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </span>
+            <span>Feedback & Support</span>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="#health" class="menu-link" id="link-health">
+            <span class="menu-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart-pulse"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l1.5-4.5 2 9 1.5-4.5h3.27"/></svg>
+            </span>
+            <span>System Health</span>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="#notes" class="menu-link" id="link-notes">
+            <span class="menu-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+            </span>
+            <span>Notes & Tasks</span>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="#settings" class="menu-link" id="link-settings">
+            <span class="menu-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.1a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+            </span>
+            <span>Settings</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Sidebar footer inspired by shadow-dropdown template -->
+    <div class="sidebar-footer">
+      <div class="avatar-circle">HP</div>
+      <div class="admin-info">
+        <span class="admin-name" id="adminEmailDisplay">harshaparisha@gmail.com</span>
+        <span class="admin-role">Founder / Owner</span>
+      </div>
+      <button class="btn-logout" id="logoutBtn" title="Sign Out">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN AREA -->
+  <div class="main-wrapper">
+    <header class="header">
+      <div class="header-title-section">
+        <button class="menu-toggle" id="menuToggle">☰</button>
+        <h2 class="header-title" id="pageTitle">Overview</h2>
+      </div>
+      <div class="header-actions">
+        <div class="refresh-indicator" id="refreshIndicator">
+          <span class="refresh-dot"></span>
+          <span>Auto-updates in 30s</span>
+        </div>
+        <button class="btn-action-primary" id="manualRefreshBtn" style="display: flex; align-items: center; gap: 6px;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-refresh-cw"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
+          <span>Refresh</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="content-area">
+      
+      <!-- ─── PANE 1: OVERVIEW ─── -->
+      <section class="section-pane active" id="pane-overview">
+        <div class="stats-grid" id="overview-stats-grid">
+          <!-- Populated by JS -->
+          <div class="stat-card">
+            <span class="stat-label">Loading stats...</span>
+          </div>
+        </div>
+
+        <div class="panel-grid">
+          <!-- Recent Webhooks -->
+          <div class="card" style="display: flex; flex-direction: column;">
+            <div class="card-title">
+              <span>Recent Activity Logs</span>
+              <a href="#events" class="btn-action-sm" style="display: inline-flex; align-items: center; gap: 4px;">
+                <span>View All</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>
+              </a>
+            </div>
+            <div class="table-wrapper" style="flex-grow: 1;">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Event</th>
+                    <th>Payment ID</th>
+                    <th>Subscription ID</th>
+                    <th>Logged On</th>
+                  </tr>
+                </thead>
+                <tbody id="overview-events-table">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+            <div class="pagination-container" id="overview-events-pagination" style="display: none; align-items: center; justify-content: space-between; padding: 12px 16px; border-top: 1px solid var(--card-border); font-size: 13px; color: var(--text-muted); font-family: var(--font-body); margin-top: auto;">
+              <span id="overview-events-pagination-info">Showing 1-5 of 0</span>
+              <div style="display: flex; gap: 8px;">
+                <button type="button" class="btn-action-sm" id="btn-overview-events-prev" style="padding: 4px 10px; font-size: 12px; border-radius: 4px;">Previous</button>
+                <button type="button" class="btn-action-sm" id="btn-overview-events-next" style="padding: 4px 10px; font-size: 12px; border-radius: 4px;">Next</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pending Support Tickets -->
+          <div class="card" style="display: flex; flex-direction: column;">
+            <div class="card-title">
+              <span>Urgent Support Tickets</span>
+              <a href="#feedback" class="btn-action-sm">Resolve</a>
+            </div>
+            <div class="ticket-list" id="overview-tickets-list" style="flex-grow: 1;">
+              <!-- Populated by JS -->
+            </div>
+            <div class="pagination-container" id="overview-tickets-pagination" style="display: none; align-items: center; justify-content: space-between; padding: 12px 16px; border-top: 1px solid var(--card-border); font-size: 13px; color: var(--text-muted); font-family: var(--font-body); margin-top: 16px;">
+              <span id="overview-tickets-pagination-info">Showing 1-5 of 0</span>
+              <div style="display: flex; gap: 8px;">
+                <button type="button" class="btn-action-sm" id="btn-overview-tickets-prev" style="padding: 4px 10px; font-size: 12px; border-radius: 4px;">Previous</button>
+                <button type="button" class="btn-action-sm" id="btn-overview-tickets-next" style="padding: 4px 10px; font-size: 12px; border-radius: 4px;">Next</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─── PANE 2: USER DATABASE ─── -->
+      <section class="section-pane" id="pane-users">
+        <div class="card">
+          <div class="card-title">
+            <span>Manage User Accounts</span>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <!-- Inspired Dropdown visibility trigger -->
+              <div class="dropdown-wrapper">
+                <button class="btn-action-sm dropdown-trigger" id="btnColumnVisibility" style="display: flex; align-items: center; gap: 6px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0z"/><circle cx="12" cy="12" r="3"/></svg>
+                  <span>Show/Hide</span>
+                </button>
+                <div class="dropdown-content" id="columnVisibilityDropdown">
+                  <!-- Dynamic checkmark inputs generated by JS -->
+                </div>
+              </div>
+              <button class="btn-action-primary" id="openActivateModalBtn" style="display: flex; align-items: center; gap: 6px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                <span>Manual Upgrade</span>
+              </button>
+            </div>
+          </div>
+          
+          <div class="search-bar">
+            <input type="text" class="search-input" id="userSearchInput" placeholder="Search by email, name or account ID...">
+            <select class="filter-select" id="userPlanFilter">
+              <option value="all">All Plans</option>
+              <option value="free">Free</option>
+              <option value="pro_monthly">Pro Monthly</option>
+              <option value="lifetime">Lifetime</option>
+            </select>
+            <select class="filter-select" id="userStatusFilter">
+              <option value="all">All Statuses</option>
+              <option value="active">Active</option>
+              <option value="cancelled">Cancelled</option>
+              <option value="pending">Pending</option>
+              <option value="expired">Expired</option>
+            </select>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="data-table" id="user-table-element">
+              <thead>
+                <tr>
+                  <th>User Details</th>
+                  <th>Plan</th>
+                  <th>Status</th>
+                  <th>Razorpay Customer</th>
+                  <th>Subscription ID</th>
+                  <th>Expires On</th>
+                  <th>Signed Up</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="user-database-table">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─── PANE 3: REVENUE & PAYMENTS ─── -->
+      <section class="section-pane" id="pane-revenue">
+        <!-- Revenue Metrics Grid -->
+        <div class="stats-grid" id="revenue-stats-grid">
+          <div class="stat-card">
+            <span class="stat-label">Total Revenue</span>
+            <div class="stat-value" id="revenueTotalVal">₹0</div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Monthly Recurring Revenue (MRR)</span>
+            <div class="stat-value" id="revenueMRRVal">₹0</div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Total Transactions</span>
+            <div class="stat-value" id="revenueCountVal">0</div>
+          </div>
+        </div>
+
+        <!-- Payments list -->
+        <div class="card">
+          <div class="card-title">
+            <span>Payment Transactions History</span>
+          </div>
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Customer Email</th>
+                  <th>Description</th>
+                  <th>Amount</th>
+                  <th>Payment ID</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody id="revenue-history-table">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─── PANE 4: ACTIVITY & WEBHOOKS ─── -->
+      <section class="section-pane" id="pane-events">
+        <div class="card">
+          <div class="card-title">
+            <span>Razorpay Webhook Events Log</span>
+          </div>
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Event</th>
+                  <th>Payment ID</th>
+                  <th>Subscription ID</th>
+                  <th>User ID / Profile</th>
+                  <th>Received At</th>
+                </tr>
+              </thead>
+              <tbody id="full-events-table">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─── PANE 5: FEEDBACK & SUPPORT ─── -->
+      <section class="section-pane" id="pane-feedback">
+        <div class="panel-grid" style="grid-template-columns: 1fr 1fr;">
+          <!-- Left: Support Ticket Queue -->
+          <div class="card">
+            <div class="card-title">
+              <span>Customer Support Queue</span>
+              <select class="filter-select" id="ticketStatusFilter" style="padding: 6px 10px; font-size: 12px;">
+                <option value="all">All Statuses</option>
+                <option value="open">Open</option>
+                <option value="in_progress">In Progress</option>
+                <option value="resolved">Resolved</option>
+              </select>
+            </div>
+            <div class="ticket-list" id="full-support-list">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+          <!-- Right: Feedback Submissions -->
+          <div class="card">
+            <div class="card-title">
+              <span>User Rating Feedback</span>
+            </div>
+            <div class="table-wrapper">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>User Details</th>
+                    <th>Rating</th>
+                    <th>Message</th>
+                    <th>Submitted</th>
+                  </tr>
+                </thead>
+                <tbody id="feedback-table">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+              <div class="pagination-container" id="feedback-pagination" style="display: none; align-items: center; justify-content: space-between; padding: 12px 16px; border-top: 1px solid var(--card-border); font-size: 13px; color: var(--text-muted); font-family: var(--font-body);">
+                <span id="feedback-pagination-info">Showing 1-5 of 0</span>
+                <div style="display: flex; gap: 8px;">
+                  <button type="button" class="btn-action-sm" id="btn-feedback-prev" style="padding: 4px 10px; font-size: 12px; border-radius: 4px;">Previous</button>
+                  <button type="button" class="btn-action-sm" id="btn-feedback-next" style="padding: 4px 10px; font-size: 12px; border-radius: 4px;">Next</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─── PANE 6: SYSTEM HEALTH ─── -->
+      <section class="section-pane" id="pane-health">
+        <div class="panel-grid" style="grid-template-columns: 1fr 1fr;">
+          <div class="card">
+            <div class="card-title">System Health & API Connection Status</div>
+            <div class="health-list" id="health-check-list">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="card-title">Quick Administrative Actions</div>
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+              <p style="font-size: 14px; color: var(--text-muted);">Perform administrative utilities manually in case of service mismatches.</p>
+              
+              <div style="border-top: 1px solid var(--card-border); padding-top: 16px;">
+                <h4 style="font-size: 14px; margin-bottom: 8px;">Synchronize Webhook Events</h4>
+                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">Trigger a check to process missed webhook audits.</p>
+                <button class="btn-action-primary" id="btnSyncWebhooks" style="display: flex; align-items: center; gap: 6px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                  <span>Trigger Webhook Scan</span>
+                </button>
+              </div>
+
+              <div style="border-top: 1px solid var(--card-border); padding-top: 16px;">
+                <h4 style="font-size: 14px; margin-bottom: 8px;">Development repository link</h4>
+                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">Open the developer repository to review commits.</p>
+                <a href="https://github.com/supportmeter-ai/Meter-Ai" target="_blank" class="btn-action-primary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+                  <span>Open GitHub Repo</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─── PANE 7: FOUNDER NOTES & TASKS ─── -->
+      <section class="section-pane" id="pane-notes">
+        <!-- Top Control Bar (Quick Actions + Filters) -->
+        <div class="kanban-control-bar">
+          <!-- Quick Actions Bar -->
+          <div class="quick-actions-bar">
+            <button type="button" class="btn-action-sm btn-quick-add" data-type="task">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-circle"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
+              <span>Task</span>
+            </button>
+            <button type="button" class="btn-action-sm btn-quick-add" data-type="bug">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bug"><path d="m8 2 1.88 1.88"/><path d="M14.12 3.88 16 2"/><path d="M9 7.13v-1a3.003 3.003 0 1 1 6 0v1"/><path d="M12 20c-4.42 0-8-3.58-8-8V9h16v3c0 4.42-3.58 8-8 8Z"/><path d="M5 12H2"/><path d="M22 12h-3"/><path d="M4 17h-2"/><path d="M22 17h-2"/><path d="M4 7H2"/><path d="M22 7h-2"/></svg>
+              <span>Bug</span>
+            </button>
+            <button type="button" class="btn-action-sm btn-quick-add" data-type="feature">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-zap"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              <span>Feature</span>
+            </button>
+            <button type="button" class="btn-action-sm btn-quick-add" data-type="deployment">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-rocket"><path d="M4.5 16.5c-1.5 1.26-2 3.5-2 3.5s2.24-.5 3.5-2"/><path d="M22 2c-1.5 1.5-6.5 2-8.5 2.5a20 20 0 0 0-4 1.5c-3.15 1.89-6.3 5.46-7.5 7.5L5 16.5a14 14 0 0 0 6-3L13.5 12c1.35-.9 3.5-5.5 5-7.5L22 2Z"/><path d="M12 12c.5-.5 1-1.5 1-2.5s-1-2-2.5-3S8 7.5 8 8v1.5Z"/></svg>
+              <span>Deployment</span>
+            </button>
+            <button type="button" class="btn-action-sm btn-quick-add" data-type="meeting">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-days"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></svg>
+              <span>Meeting</span>
+            </button>
+            <button type="button" class="btn-action-sm btn-quick-add" data-type="note" style="color: var(--accent); border-color: rgba(216,90,48,0.2);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sticky-note"><path d="M16 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9Z"/><path d="M15 3v6h6"/></svg>
+              <span>Note</span>
+            </button>
+          </div>
+
+          <!-- Board Filters Bar (Inline) -->
+          <div class="kanban-filters-inline">
+            <input type="text" id="kanbanSearchInput" class="search-input-sm" placeholder="Search cards...">
+            <select id="kanbanPriorityFilter" class="filter-select-sm">
+              <option value="all">All Priorities</option>
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+              <option value="critical">Critical</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Productivity Stats Row -->
+        <div class="kanban-stats-row">
+          <div class="k-stat-item">
+            <div class="k-stat-label">Total Cards</div>
+            <div class="k-stat-value" id="k-stat-total">0</div>
+          </div>
+          <div class="k-stat-item">
+            <div class="k-stat-label">Inbox Queue</div>
+            <div class="k-stat-value" id="k-stat-inbox" style="color: var(--text-muted);">0</div>
+          </div>
+          <div class="k-stat-item">
+            <div class="k-stat-label">To Do List</div>
+            <div class="k-stat-value" id="k-stat-todo-count" style="color: #30a2ff;">0</div>
+          </div>
+          <div class="k-stat-item">
+            <div class="k-stat-label">Active Work</div>
+            <div class="k-stat-value" id="k-stat-progress" style="color: var(--warning);">0</div>
+          </div>
+          <div class="k-stat-item">
+            <div class="k-stat-label">Urgent Focus</div>
+            <div class="k-stat-value" id="k-stat-urgent" style="color: var(--danger);">0</div>
+          </div>
+        </div>
+
+        <!-- Kanban Board Container -->
+        <div class="kanban-board-container">
+          <div class="kanban-column" data-col="backlog">
+            <div class="column-header">
+              <span class="column-title">Inbox</span>
+              <span class="column-count" id="count-backlog">0</span>
+            </div>
+            <div class="column-cards" id="cards-backlog"></div>
+          </div>
+
+          <div class="kanban-column" data-col="todo">
+            <div class="column-header">
+              <span class="column-title">To Do</span>
+              <span class="column-count" id="count-todo">0</span>
+            </div>
+            <div class="column-cards" id="cards-todo"></div>
+          </div>
+
+          <div class="kanban-column" data-col="in_progress">
+            <div class="column-header">
+              <span class="column-title">In Progress</span>
+              <span class="column-count" id="count-in_progress">0</span>
+            </div>
+            <div class="column-cards" id="cards-in_progress"></div>
+          </div>
+
+          <div class="kanban-column" data-col="done">
+            <div class="column-header">
+              <span class="column-title">Done</span>
+              <span class="column-count" id="count-done">0</span>
+            </div>
+            <div class="column-cards" id="cards-done"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─── PANE 8: SETTINGS & SECURITY ─── -->
+      <section class="section-pane" id="pane-settings">
+        <div class="panel-grid" style="grid-template-columns: 1fr 1fr; gap: 24px;">
+          <!-- System Configurations -->
+          <div class="card" style="margin-bottom: 0;">
+            <div class="card-title">Environment Variables & SDK Configuration</div>
+            <div class="table-wrapper">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Variable Name</th>
+                    <th>Configured Value</th>
+                  </tr>
+                </thead>
+                <tbody id="settingsConfigTable">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Security parameters -->
+          <div class="card" style="margin-bottom: 0;">
+            <div class="card-title">Security & Session Policies</div>
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+              <div class="policy-card">
+                <h4 class="policy-title">Admin Session Expiration</h4>
+                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px;">HTTP-only authentication cookies expire automatically after 24 hours. Sign-in sessions are checked on every page access.</p>
+                <span class="badge active">24h Expiry</span>
+                <span class="badge active" style="background-color: var(--accent-light); color: var(--accent); border: 1px solid rgba(216,90,48,0.2);">HTTP-Only Cookie</span>
+              </div>
+
+              <div class="policy-card">
+                <h4 class="policy-title">API Access Policy</h4>
+                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px;">CORS is set up to block access to the `/api/admin/` routing block except from authenticated origins. All responses contain basic security protection headers.</p>
+                <span class="badge active">CORS Enforced</span>
+                <span class="badge active">CSRF Protected</span>
+              </div>
+
+              <div class="policy-card danger">
+                <h4 class="policy-title" style="color: var(--danger);">System Security Notice</h4>
+                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 0;">Passwords are compared strictly using one-way cryptographic bcrypt hashes stored in environmental variables. Ensure you never commit unhashed values in source repositories.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ─── MODAL: MANUAL ACTIVATION ─── -->
+  <div class="modal-overlay" id="activateModalOverlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title">Manual Account Activation</h3>
+        <button class="btn-close-modal" id="closeActivateModalBtn">&times;</button>
+      </div>
+      <form id="activateUserForm">
+        <div class="modal-body">
+          <div class="modal-form-group">
+            <label for="activateEmail">User Email Address</label>
+            <input type="email" id="activateEmail" class="modal-input" required placeholder="user@example.com">
+          </div>
+          <div class="modal-form-group">
+            <label for="activatePlan">Choose Plan</label>
+            <select id="activatePlan" class="modal-input">
+              <option value="pro_monthly">Pro Monthly (₹169)</option>
+              <option value="lifetime">Lifetime Premium (₹1999)</option>
+              <option value="free">Free Downgrade</option>
+            </select>
+          </div>
+          <div class="modal-form-group">
+            <label for="activateReason">Reason / Notes</label>
+            <input type="text" id="activateReason" class="modal-input" placeholder="e.g. Complimentary test account, Razorpay failure">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-action-sm" id="cancelActivateBtn">Cancel</button>
+          <button type="submit" class="btn-action-primary" id="submitActivateBtn">Activate User</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ─── MODAL: SEND REPLY (SUPPORT) ─── -->
+  <div class="modal-overlay" id="replyModalOverlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title">Reply to Support Ticket</h3>
+        <button class="btn-close-modal" id="closeReplyModalBtn">&times;</button>
+      </div>
+      <form id="replyTicketForm">
+        <input type="hidden" id="replyTicketId">
+        <div class="modal-body">
+          <div class="modal-form-group">
+            <label>Recipient</label>
+            <div id="replyRecipientDisplay" style="font-size: 14px; font-weight: 600; padding: 4px 0;">user@example.com</div>
+          </div>
+          <div class="modal-form-group">
+            <label>Original Subject</label>
+            <div id="replySubjectDisplay" style="font-size: 14px; padding: 4px 0; color: var(--text-muted);">Problem with setup</div>
+          </div>
+          <div class="modal-form-group">
+            <label for="replyMessage">Reply Email Content</label>
+            <textarea id="replyMessage" class="modal-textarea" required placeholder="Write your professional email response here..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-action-sm" id="cancelReplyBtn">Cancel</button>
+          <button type="submit" class="btn-action-primary" id="submitReplyBtn">Send Reply via Resend</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ─── MODAL: KANBAN TASK EDITOR ─── -->
+  <div class="modal-overlay" id="kanbanModalOverlay">
+    <div class="modal" style="max-width: 600px;">
+      <div class="modal-header">
+        <h3 class="modal-title" id="kanbanModalTitle">Create Kanban Task</h3>
+        <button class="btn-close-modal" id="closeKanbanModalBtn">&times;</button>
+      </div>
+      <form id="kanbanTaskForm">
+        <input type="hidden" id="kanbanTaskId">
+        <div class="modal-body" style="max-height: 480px; overflow-y: auto; padding-right: 8px;">
+          
+          <div class="modal-form-group">
+            <label for="kanbanTaskTitle">Heading</label>
+            <input type="text" id="kanbanTaskTitle" class="modal-input" required placeholder="e.g. Chrome Extension JWT Verification">
+          </div>
+          
+          <div class="modal-form-group">
+            <label for="kanbanTaskDesc">Problem Statement / Details</label>
+            <textarea id="kanbanTaskDesc" class="modal-textarea" style="height: 180px;" placeholder="Enter the problem statement or detailed tasks here..."></textarea>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div class="modal-form-group">
+              <label for="kanbanTaskPriority">Priority</label>
+              <select id="kanbanTaskPriority" class="modal-input">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+                <option value="critical">Critical</option>
+              </select>
+            </div>
+            <div class="modal-form-group">
+              <label for="kanbanTaskColumn">Board Column</label>
+              <select id="kanbanTaskColumn" class="modal-input">
+                <option value="backlog">Inbox</option>
+                <option value="todo">To Do</option>
+                <option value="in_progress">In Progress</option>
+                <option value="done">Done</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-action-sm" id="cancelKanbanBtn">Cancel</button>
+          <button type="submit" class="btn-action-primary" id="saveKanbanBtn">Save Card</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="admin.js?v=1.0.1"></script>
+</body>
+</html>

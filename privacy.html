@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Meter AI</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .legal-content {
+      max-width: 600px;
+      margin: 80px auto;
+      padding: 0 24px;
+    }
+    .legal-content h1 {
+      font-family: var(--font-heading);
+      font-size: 36px;
+      font-weight: 400;
+      color: var(--text-primary);
+      margin-bottom: 24px;
+    }
+    .legal-content h2 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-top: 32px;
+      margin-bottom: 12px;
+    }
+    .legal-content p, .legal-content li {
+      font-size: 14.5px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .legal-content ul {
+      margin-left: 20px;
+      margin-bottom: 16px;
+    }
+    .legal-back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 40px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .legal-back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="legal-content">
+    <a href="/" class="legal-back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      Back to Home
+    </a>
+    <h1>Privacy Policy</h1>
+    <p>Last updated: June 20, 2026</p>
+    
+    <p>Meter AI does not collect, transmit, or store any of your data outside your browser. We value your privacy and believe your usage data belongs to you.</p>
+    
+    <h2>What Meter Reads</h2>
+    <ul>
+      <li>Usage percentages and reset timestamps that Claude.ai's own page already loads into your browser, in order to display them in a more useful format.</li>
+      <li>The visible text of your current conversation, solely to estimate token counts locally when live usage data isn't yet available. This text is never transmitted, logged, or stored — it is processed in memory and discarded immediately after the estimate is computed.</li>
+      <li>The name of your active Claude Project (if any), to let you set usage budgets per project.</li>
+    </ul>
+
+    <h2>What Meter Stores</h2>
+    <p>Your settings (currency, notification preferences, budgets) and activity logs are stored locally in your browser via <code>chrome.storage.local</code>. This data never leaves your device and is deleted if you uninstall the extension or use "Reset all data" in settings.</p>
+
+    <h2>What Meter Does NOT Do</h2>
+    <ul>
+      <li>No analytics, tracking pixels, or third-party scripts.</li>
+      <li>No data is ever sold, shared, or transmitted anywhere.</li>
+    </ul>
+    
+    <p>Meter is not affiliated with or endorsed by Anthropic.</p>
+  </div>
+</body>
+</html>
