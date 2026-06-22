@@ -1314,6 +1314,72 @@ a {
   #pane-settings .panel-grid {
     grid-template-columns: 1fr;
   }
+
+  /* Mobile Kanban & Tables Responsive Overrides */
+  .card, .panel-grid > div {
+    min-width: 0;
+  }
+
+  .table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .data-table {
+    width: 100%;
+    min-width: 600px;
+  }
+
+  .kanban-board-container {
+    height: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
+    flex-wrap: nowrap;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 12px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .kanban-column {
+    flex: 0 0 280px;
+    max-width: 280px;
+    height: 600px;
+    scroll-snap-align: start;
+  }
+
+  .kanban-control-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .quick-actions-bar {
+    justify-content: flex-start;
+  }
+
+  .btn-quick-add {
+    flex: 1 1 calc(33.333% - 8px);
+    justify-content: center;
+  }
+
+  .kanban-filters-inline {
+    width: 100%;
+  }
+
+  .search-input-sm {
+    flex: 1;
+    width: auto;
+  }
+
+  .kanban-stats-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .kanban-stats-row > div:first-child {
+    grid-column: span 2;
+  }
 }
 
 /* ─── COLLAPSED SIDEBAR STATES & SELECT DROPDOWNS OVERRIDES ─────────── */
