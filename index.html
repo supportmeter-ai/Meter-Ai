@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="canonical" href="https://meter-ai.app/">
   <link rel="stylesheet" href="styles.css?v=1.0.1">
+  <link rel="manifest" href="/manifest.json">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D85A30' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M20 20a8 8 0 0 0-16 0'/><line x1='12' y1='20' x2='16' y2='14'/><circle cx='12' cy='20' r='2'/></svg>">
 
   <!-- Open Graph -->
@@ -1095,5 +1096,16 @@
   <!-- Razorpay Checkout -->
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <script src="script.js?v=1.0.1"></script>
+  
+  <!-- PWA Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(reg => console.log('PWA Service Worker registered:', reg.scope))
+          .catch(err => console.error('PWA Service Worker registration failed:', err));
+      });
+    }
+  </script>
 </body>
 </html>
