@@ -1277,7 +1277,11 @@ a {
   }
   
   .header {
-    padding: 0 20px;
+    padding: 12px 20px;
+    height: auto;
+    min-height: 70px;
+    flex-wrap: wrap;
+    gap: 12px;
   }
   
   .content-area {
@@ -1285,8 +1289,20 @@ a {
   }
   
   .panel-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  
+  .card-title {
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .card-title > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
   }
   
   .stats-grid {
@@ -1298,21 +1314,26 @@ a {
     flex-direction: column;
     gap: 8px;
   }
+
+  .data-table th,
+  .data-table td {
+    white-space: nowrap;
+  }
   
   #pane-notes .panel-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
   }
   
   #pane-feedback .panel-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
   }
   
   #pane-health .panel-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
   }
   
   #pane-settings .panel-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
   }
 
   /* Mobile Kanban & Tables Responsive Overrides */
@@ -1434,3 +1455,54 @@ select option {
   background-color: #2C2926 !important;
   color: #F5F1ED !important;
 }
+
+/* Base pagination container styling */
+.pagination-container {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-top: 1px solid var(--card-border);
+  font-size: 13px;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  margin-top: auto;
+}
+
+/* Extramobile adjustments (max-width 480px) */
+@media (max-width: 480px) {
+  .pagination-container {
+    flex-direction: column !important;
+    gap: 12px !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding: 12px 8px !important;
+  }
+  
+  .health-item {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+    padding: 12px !important;
+  }
+  
+  .health-status {
+    width: 100% !important;
+    justify-content: flex-start !important;
+    margin-left: 0 !important;
+  }
+  
+  .card-title > div {
+    width: 100% !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+  }
+  
+  .card-title .btn-action-primary,
+  .card-title .dropdown-trigger {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+}
+
