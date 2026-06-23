@@ -1,8 +1,8 @@
-const CACHE_NAME = 'meter-ai-cache-v1';
+const CACHE_NAME = 'meter-ai-cache-v2';
 const ASSETS = [
   '/',
   '/index.html',
-  '/styles.css?v=1.0.1',
+  '/styles.css?v=1.0.2',
   '/script.js?v=1.0.1',
   '/assets/logo.svg',
   '/assets/logo-maskable.svg',
