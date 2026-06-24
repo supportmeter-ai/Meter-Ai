@@ -210,11 +210,11 @@ app.use(express.json({
 }));
 
 app.get('/privacy', (req, res) => {
-  res.sendFile(path.join(__dirname, 'privacy.html'));
+  res.sendFile(path.join(__dirname, 'public', 'privacy.html'));
 });
 
 app.get('/terms', (req, res) => {
-  res.sendFile(path.join(__dirname, 'terms.html'));
+  res.sendFile(path.join(__dirname, 'public', 'terms.html'));
 });
 
 // HTML Sanitizer helper (simple escape to avoid XSS)
@@ -2123,23 +2123,23 @@ const setNoCacheHeaders = (req, res, next) => {
 };
 
 app.get('/admin/login', setNoCacheHeaders, (req, res) => {
-  res.sendFile(path.join(__dirname, 'admin', 'login.html'));
+  res.sendFile(path.join(__dirname, 'public', 'admin', 'login.html'));
 });
 
 app.get('/admin/admin-styles.css', setNoCacheHeaders, (req, res) => {
-  res.sendFile(path.join(__dirname, 'admin', 'admin-styles.css'));
+  res.sendFile(path.join(__dirname, 'public', 'admin', 'admin-styles.css'));
 });
 
 app.get('/admin', requireAdminRedirect, setNoCacheHeaders, (req, res) => {
-  res.sendFile(path.join(__dirname, 'admin', 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'admin', 'index.html'));
 });
 
 app.get('/admin/', requireAdminRedirect, setNoCacheHeaders, (req, res) => {
-  res.sendFile(path.join(__dirname, 'admin', 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'admin', 'index.html'));
 });
 
 app.get('/admin/admin.js', requireAdminRedirect, setNoCacheHeaders, (req, res) => {
-  res.sendFile(path.join(__dirname, 'admin', 'admin.js'));
+  res.sendFile(path.join(__dirname, 'public', 'admin', 'admin.js'));
 });
 
 // Enforce HTTPS redirect in production
@@ -2164,51 +2164,50 @@ const staticCacheOptions = {
   }
 };
 
-// Serve static assets out of the root and public directory
+// Serve static assets out of the public directory
 app.use(express.static(path.join(__dirname, 'public'), staticCacheOptions));
-app.use(express.static(__dirname, staticCacheOptions));
 
 // Specific Clean URL routes
 app.get('/features', (req, res) => {
-  res.sendFile(path.join(__dirname, 'features.html'));
+  res.sendFile(path.join(__dirname, 'public', 'features.html'));
 });
 
 app.get('/pricing', (req, res) => {
-  res.sendFile(path.join(__dirname, 'pricing.html'));
+  res.sendFile(path.join(__dirname, 'public', 'pricing.html'));
 });
 
 app.get('/install', (req, res) => {
-  res.sendFile(path.join(__dirname, 'install.html'));
+  res.sendFile(path.join(__dirname, 'public', 'install.html'));
 });
 
 app.get('/faq', (req, res) => {
-  res.sendFile(path.join(__dirname, 'faq.html'));
+  res.sendFile(path.join(__dirname, 'public', 'faq.html'));
 });
 
 app.get('/changelog', (req, res) => {
-  res.sendFile(path.join(__dirname, 'changelog.html'));
+  res.sendFile(path.join(__dirname, 'public', 'changelog.html'));
 });
 
 app.get('/about', (req, res) => {
-  res.sendFile(path.join(__dirname, 'about.html'));
+  res.sendFile(path.join(__dirname, 'public', 'about.html'));
 });
 
 app.get('/privacy', (req, res) => {
-  res.sendFile(path.join(__dirname, 'privacy.html'));
+  res.sendFile(path.join(__dirname, 'public', 'privacy.html'));
 });
 
 app.get('/terms', (req, res) => {
-  res.sendFile(path.join(__dirname, 'terms.html'));
+  res.sendFile(path.join(__dirname, 'public', 'terms.html'));
 });
 
 // Route fallback for /
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Default fallback to 404.html for unknown routes
 app.get('*', (req, res) => {
-  res.status(404).sendFile(path.join(__dirname, '404.html'));
+  res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
 });
 
 async function migrateExistingTasks() {
