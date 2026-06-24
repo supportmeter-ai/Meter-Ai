@@ -103,10 +103,10 @@ app.use((req, res, next) => {
     "default-src 'self'; " +
     "script-src 'self' 'unsafe-inline' https://checkout.razorpay.com https://cdn.razorpay.com https://cdn.jsdelivr.net; " +
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
-    "img-src 'self' data: https://lh3.googleusercontent.com; " +
+    "img-src 'self' data: https://lh3.googleusercontent.com https://cdn.razorpay.com https://razorpay.com; " +
     "font-src 'self' data: https://fonts.gstatic.com; " +
     "frame-src 'self' https://checkout.razorpay.com https://api.razorpay.com; " +
-    "connect-src 'self' https://ojlamxgpcgchqrmpuugl.supabase.co wss://ojlamxgpcgchqrmpuugl.supabase.co https://api.razorpay.com https://cdn.jsdelivr.net;"
+    "connect-src 'self' https://ojlamxgpcgchqrmpuugl.supabase.co wss://ojlamxgpcgchqrmpuugl.supabase.co https://api.razorpay.com https://lumberjack.razorpay.com https://lumberjack-cx.razorpay.com https://lumberjack.rzp.io https://customerevents.razorpay.com https://cdn.jsdelivr.net;"
   );
 
   if (process.env.NODE_ENV === 'production') {
