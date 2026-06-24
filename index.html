@@ -141,34 +141,133 @@
     </a>
     
     <div class="nav-tabs">
+      <!-- Why Meter -->
       <div class="nav-tab-container">
-        <a href="/features" class="nav-tab" data-section="features">
+        <a href="#why" class="nav-tab active" data-section="why">
+          <span class="animated-roll">Why Meter?</span>
+          <svg class="nav-tab-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </a>
+        <div class="nav-dropdown">
+          <div class="nav-dropdown-inner why-dropdown-grid">
+            <div class="why-dropdown-left">
+              <h4>Meter AI</h4>
+              <p>A lightweight, privacy-first companion utility for Claude.ai power users.</p>
+              <div class="why-dropdown-tag">100% Local & Private</div>
+            </div>
+            <div class="why-dropdown-right">
+              <a href="#why" class="dropdown-link-item">
+                <span class="link-item-title">Without Meter</span>
+                <span class="link-item-desc">sudden rate lockouts, zero usage logs, no reset timers.</span>
+              </a>
+              <a href="#why" class="dropdown-link-item">
+                <span class="link-item-title">With Meter</span>
+                <span class="link-item-desc">live inline tracking, remaining prompt predictions, LLM bridge.</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Features -->
+      <div class="nav-tab-container">
+        <a href="#features" class="nav-tab" data-section="features">
           <span class="animated-roll">Features</span>
+          <svg class="nav-tab-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
         </a>
+        <div class="nav-dropdown">
+          <div class="nav-dropdown-inner features-dropdown-grid">
+            <a href="#features" class="dropdown-feature-card">
+              <div class="feature-card-icon-wrapper">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              </div>
+              <div class="feature-card-text">
+                <span class="feature-card-title">Live Usage Meter</span>
+                <span class="feature-card-desc">Injected progress bar keeping track of session percentages.</span>
+              </div>
+            </a>
+            <a href="#features" class="dropdown-feature-card">
+              <div class="feature-card-icon-wrapper">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>
+              </div>
+              <div class="feature-card-text">
+                <span class="feature-card-title">Context Bridge</span>
+                <span class="feature-card-desc">Single click transition to ChatGPT, Gemini, or Grok.</span>
+              </div>
+            </a>
+            <a href="#features" class="dropdown-feature-card">
+              <div class="feature-card-icon-wrapper">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10M18 20V4M6 20v-4"/></svg>
+              </div>
+              <div class="feature-card-text">
+                <span class="feature-card-title">Smart Analytics</span>
+                <span class="feature-card-desc">Detailed local dashboards of prompt counts and values.</span>
+              </div>
+            </a>
+            <a href="#features" class="dropdown-feature-card">
+              <div class="feature-card-icon-wrapper">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              </div>
+              <div class="feature-card-text">
+                <span class="feature-card-title">AI Wrapped</span>
+                <span class="feature-card-desc">Yearly recap of your prompt volumes and productive hours.</span>
+              </div>
+            </a>
+          </div>
+        </div>
       </div>
+
+      <!-- Pricing -->
       <div class="nav-tab-container">
-        <a href="/pricing" class="nav-tab" data-section="pricing">
+        <a href="#pricing" class="nav-tab" data-section="pricing">
           <span class="animated-roll">Pricing</span>
+          <svg class="nav-tab-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
         </a>
+        <div class="nav-dropdown">
+          <div class="nav-dropdown-inner privacy-dropdown-grid">
+            <a href="#pricing" class="dropdown-link-item">
+              <span class="link-item-title">Free Forever</span>
+              <span class="link-item-desc">Useful tracking with 2 daily cross-LLM sends.</span>
+            </a>
+            <a href="#pricing" class="dropdown-link-item">
+              <span class="link-item-title">Pro</span>
+              <span class="link-item-desc">2 / month or 20 lifetime for unlimited access.</span>
+            </a>
+          </div>
+        </div>
       </div>
+
+      <!-- Privacy -->
       <div class="nav-tab-container">
-        <a href="/install" class="nav-tab" data-section="install">
-          <span class="animated-roll">Install</span>
+        <a href="/privacy" class="nav-tab" data-section="privacy">
+          <span class="animated-roll">Privacy</span>
+          <svg class="nav-tab-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
         </a>
+        <div class="nav-dropdown">
+          <div class="nav-dropdown-inner privacy-dropdown-grid">
+            <a href="/privacy" class="dropdown-link-item">
+              <span class="link-item-title">No Cloud Backend</span>
+              <span class="link-item-desc">Your workspace data resides only in your local browser sandbox.</span>
+            </a>
+            <a href="/privacy" class="dropdown-link-item">
+              <span class="link-item-title">No Telemetry</span>
+              <span class="link-item-desc">Zero tracking pixels, advertisements, or cloud APIs.</span>
+            </a>
+          </div>
+        </div>
       </div>
+
+      <!-- FAQ -->
       <div class="nav-tab-container">
-        <a href="/faq" class="nav-tab" data-section="faq">
+        <a href="#faq" class="nav-tab" data-section="faq">
           <span class="animated-roll">FAQ</span>
-        </a>
-      </div>
-      <div class="nav-tab-container">
-        <a href="/changelog" class="nav-tab" data-section="changelog">
-          <span class="animated-roll">Changelog</span>
-        </a>
-      </div>
-      <div class="nav-tab-container">
-        <a href="/about" class="nav-tab" data-section="about">
-          <span class="animated-roll">About</span>
         </a>
       </div>
     </div>
