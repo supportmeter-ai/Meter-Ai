@@ -9,20 +9,8 @@
   "orientation": "any",
   "icons": [
     {
-      "src": "assets/icon-128.png",
-      "sizes": "128x128",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
       "src": "assets/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "assets/icon-256.png",
-      "sizes": "256x256",
       "type": "image/png",
       "purpose": "any"
     },
@@ -33,7 +21,7 @@
       "purpose": "any"
     },
     {
-      "src": "assets/icon-512.png",
+      "src": "assets/maskable-icon.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
