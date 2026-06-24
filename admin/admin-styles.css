@@ -1279,10 +1279,27 @@ a {
     bottom: 0;
     transform: translateX(-100%);
     width: var(--sidebar-width);
+    z-index: 200;
   }
   
   .sidebar.mobile-open {
     transform: translateX(0);
+  }
+
+  /* Backdrop overlay when mobile sidebar is open */
+  .sidebar-backdrop {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 150;
+  }
+
+  .sidebar-backdrop.active {
+    display: block;
   }
   
   .menu-toggle {
@@ -1295,6 +1312,11 @@ a {
     min-height: 70px;
     flex-wrap: wrap;
     gap: 12px;
+  }
+
+  .header-actions {
+    flex-wrap: wrap;
+    gap: 8px;
   }
   
   .content-area {
@@ -1516,6 +1538,53 @@ select option {
   .card-title .dropdown-trigger {
     width: 100% !important;
     justify-content: center !important;
+  }
+
+  /* Kanban stats grid → 1 column on small phones */
+  .kanban-stats-row {
+    grid-template-columns: 1fr !important;
+    gap: 8px;
+  }
+
+  .kanban-stats-row > div:first-child {
+    grid-column: span 1;
+  }
+
+  /* Header title adjustments */
+  .header-title {
+    font-size: 18px;
+  }
+
+  .content-area {
+    padding: 16px;
+  }
+
+  /* Modal mobile adjustments */
+  .modal {
+    padding: 20px 16px;
+    width: calc(100% - 24px);
+    max-width: none;
+  }
+
+  .modal-title {
+    font-size: 16px;
+  }
+
+  .modal-footer {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .modal-footer .btn-action-primary,
+  .modal-footer .btn-action-sm {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Kanban columns — narrower on small screens */
+  .kanban-column {
+    flex: 0 0 250px;
+    max-width: 250px;
   }
 }
 

@@ -1883,4 +1883,45 @@ document.addEventListener('DOMContentLoaded', () => {
       sidebar.classList.add('collapsed');
     }
   }
+
+  // ─── Mobile Sidebar Toggle & Backdrop ──────────────────────────
+  (function setupMobileSidebar() {
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+    const backdrop = document.getElementById('sidebarBackdrop');
+    if (!menuToggle || !sidebar) return;
+
+    function openSidebar() {
+      sidebar.classList.add('mobile-open');
+      if (backdrop) backdrop.classList.add('active');
+    }
+
+    function closeSidebar() {
+      sidebar.classList.remove('mobile-open');
+      if (backdrop) backdrop.classList.remove('active');
+    }
+
+    menuToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (sidebar.classList.contains('mobile-open')) {
+        closeSidebar();
+      } else {
+        openSidebar();
+      }
+    });
+
+    // Close sidebar when backdrop is tapped
+    if (backdrop) {
+      backdrop.addEventListener('click', closeSidebar);
+    }
+
+    // Close sidebar when a menu link is clicked (on mobile)
+    sidebar.querySelectorAll('.menu-link').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+          closeSidebar();
+        }
+      });
+    });
+  })();
 });

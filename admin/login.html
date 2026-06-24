@@ -256,6 +256,64 @@
     .back-link:hover {
       color: var(--text-secondary);
     }
+
+    /* ─── Mobile Responsive ────────────────────────── */
+    @media (max-width: 480px) {
+      body {
+        padding: 16px;
+        align-items: flex-start;
+        padding-top: 60px;
+      }
+
+      .brand-title {
+        font-size: 30px;
+      }
+
+      .brand-subtitle {
+        font-size: 11px;
+      }
+
+      .login-card {
+        padding: 28px 20px;
+        border-radius: 10px;
+      }
+
+      .input-field {
+        padding: 11px 14px 11px 40px;
+        font-size: 16px; /* Prevents iOS zoom on focus */
+      }
+
+      .btn-submit {
+        padding: 14px;
+        font-size: 15px;
+        min-height: 48px; /* Touch-friendly target */
+      }
+
+      .password-toggle {
+        padding: 6px;
+        right: 8px;
+      }
+
+      .password-toggle svg {
+        width: 18px;
+        height: 18px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      body {
+        padding: 12px;
+        padding-top: 40px;
+      }
+
+      .brand-title {
+        font-size: 26px;
+      }
+
+      .login-card {
+        padding: 24px 16px;
+      }
+    }
   </style>
 </head>
 <body>

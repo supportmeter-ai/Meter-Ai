@@ -291,6 +291,7 @@ section {
   transition: opacity 0.25s var(--ease-out), transform 0.25s var(--ease-out);
   z-index: 1000;
   padding-top: 10px;
+  max-width: calc(100vw - 48px); /* Prevent overflow on tablet viewports */
 }
 
 .nav-tab-container:hover .nav-dropdown {
@@ -2918,6 +2919,11 @@ section {
     padding: 60px 0 36px;
   }
 
+  .footer-links-row {
+    font-size: 12px;
+    gap: 6px;
+  }
+
   .footer-social-row {
     gap: 20px;
   }
@@ -3004,6 +3010,26 @@ section {
   /* ── Days-remaining badge ── */
   #sub-modal-remaining {
     font-size: 12px;
+  }
+
+  /* ── Subpage container ── */
+  .subpage-container {
+    margin-top: 76px;
+    margin-bottom: 48px;
+  }
+
+  /* ── Toast notifications ── */
+  .custom-toast {
+    width: calc(100vw - 48px);
+    max-width: 320px;
+    right: 0;
+  }
+
+  #toast-container {
+    right: 12px;
+    bottom: 16px;
+    left: 12px;
+    align-items: stretch;
   }
 }
 
