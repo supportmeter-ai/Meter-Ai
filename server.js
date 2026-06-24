@@ -23,7 +23,6 @@ const cors = require('cors');
 const path = require('path');
 const https = require('https');
 const crypto = require('crypto');
-const { withSupabase } = require('@supabase/server');
 const { createClient } = require('@supabase/supabase-js');
 const Razorpay = require('razorpay');
 const cookieParser = require('cookie-parser');
@@ -228,6 +227,47 @@ function escapeHTML(str) {
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#x27;')
     .replace(/\//g, '&#x2F;');
+}
+
+/**
+ * Local custom replacement for @supabase/server withSupabase.
+ * Avoids ESM/CommonJS compatibility issues with jose dependency.
+ */
+function withSupabase({ auth: authMode }, handler) {
+  return async (webReq) => {
+    const ctx = {
+      supabaseAdmin: supabaseAdmin
+    };
+
+    if (authMode === 'user') {
+      const authHeader = webReq.headers.get('authorization') || '';
+      if (!authHeader.startsWith('Bearer ')) {
+        return new Response(JSON.stringify({ error: 'Unauthorized: Missing or invalid token format' }), {
+          status: 401,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+
+      const token = authHeader.substring(7);
+      try {
+        const { data: { user }, error } = await supabaseAdmin.auth.getUser(token);
+        if (error || !user) {
+          return new Response(JSON.stringify({ error: 'Unauthorized: Invalid session' }), {
+            status: 401,
+            headers: { 'Content-Type': 'application/json' }
+          });
+        }
+        ctx.userClaims = { id: user.id, email: user.email };
+      } catch (err) {
+        return new Response(JSON.stringify({ error: 'Internal auth validation error' }), {
+          status: 401,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+    }
+
+    return handler(webReq, ctx);
+  };
 }
 
 /**
