@@ -767,13 +767,14 @@ document.addEventListener('DOMContentLoaded', () => {
       const response = await fetch('/api/profile', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
-      const profile = await response.json();
-      if (response.ok) {
-        window.localStorage.setItem('meter_profile', JSON.stringify(profile));
-        window.dispatchEvent(new CustomEvent('meter-session-synced', { detail: profile }));
-        updateAuthUI(profile);
-        return profile;
+      if (!response.ok) {
+        throw new Error(`Profile API failed: ${response.status}`);
       }
+      const profile = await response.json();
+      window.localStorage.setItem('meter_profile', JSON.stringify(profile));
+      window.dispatchEvent(new CustomEvent('meter-session-synced', { detail: profile }));
+      updateAuthUI(profile);
+      return profile;
     } catch (e) {
       console.error('Failed to sync profile status:', e);
     }

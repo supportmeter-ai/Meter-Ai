@@ -35,18 +35,18 @@
   "routes": [
     {
       "src": "^/admin(.*)",
-      "dest": "/api/index.js"
+      "dest": "/api"
     },
     {
       "src": "^/api(.*)",
-      "dest": "/api/index.js"
+      "dest": "/api"
     },
     {
       "handle": "filesystem"
     },
     {
       "src": "/(.*)",
-      "dest": "/api/index.js"
+      "dest": "/api"
     }
   ]
 }
