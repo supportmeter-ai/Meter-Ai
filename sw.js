@@ -1,11 +1,18 @@
-const CACHE_NAME = 'meter-ai-cache-v2';
+const CACHE_NAME = 'meter-ai-cache-v3';
 const ASSETS = [
   '/',
   '/index.html',
   '/styles.css?v=1.0.2',
   '/script.js?v=1.0.1',
-  '/assets/logo.svg',
-  '/assets/logo-maskable.svg',
+  '/assets/icon-16.png',
+  '/assets/icon-32.png',
+  '/assets/icon-48.png',
+  '/assets/icon-64.png',
+  '/assets/icon-128.png',
+  '/assets/icon-180.png',
+  '/assets/icon-192.png',
+  '/assets/icon-256.png',
+  '/assets/icon-512.png',
   '/privacy.html',
   '/terms.html'
 ];
