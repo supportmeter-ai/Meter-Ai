@@ -3543,5 +3543,27 @@ section {
   }
 }
 
+/* ─── Support Modal Mobile Responsiveness ───────────────────────── */
+@media (max-width: 480px) {
+  .support-modal-card {
+    padding: 24px 16px;
+    width: calc(100% - 24px);
+    margin: 12px;
+  }
+
+  .support-modal-title {
+    font-size: 18px;
+  }
+
+  .support-option-card {
+    padding: 12px 10px;
+  }
+
+  .support-option-value {
+    font-size: 12px;
+  }
+}
+
+
 
 
