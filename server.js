@@ -179,7 +179,7 @@ const clientAuthLimiter = createRateLimiter({
 });
 
 // Setup CORS middleware for local extension development and production
-const allowedOrigins = ['https://meter-ai.app'];
+const allowedOrigins = ['https://meter-ai.app', 'https://getmeterai.vercel.app'];
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin) return callback(null, true);
