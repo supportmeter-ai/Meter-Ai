@@ -2102,8 +2102,64 @@ app.get('/admin/admin.js', requireAdminRedirect, setNoCacheHeaders, (req, res) =
   res.sendFile(path.join(__dirname, 'admin', 'admin.js'));
 });
 
-// Serve landing pages and static assets
-app.use(express.static(__dirname));
+// Enforce HTTPS redirect in production
+app.use((req, res, next) => {
+  if (process.env.NODE_ENV === 'production' && req.headers['x-forwarded-proto'] !== 'https') {
+    return res.redirect(301, `https://${req.headers.host}${req.url}`);
+  }
+  next();
+});
+
+// ─── STATIC FILES & ROUTING FOR CLEAN URLs ──────────────────────────
+const staticCacheOptions = {
+  maxAge: '1d',
+  setHeaders: (res, filePath) => {
+    const ext = path.extname(filePath).toLowerCase();
+    // Do not cache HTML files, robots, sitemaps, manifests, or service worker
+    if (ext === '.html' || filePath.endsWith('robots.txt') || filePath.endsWith('sitemap.xml') || filePath.endsWith('manifest.json') || filePath.endsWith('manifest.webmanifest') || filePath.endsWith('sw.js')) {
+      res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+    } else {
+      res.setHeader('Cache-Control', 'public, max-age=86400'); // 1 day cache for CSS, JS, images, fonts
+    }
+  }
+};
+
+// Serve static assets out of the root and public directory
+app.use(express.static(path.join(__dirname, 'public'), staticCacheOptions));
+app.use(express.static(__dirname, staticCacheOptions));
+
+// Specific Clean URL routes
+app.get('/features', (req, res) => {
+  res.sendFile(path.join(__dirname, 'features.html'));
+});
+
+app.get('/pricing', (req, res) => {
+  res.sendFile(path.join(__dirname, 'pricing.html'));
+});
+
+app.get('/install', (req, res) => {
+  res.sendFile(path.join(__dirname, 'install.html'));
+});
+
+app.get('/faq', (req, res) => {
+  res.sendFile(path.join(__dirname, 'faq.html'));
+});
+
+app.get('/changelog', (req, res) => {
+  res.sendFile(path.join(__dirname, 'changelog.html'));
+});
+
+app.get('/about', (req, res) => {
+  res.sendFile(path.join(__dirname, 'about.html'));
+});
+
+app.get('/privacy', (req, res) => {
+  res.sendFile(path.join(__dirname, 'privacy.html'));
+});
+
+app.get('/terms', (req, res) => {
+  res.sendFile(path.join(__dirname, 'terms.html'));
+});
 
 // Route fallback for /
 app.get('/', (req, res) => {

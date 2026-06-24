@@ -5,14 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Terms of Service — Meter AI</title>
   <meta name="description" content="Terms of Service for Meter AI — user agreement, license, disclaimers, and subscription terms.">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="canonical" href="https://meter-ai.app/terms" />
+  <link rel="stylesheet" href="styles.css?v=1.0.2">
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D85A30' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'><path d='M5.5 18a7.6 7.6 0 1 1 13 0'/><line x1='12' y1='14' x2='16.5' y2='9.5'/><circle cx='12' cy='14' r='2' fill='%23D85A30' stroke='none'/></svg>">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <style>
     .legal-content {
       max-width: 600px;
-      margin: 80px auto;
+      margin: 120px auto 80px auto;
       padding: 0 24px;
     }
     .legal-content h1 {
@@ -49,8 +50,75 @@
       text-decoration: underline;
     }
   </style>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Terms of Service — Meter AI">
+  <meta property="og:description" content="Terms of Service for Meter AI — user agreement, license, disclaimers, and subscription terms.">
+  <meta property="og:url" content="https://meter-ai.app/terms">
+  <meta property="og:image" content="https://meter-ai.app/og-image.png">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Terms of Service — Meter AI">
+  <meta name="twitter:description" content="Terms of Service for Meter AI — user agreement, license, disclaimers, and subscription terms.">
+  <meta name="twitter:image" content="https://meter-ai.app/og-image.png">
 </head>
 <body>
+
+  <!-- ═══ Navigation ═══ -->
+  <nav class="nav" id="nav">
+    <a href="/" class="nav-brand">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" class="nav-logo-icon">
+        <path d="M5.5 18a7.6 7.6 0 1 1 13 0" />
+        <line x1="12" y1="14" x2="16.5" y2="9.5" />
+        <circle cx="12" cy="14" r="2" fill="currentColor" stroke="none" />
+      </svg>
+      <span class="nav-logo-text">Meter<span class="brand-ai">AI</span></span>
+    </a>
+    
+    <div class="nav-tabs">
+      <div class="nav-tab-container">
+        <a href="/features" class="nav-tab" data-section="features">
+          <span class="animated-roll">Features</span>
+        </a>
+      </div>
+      <div class="nav-tab-container">
+        <a href="/pricing" class="nav-tab" data-section="pricing">
+          <span class="animated-roll">Pricing</span>
+        </a>
+      </div>
+      <div class="nav-tab-container">
+        <a href="/install" class="nav-tab" data-section="install">
+          <span class="animated-roll">Install</span>
+        </a>
+      </div>
+      <div class="nav-tab-container">
+        <a href="/faq" class="nav-tab" data-section="faq">
+          <span class="animated-roll">FAQ</span>
+        </a>
+      </div>
+      <div class="nav-tab-container">
+        <a href="/changelog" class="nav-tab" data-section="changelog">
+          <span class="animated-roll">Changelog</span>
+        </a>
+      </div>
+      <div class="nav-tab-container">
+        <a href="/about" class="nav-tab" data-section="about">
+          <span class="animated-roll">About</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="nav-actions">
+      <a href="https://chromewebstore.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary nav-btn">
+        <span class="animated-roll">Install for Chrome</span>
+      </a>
+      <div id="auth-status-container"></div>
+    </div>
+  </nav>
+
+  <!-- ═══ Content ═══ -->
   <div class="legal-content">
     <a href="/" class="legal-back-link">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
@@ -74,5 +142,202 @@
     <h2>5. Subscriptions and Payments</h2>
     <p>Meter AI offers a Pro Monthly recurring subscription plan at ₹169/month and a Pro Lifetime one-time payment plan. By subscribing to the Pro Monthly plan, you authorize Razorpay to establish an automatic payment mandate for recurring monthly charges. Your subscription will renew automatically every month until cancelled. You may cancel your subscription at any time via the Account Center or by contacting support, and access will remain available until the end of your current paid billing cycle.</p>
   </div>
+
+  <!-- ═══ Footer ═══ -->
+  <footer class="footer">
+    <div class="container footer-content-centered">
+      <span class="footer-logo">Meter<span class="brand-ai">AI</span></span>
+      <p class="footer-tagline">Built for people who spend serious time with AI.</p>
+      
+      <button id="footer-feedback-trigger" class="btn-feedback-footer">Give Feedback</button>
+      
+      <div class="footer-links-row">
+        <a href="/features">Features</a>
+        <span>·</span>
+        <a href="/pricing">Pricing</a>
+        <span>·</span>
+        <a href="/install">Install</a>
+        <span>·</span>
+        <a href="/faq">FAQ</a>
+        <span>·</span>
+        <a href="/changelog">Changelog</a>
+        <span>·</span>
+        <a href="/about">About</a>
+        <span>·</span>
+        <a href="/privacy">Privacy Policy</a>
+        <span>·</span>
+        <a href="/terms">Terms of Service</a>
+      </div>
+      
+      <div class="footer-social-row">
+        <a href="https://www.instagram.com/harsha._.l4" target="_blank" rel="noopener noreferrer" class="footer-social-icon" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+          </svg>
+        </a>
+        <a href="https://github.com/HarshaParisha" target="_blank" rel="noopener noreferrer" class="footer-social-icon" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+          </svg>
+        </a>
+        <a href="https://www.linkedin.com/in/parisha-harshavardhan/" target="_blank" rel="noopener noreferrer" class="footer-social-icon" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+            <rect x="2" y="9" width="4" height="12"/>
+            <circle cx="4" cy="4" r="2"/>
+          </svg>
+        </a>
+        <a href="https://harshaparisha.in" target="_blank" rel="noopener noreferrer" class="footer-social-icon" aria-label="Portfolio">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+        </a>
+        <button id="footer-help-trigger" class="footer-social-icon" aria-label="Help" style="background: none; border: none; cursor: pointer; padding: 0;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+        </button>
+        <a href="mailto:support.meterai@gmail.com" class="footer-social-icon" aria-label="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+        </a>
+      </div>
+      
+      <span class="footer-copy">&copy; 2026 Meter AI. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <!-- ═══ Modals ═══ -->
+  <!-- Feedback Modal -->
+  <div id="feedback-modal" class="feedback-modal-overlay" style="display: none;">
+    <div class="feedback-modal-card">
+      <div id="modal-form-container">
+        <div class="feedback-modal-header">
+          <h2 class="feedback-modal-title">We Value Your Feedback</h2>
+          <p class="feedback-modal-subtitle">Help us improve by sharing your thoughts.</p>
+        </div>
+        <form id="feedback-modal-form" novalidate>
+          <div class="feedback-form-group">
+            <label for="modal-name" class="feedback-field-label">Name</label>
+            <input type="text" id="modal-name" name="name" class="feedback-input" placeholder="Your name" required>
+            <div id="modal-name-error" class="feedback-error" style="display: none;">Name is required.</div>
+          </div>
+          <div class="feedback-form-group">
+            <label for="modal-email" class="feedback-field-label">Email</label>
+            <input type="email" id="modal-email" name="email" class="feedback-input" placeholder="you@example.com">
+            <div id="modal-email-error" class="feedback-error" style="display: none;">Please enter a valid email address.</div>
+          </div>
+          <div class="feedback-form-group">
+            <label class="feedback-field-label">Rate your experience</label>
+            <div class="feedback-stars" id="modal-rating-container">
+              <button type="button" class="modal-star-btn" data-rating="1" aria-label="1 Star">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="modal-star-icon">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+              </button>
+              <button type="button" class="modal-star-btn" data-rating="2" aria-label="2 Stars">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="modal-star-icon">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+              </button>
+              <button type="button" class="modal-star-btn" data-rating="3" aria-label="3 Stars">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="modal-star-icon">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+              </button>
+              <button type="button" class="modal-star-btn" data-rating="4" aria-label="4 Stars">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="modal-star-icon">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+              </button>
+              <button type="button" class="modal-star-btn" data-rating="5" aria-label="5 Stars">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="modal-star-icon">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+              </button>
+            </div>
+            <div id="modal-rating-error" class="feedback-error" style="display: none;">Please select a rating.</div>
+            <input type="hidden" id="modal-selected-rating" name="rating" required>
+          </div>
+          <div class="feedback-form-group">
+            <label for="modal-message" class="feedback-field-label">Message</label>
+            <textarea id="modal-message" name="message" class="feedback-textarea" placeholder="Tell us about your experience..." maxlength="500" required></textarea>
+            <div class="feedback-textarea-footer">
+              <div id="modal-message-error" class="feedback-error" style="display: none;">Message is required.</div>
+              <span id="modal-char-count" class="feedback-char-count">0 / 500</span>
+            </div>
+          </div>
+          <div class="feedback-modal-actions">
+            <button type="submit" id="modal-submit-btn" class="btn-feedback-submit">Submit Feedback</button>
+            <button type="button" id="modal-cancel-btn" class="btn-feedback-cancel">Cancel</button>
+          </div>
+        </form>
+      </div>
+      <div id="modal-success-state" class="feedback-success-state" style="display: none;">
+        <div class="feedback-success-emoji">✅</div>
+        <h3 class="feedback-success-title">Feedback Sent</h3>
+        <p class="feedback-success-message">Thank you! Your feedback has been received and helps us improve.</p>
+        <button type="button" id="modal-success-done-btn" class="btn-feedback-submit" style="width: 100%;">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Support Modal -->
+  <div class="support-modal-overlay" id="support-modal" style="display:none;">
+    <div class="support-modal-card">
+      <button type="button" class="support-modal-close-x" id="support-modal-close-x" aria-label="Close modal">&times;</button>
+      <div id="support-form-container">
+        <div class="support-modal-header">
+          <h2 class="support-modal-title">Contact Support</h2>
+          <p class="support-modal-subtitle">Need help with your account or subscription? We're here to help.</p>
+        </div>
+        <div class="support-options-grid">
+          <div class="support-option-card">
+            <div class="support-option-title">Email Support</div>
+            <div class="support-option-value">support@meter-ai.app</div>
+            <div class="support-option-caption">Best for billing, subscriptions, and technical issues.</div>
+          </div>
+          <div class="support-option-card">
+            <div class="support-option-title">Response Time</div>
+            <div class="support-option-value">24–48 hours</div>
+            <div class="support-option-caption">Usually within 24–48 hours.</div>
+          </div>
+        </div>
+        <form id="support-modal-form" class="support-modal-form">
+          <div class="form-group">
+            <label class="form-label" for="support-email">Your Email Address</label>
+            <input type="email" id="support-email" class="input-field" placeholder="name@example.com" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="support-message">Describe your issue</label>
+            <textarea id="support-message" class="textarea-field" placeholder="How can we help you?" rows="3" required></textarea>
+          </div>
+          <div class="support-modal-actions">
+            <button type="button" class="action-btn btn-secondary" id="support-modal-cancel-btn">Close</button>
+            <button type="submit" class="action-btn btn-primary" id="support-submit-btn">Send Support Request</button>
+          </div>
+        </form>
+      </div>
+      <div id="support-success-state" style="display:none;" class="support-success-state">
+        <div class="success-icon">✓</div>
+        <h3>Request Sent</h3>
+        <p>Thank you! We've received your support request and will get back to you shortly.</p>
+        <button type="button" class="action-btn btn-primary" id="support-success-done-btn" style="width: 100%;">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Supabase Client CDN & razorpay -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script src="script.js?v=1.0.1"></script>
 </body>
 </html>

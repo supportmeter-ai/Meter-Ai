@@ -3,31 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meter AI | Track, Transfer, and Continue AI Workflows (TRACK · TRANSFER · CONTINUE)</title>
-  <meta name="description" content="Meter AI helps professionals track AI usage, transfer conversations between models using Context Bridge™, and continue workflows without losing context. Free and privacy-first.">
+  <title>Meter AI — Real-Time Claude Session & Context Window Tracker</title>
+  <meta name="description" content="Meter AI is a browser extension that tracks your Claude.ai session in real time — monitor context window usage, get alerts before hitting limits, and hand off conversations across LLMs seamlessly.">
   <meta name="theme-color" content="#1A1816">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="canonical" href="https://meter-ai.app/">
+  <link rel="canonical" href="https://meter-ai.app" />
   <link rel="stylesheet" href="styles.css?v=1.0.2">
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D85A30' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'><path d='M5.5 18a7.6 7.6 0 1 1 13 0'/><line x1='12' y1='14' x2='16.5' y2='9.5'/><circle cx='12' cy='14' r='2' fill='%23D85A30' stroke='none'/></svg>">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Meter AI | Track, Transfer, and Continue AI Workflows">
-  <meta property="og:description" content="Track AI usage across platforms. Transfer conversations between models using Context Bridge™. Continue work without losing context. Privacy-first browser extension.">
-  <meta property="og:image" content="https://meter-ai.app/assets/infographic.png">
-  <meta property="og:url" content="https://meter-ai.app/">
+  <meta property="og:title" content="Meter AI — Real-Time Claude Session Tracker">
+  <meta property="og:description" content="Track your Claude.ai context window live. Get alerts, monitor token usage, and hand off conversations to other LLMs without losing context.">
+  <meta property="og:url" content="https://meter-ai.app">
+  <meta property="og:image" content="https://meter-ai.app/og-image.png">
   <meta property="og:type" content="website">
 
   <!-- Twitter Cards -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Meter AI | Track, Transfer, and Continue AI Workflows">
-  <meta name="twitter:description" content="Track AI usage across platforms. Transfer conversations between models using Context Bridge™. Continue work without losing context. Privacy-first browser extension.">
-  <meta name="twitter:image" content="https://meter-ai.app/assets/infographic.png">
+  <meta name="twitter:title" content="Meter AI — Real-Time Claude Session Tracker">
+  <meta name="twitter:description" content="Never get cut off mid-conversation again. Meter AI tracks your Claude context window in real time.">
+  <meta name="twitter:image" content="https://meter-ai.app/og-image.png">
 
-  <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -36,35 +35,44 @@
         "@type": "Organization",
         "@id": "https://meter-ai.app/#organization",
         "name": "Meter AI",
-        "url": "https://meter-ai.app/",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://meter-ai.app/assets/logo.png"
-        },
-        "sameAs": [
-          "https://github.com/supportmeter-ai/Meter-Ai"
-        ]
+        "url": "https://meter-ai.app",
+        "logo": "https://meter-ai.app/assets/logo.png"
       },
       {
         "@type": "WebSite",
         "@id": "https://meter-ai.app/#website",
-        "url": "https://meter-ai.app/",
+        "url": "https://meter-ai.app",
         "name": "Meter AI",
         "publisher": {
           "@id": "https://meter-ai.app/#organization"
         }
       },
       {
-        "@type": "WebPage",
-        "@id": "https://meter-ai.app/",
-        "url": "https://meter-ai.app/",
-        "name": "Meter AI | Track, Transfer, and Continue AI Workflows",
-        "isPartOf": {
-          "@id": "https://meter-ai.app/#website"
-        },
-        "description": "Meter AI helps professionals track AI usage, transfer conversations between models using Context Bridge™, and continue workflows without losing context.",
-        "breadcrumb": {
-          "@id": "https://meter-ai.app/#breadcrumb"
+        "@type": "SoftwareApplication",
+        "@id": "https://meter-ai.app/#software",
+        "name": "Meter AI",
+        "url": "https://meter-ai.app",
+        "applicationCategory": "BrowserApplication",
+        "operatingSystem": "Chrome, Firefox",
+        "description": "Real-time Claude.ai context window tracker and LLM session monitor. Track token usage, get alerts before hitting limits, and hand off conversations seamlessly across AI models.",
+        "offers": [
+          {
+            "@type": "Offer",
+            "name": "Free Plan",
+            "price": "0",
+            "priceCurrency": "INR"
+          },
+          {
+            "@type": "Offer",
+            "name": "Pro Monthly",
+            "price": "169",
+            "priceCurrency": "INR"
+          }
+        ],
+        "author": {
+          "@type": "Person",
+          "name": "Harsha Parisha",
+          "url": "https://harshaparisha.in"
         }
       },
       {
@@ -75,95 +83,43 @@
             "@type": "ListItem",
             "position": 1,
             "name": "Home",
-            "item": "https://meter-ai.app/"
-          }
-        ]
-      },
-      {
-        "@type": "Product",
-        "@id": "https://meter-ai.app/#product",
-        "name": "Meter AI Pro",
-        "image": "https://meter-ai.app/assets/infographic.png",
-        "description": "Meter AI is a browser-based productivity platform providing AI usage analytics, session tracking, context bridge conversation handoffs, and workflow continuity.",
-        "brand": {
-          "@type": "Brand",
-          "name": "Meter AI"
-        },
-        "offers": {
-          "@type": "AggregateOffer",
-          "priceCurrency": "INR",
-          "lowPrice": "0",
-          "highPrice": "1999",
-          "offerCount": "2",
-          "offers": [
-            {
-              "@type": "Offer",
-              "price": "0",
-              "priceCurrency": "INR",
-              "name": "Free Tier",
-              "url": "https://meter-ai.app/#pricing"
-            },
-            {
-              "@type": "Offer",
-              "price": "1999",
-              "priceCurrency": "INR",
-              "name": "Pro Lifetime License",
-              "url": "https://meter-ai.app/#pricing"
-            }
-          ]
-        }
-      },
-      {
-        "@type": "SoftwareApplication",
-        "@id": "https://meter-ai.app/#software",
-        "name": "Meter AI",
-        "applicationCategory": "BrowserApplication",
-        "operatingSystem": "Chrome, Firefox",
-        "description": "Browser extension that tracks AI usage in real time, manages conversation context, and automates multi-model handoffs.",
-        "url": "https://meter-ai.app",
-        "downloadUrl": "https://chromewebstore.google.com",
-        "softwareVersion": "1.0.1",
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "INR",
-          "availability": "https://schema.org/InStock"
-        },
-        "featureList": [
-          "Live session usage bar",
-          "Context Bridge™ handoff to ChatGPT, Gemini, Grok",
-          "Model-aware message budgets",
-          "AI Wrapped usage summary",
-          "Activity reports & usage history"
-        ]
-      },
-      {
-        "@type": "FAQPage",
-        "@id": "https://meter-ai.app/#faq",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "What is Meter AI?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Meter AI is a browser-based productivity tool that helps you track AI usage, manage context budgets, and transfer conversations seamlessly between models."
-            }
+            "item": "https://meter-ai.app"
           },
           {
-            "@type": "Question",
-            "name": "Does Meter AI compromise conversation privacy?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "No. Meter AI is built on a privacy-first design model. All conversation details and usage analytics are processed and stored locally in your browser storage. Nothing is uploaded to external servers."
-            }
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Features",
+            "item": "https://meter-ai.app/features"
           },
           {
-            "@type": "Question",
-            "name": "What is Context Bridge™?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Context Bridge™ is our proprietary conversation parsing and handoff engine that allows you to copy or transfer complete active chat threads between different models (Claude, ChatGPT, Gemini, Grok) without losing your state."
-            }
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Pricing",
+            "item": "https://meter-ai.app/pricing"
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "name": "Install",
+            "item": "https://meter-ai.app/install"
+          },
+          {
+            "@type": "ListItem",
+            "position": 5,
+            "name": "FAQ",
+            "item": "https://meter-ai.app/faq"
+          },
+          {
+            "@type": "ListItem",
+            "position": 6,
+            "name": "Changelog",
+            "item": "https://meter-ai.app/changelog"
+          },
+          {
+            "@type": "ListItem",
+            "position": 7,
+            "name": "About",
+            "item": "https://meter-ai.app/about"
           }
         ]
       }
@@ -185,133 +141,34 @@
     </a>
     
     <div class="nav-tabs">
-      <!-- Why Meter -->
       <div class="nav-tab-container">
-        <a href="#why" class="nav-tab active" data-section="why">
-          <span class="animated-roll">Why Meter?</span>
-          <svg class="nav-tab-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="6 9 12 15 18 9"/>
-          </svg>
-        </a>
-        <div class="nav-dropdown">
-          <div class="nav-dropdown-inner why-dropdown-grid">
-            <div class="why-dropdown-left">
-              <h4>Meter AI</h4>
-              <p>A lightweight, privacy-first companion utility for Claude.ai power users.</p>
-              <div class="why-dropdown-tag">100% Local & Private</div>
-            </div>
-            <div class="why-dropdown-right">
-              <a href="#why" class="dropdown-link-item">
-                <span class="link-item-title">Without Meter</span>
-                <span class="link-item-desc">sudden rate lockouts, zero usage logs, no reset timers.</span>
-              </a>
-              <a href="#why" class="dropdown-link-item">
-                <span class="link-item-title">With Meter</span>
-                <span class="link-item-desc">live inline tracking, remaining prompt predictions, LLM bridge.</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Features -->
-      <div class="nav-tab-container">
-        <a href="#features" class="nav-tab" data-section="features">
+        <a href="/features" class="nav-tab" data-section="features">
           <span class="animated-roll">Features</span>
-          <svg class="nav-tab-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="6 9 12 15 18 9"/>
-          </svg>
         </a>
-        <div class="nav-dropdown">
-          <div class="nav-dropdown-inner features-dropdown-grid">
-            <a href="#features" class="dropdown-feature-card">
-              <div class="feature-card-icon-wrapper">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-              </div>
-              <div class="feature-card-text">
-                <span class="feature-card-title">Live Usage Meter</span>
-                <span class="feature-card-desc">Injected progress bar keeping track of session percentages.</span>
-              </div>
-            </a>
-            <a href="#features" class="dropdown-feature-card">
-              <div class="feature-card-icon-wrapper">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>
-              </div>
-              <div class="feature-card-text">
-                <span class="feature-card-title">Context Bridge</span>
-                <span class="feature-card-desc">Single click transition to ChatGPT, Gemini, or Grok.</span>
-              </div>
-            </a>
-            <a href="#features" class="dropdown-feature-card">
-              <div class="feature-card-icon-wrapper">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10M18 20V4M6 20v-4"/></svg>
-              </div>
-              <div class="feature-card-text">
-                <span class="feature-card-title">Smart Analytics</span>
-                <span class="feature-card-desc">Detailed local dashboards of prompt counts and values.</span>
-              </div>
-            </a>
-            <a href="#features" class="dropdown-feature-card">
-              <div class="feature-card-icon-wrapper">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-              </div>
-              <div class="feature-card-text">
-                <span class="feature-card-title">AI Wrapped</span>
-                <span class="feature-card-desc">Yearly recap of your prompt volumes and productive hours.</span>
-              </div>
-            </a>
-          </div>
-        </div>
       </div>
-
-      <!-- Pricing -->
       <div class="nav-tab-container">
-        <a href="#pricing" class="nav-tab" data-section="pricing">
+        <a href="/pricing" class="nav-tab" data-section="pricing">
           <span class="animated-roll">Pricing</span>
-          <svg class="nav-tab-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="6 9 12 15 18 9"/>
-          </svg>
         </a>
-        <div class="nav-dropdown">
-          <div class="nav-dropdown-inner privacy-dropdown-grid">
-            <a href="#pricing" class="dropdown-link-item">
-              <span class="link-item-title">Free Forever</span>
-              <span class="link-item-desc">Useful tracking with 2 daily cross-LLM sends.</span>
-            </a>
-            <a href="#pricing" class="dropdown-link-item">
-              <span class="link-item-title">Pro</span>
-              <span class="link-item-desc">2 / month or 20 lifetime for unlimited access.</span>
-            </a>
-          </div>
-        </div>
       </div>
-
-      <!-- Privacy -->
       <div class="nav-tab-container">
-        <a href="#privacy" class="nav-tab" data-section="privacy">
-          <span class="animated-roll">Privacy</span>
-          <svg class="nav-tab-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="6 9 12 15 18 9"/>
-          </svg>
+        <a href="/install" class="nav-tab" data-section="install">
+          <span class="animated-roll">Install</span>
         </a>
-        <div class="nav-dropdown">
-          <div class="nav-dropdown-inner privacy-dropdown-grid">
-            <a href="#privacy" class="dropdown-link-item">
-              <span class="link-item-title">No Cloud Backend</span>
-              <span class="link-item-desc">Your workspace data resides only in your local browser sandbox.</span>
-            </a>
-            <a href="#privacy" class="dropdown-link-item">
-              <span class="link-item-title">No Telemetry</span>
-              <span class="link-item-desc">Zero tracking pixels, advertisements, or cloud APIs.</span>
-            </a>
-          </div>
-        </div>
       </div>
-
-      <!-- FAQ -->
       <div class="nav-tab-container">
-        <a href="#faq" class="nav-tab" data-section="faq">
+        <a href="/faq" class="nav-tab" data-section="faq">
           <span class="animated-roll">FAQ</span>
+        </a>
+      </div>
+      <div class="nav-tab-container">
+        <a href="/changelog" class="nav-tab" data-section="changelog">
+          <span class="animated-roll">Changelog</span>
+        </a>
+      </div>
+      <div class="nav-tab-container">
+        <a href="/about" class="nav-tab" data-section="about">
+          <span class="animated-roll">About</span>
         </a>
       </div>
     </div>
@@ -824,6 +681,24 @@
       <p class="footer-tagline">Built for people who spend serious time with AI.</p>
       
       <button id="footer-feedback-trigger" class="btn-feedback-footer">Give Feedback</button>
+      
+      <div class="footer-links-row">
+        <a href="/features">Features</a>
+        <span>·</span>
+        <a href="/pricing">Pricing</a>
+        <span>·</span>
+        <a href="/install">Install</a>
+        <span>·</span>
+        <a href="/faq">FAQ</a>
+        <span>·</span>
+        <a href="/changelog">Changelog</a>
+        <span>·</span>
+        <a href="/about">About</a>
+        <span>·</span>
+        <a href="/privacy">Privacy Policy</a>
+        <span>·</span>
+        <a href="/terms">Terms of Service</a>
+      </div>
       
       <div class="footer-social-row">
         <a href="https://www.instagram.com/harsha._.l4" target="_blank" rel="noopener noreferrer" class="footer-social-icon" aria-label="Instagram">

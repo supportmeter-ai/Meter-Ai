@@ -1229,6 +1229,29 @@ section {
   margin: 0;
 }
 
+.footer-links-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 16px 0 8px 0;
+}
+
+.footer-links-row a {
+  transition: color 0.2s var(--ease-out);
+}
+
+.footer-links-row a:hover {
+  color: var(--accent);
+}
+
+.footer-links-row span {
+  color: var(--text-muted);
+}
+
 .footer-social-row {
   display: flex;
   gap: 28px;
@@ -3413,4 +3436,83 @@ section {
 .toast-close:hover {
   color: #F5F1ED;
 }
+
+/* ─── Subpage General Styles ────────────────────────────────────── */
+.subpage-container {
+  max-width: var(--max-width);
+  margin: 120px auto 80px auto;
+  padding: 0 24px;
+}
+
+.subpage-container h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.subpage-container h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-top: 36px;
+  margin-bottom: 14px;
+}
+
+.subpage-container p, .subpage-container li {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 18px;
+}
+
+.subpage-container ul {
+  margin-left: 24px;
+  margin-bottom: 20px;
+}
+
+.subpage-container ul li {
+  margin-bottom: 8px;
+}
+
+.subpage-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--accent);
+  font-weight: 500;
+  margin-bottom: 40px;
+  font-size: 14px;
+  transition: color 0.2s var(--ease-out);
+}
+
+.subpage-back-link:hover {
+  text-decoration: underline;
+  color: #f77f50;
+}
+
+.subpage-cta-box {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  text-align: center;
+  margin: 48px 0;
+}
+
+.subpage-cta-box h3 {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 12px;
+}
+
+.subpage-cta-box p {
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
 
