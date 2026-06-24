@@ -40,6 +40,9 @@ const supabaseAdmin = supabaseAdminUrl && supabaseAdminKey
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Enable cookie parser middleware for admin auth cookies early
+app.use(cookieParser());
+
 // Initialize Razorpay Client
 const razorpayKeyId = process.env.RAZORPAY_KEY_ID;
 const razorpayKeySecret = process.env.RAZORPAY_KEY_SECRET;
@@ -48,12 +51,64 @@ const razorpay = razorpayKeyId && razorpayKeySecret ? new Razorpay({
   key_secret: razorpayKeySecret
 }) : null;
 
+// Global Static File Protection Middleware
+app.use((req, res, next) => {
+  const cleanPath = req.path.toLowerCase();
+  
+  // Sensitive root files
+  const sensitiveFiles = [
+    '/server.js',
+    '/schema.sql',
+    '/apply-schema.js',
+    '/package.json',
+    '/package-lock.json',
+    '/.env',
+    '/.gitignore',
+    '/readme.md',
+    '/release_notes.md'
+  ];
+  
+  if (sensitiveFiles.includes(cleanPath) || cleanPath.startsWith('/.git')) {
+    return res.status(403).send('Forbidden: Direct access to this file is not allowed.');
+  }
+
+  // Prevent direct access to admin source files via static serving
+  if (cleanPath === '/admin/index.html' || cleanPath === '/admin/admin.js' || cleanPath === '/admin/login.html') {
+    const token = req.cookies?.admin_session;
+    if (token) {
+      try {
+        const decoded = jwt.verify(token, process.env.ADMIN_JWT_SECRET);
+        if (decoded.email === process.env.ADMIN_EMAIL && decoded.role === 'admin') {
+          return next();
+        }
+      } catch (err) {
+        // Invalid session
+      }
+    }
+    return res.status(403).send('Forbidden: Direct access to admin source files is not allowed.');
+  }
+  
+  next();
+});
+
 // Global security headers middleware
 app.use((req, res, next) => {
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('X-Frame-Options', 'DENY');
   res.setHeader('X-XSS-Protection', '1; mode=block');
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  
+  // Content-Security-Policy header
+  res.setHeader('Content-Security-Policy', 
+    "default-src 'self'; " +
+    "script-src 'self' 'unsafe-inline' https://checkout.razorpay.com https://cdn.jsdelivr.net; " +
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
+    "img-src 'self' data: https://lh3.googleusercontent.com; " +
+    "font-src 'self' data: https://fonts.gstatic.com; " +
+    "frame-src 'self' https://checkout.razorpay.com; " +
+    "connect-src 'self' https://ojlamxgpcgchqrmpuugl.supabase.co wss://ojlamxgpcgchqrmpuugl.supabase.co https://api.razorpay.com;"
+  );
+
   if (process.env.NODE_ENV === 'production') {
     res.setHeader('Strict-Transport-Security', 'max-age=63072000; includeSubDomains; preload');
   }
@@ -124,14 +179,28 @@ const clientAuthLimiter = createRateLimiter({
   message: 'Too many API requests. Please slow down.'
 });
 
-// Enable cookie parser middleware for admin auth cookies
-app.use(cookieParser());
-
-// Setup CORS middleware for local extension development
+// Setup CORS middleware for local extension development and production
+const allowedOrigins = ['https://meter-ai.app'];
 app.use(cors({
-  origin: '*', // Allows extension popup calls
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true);
+    if (
+      origin.startsWith('chrome-extension://') || 
+      origin.startsWith('moz-extension://') || 
+      origin === 'http://localhost' || 
+      origin.startsWith('http://localhost:') || 
+      allowedOrigins.includes(origin)
+    ) {
+      return callback(null, true);
+    }
+    if (process.env.NODE_ENV === 'production') {
+      return callback(new Error('Not allowed by CORS'));
+    }
+    return callback(null, true);
+  },
   methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
 }));
 
 // Express parser with rawBody verification callback
@@ -140,9 +209,6 @@ app.use(express.json({
     req.rawBody = buf;
   }
 }));
-
-// Serve landing pages statically
-app.use(express.static(__dirname));
 
 app.get('/privacy', (req, res) => {
   res.sendFile(path.join(__dirname, 'privacy.html'));
@@ -1299,13 +1365,39 @@ app.get('/api/admin/overview', requireAdmin, async (req, res) => {
 // GET /api/admin/users - Retrieve user list
 app.get('/api/admin/users', requireAdmin, async (req, res) => {
   try {
-    const { data: users, error } = await supabaseAdmin
+    const { page = 1, limit = 10, search = '', plan = 'all', status = 'all' } = req.query;
+
+    let query = supabaseAdmin
       .from('profiles')
-      .select('*')
-      .order('created_at', { ascending: false });
+      .select('*', { count: 'exact' });
+
+    if (search && search.trim()) {
+      const searchStr = search.trim();
+      query = query.or(`email.ilike.%${searchStr}%,full_name.ilike.%${searchStr}%,id.ilike.%${searchStr}%`);
+    }
+    if (plan && plan !== 'all') {
+      query = query.eq('plan', plan);
+    }
+    if (status && status !== 'all') {
+      query = query.eq('subscription_status', status);
+    }
+
+    const pageNum = parseInt(page) || 1;
+    const limitNum = parseInt(limit) || 10;
+    const offset = (pageNum - 1) * limitNum;
+
+    query = query
+      .order('created_at', { ascending: false })
+      .range(offset, offset + limitNum - 1);
+
+    const { data: users, count, error } = await query;
     
     if (error) throw error;
-    return res.json(users || []);
+    return res.json({
+      success: true,
+      users: users || [],
+      count: count || 0
+    });
   } catch (err) {
     console.error('Get users error:', err);
     return res.status(500).json({ success: false, error: 'Database read error' });
@@ -1315,14 +1407,23 @@ app.get('/api/admin/users', requireAdmin, async (req, res) => {
 // GET /api/admin/events - Retrieve webhook audit trail (last 100)
 app.get('/api/admin/events', requireAdmin, async (req, res) => {
   try {
-    const { data: events, error } = await supabaseAdmin
+    const { page = 1, limit = 20 } = req.query;
+    const pageNum = parseInt(page) || 1;
+    const limitNum = parseInt(limit) || 20;
+    const offset = (pageNum - 1) * limitNum;
+
+    const { data: events, count, error } = await supabaseAdmin
       .from('subscription_events')
-      .select('*, profiles(email)')
+      .select('*, profiles(email)', { count: 'exact' })
       .order('created_at', { ascending: false })
-      .limit(100);
+      .range(offset, offset + limitNum - 1);
 
     if (error) throw error;
-    return res.json(events || []);
+    return res.json({
+      success: true,
+      events: events || [],
+      count: count || 0
+    });
   } catch (err) {
     console.error('Get events error:', err);
     return res.status(500).json({ success: false, error: 'Database read error' });
@@ -1332,13 +1433,23 @@ app.get('/api/admin/events', requireAdmin, async (req, res) => {
 // GET /api/admin/feedback - Retrieve user feedback
 app.get('/api/admin/feedback', requireAdmin, async (req, res) => {
   try {
-    const { data: feedback, error } = await supabaseAdmin
+    const { page = 1, limit = 5 } = req.query;
+    const pageNum = parseInt(page) || 1;
+    const limitNum = parseInt(limit) || 5;
+    const offset = (pageNum - 1) * limitNum;
+
+    const { data: feedback, count, error } = await supabaseAdmin
       .from('admin_feedback')
-      .select('*')
-      .order('created_at', { ascending: false });
+      .select('*', { count: 'exact' })
+      .order('created_at', { ascending: false })
+      .range(offset, offset + limitNum - 1);
 
     if (error) throw error;
-    return res.json(feedback || []);
+    return res.json({
+      success: true,
+      feedback: feedback || [],
+      count: count || 0
+    });
   } catch (err) {
     console.error('Get feedback error:', err);
     return res.status(500).json({ success: false, error: 'Database read error' });
@@ -1348,19 +1459,29 @@ app.get('/api/admin/feedback', requireAdmin, async (req, res) => {
 // GET /api/admin/tickets - Retrieve support queue
 app.get('/api/admin/tickets', requireAdmin, async (req, res) => {
   try {
-    const { status } = req.query;
+    const { status, page = 1, limit = 5 } = req.query;
+    const pageNum = parseInt(page) || 1;
+    const limitNum = parseInt(limit) || 5;
+    const offset = (pageNum - 1) * limitNum;
+
     let query = supabaseAdmin
       .from('admin_support')
-      .select('*')
+      .select('*', { count: 'exact' })
       .order('created_at', { ascending: false });
 
     if (status && status !== 'all') {
       query = query.eq('status', status);
     }
 
-    const { data: tickets, error } = await query;
+    query = query.range(offset, offset + limitNum - 1);
+
+    const { data: tickets, count, error } = await query;
     if (error) throw error;
-    return res.json(tickets || []);
+    return res.json({
+      success: true,
+      tickets: tickets || [],
+      count: count || 0
+    });
   } catch (err) {
     console.error('Get tickets error:', err);
     return res.status(500).json({ success: false, error: 'Database read error' });
@@ -1981,9 +2102,17 @@ app.get('/admin/admin.js', requireAdminRedirect, setNoCacheHeaders, (req, res) =
   res.sendFile(path.join(__dirname, 'admin', 'admin.js'));
 });
 
-// Default fallback to index.html for unknown routes
-app.get('*', (req, res) => {
+// Serve landing pages and static assets
+app.use(express.static(__dirname));
+
+// Route fallback for /
+app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// Default fallback to 404.html for unknown routes
+app.get('*', (req, res) => {
+  res.status(404).sendFile(path.join(__dirname, '404.html'));
 });
 
 async function migrateExistingTasks() {

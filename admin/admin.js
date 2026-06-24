@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let autoRefreshInterval = null;
   const refreshRateMs = 30000; // 30 seconds
   let cachedTasks = [];
-  let allFeedbackData = [];
+  
   let feedbackCurrentPage = 1;
   const feedbackPageSize = 5;
 
@@ -16,6 +16,15 @@ document.addEventListener('DOMContentLoaded', () => {
   let allOverviewTickets = [];
   let overviewTicketsCurrentPage = 1;
   const overviewTicketsPageSize = 5;
+
+  let usersCurrentPage = 1;
+  const usersPageSize = 10;
+
+  let eventsCurrentPage = 1;
+  const eventsPageSize = 20;
+
+  let supportCurrentPage = 1;
+  const supportPageSize = 5;
 
   // Initialize
   checkSession().then(authenticated => {
@@ -100,20 +109,68 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('userSearchInput').addEventListener('input', debounce(filterUsers, 300));
     document.getElementById('userPlanFilter').addEventListener('change', filterUsers);
     document.getElementById('userStatusFilter').addEventListener('change', filterUsers);
-    document.getElementById('ticketStatusFilter').addEventListener('change', () => fetchSupportData());
+    document.getElementById('ticketStatusFilter').addEventListener('change', () => {
+      supportCurrentPage = 1;
+      fetchSupportData();
+    });
 
     // Feedback Pagination Event Listeners
     document.getElementById('btn-feedback-prev').addEventListener('click', () => {
       if (feedbackCurrentPage > 1) {
         feedbackCurrentPage--;
-        renderFeedbackPage(feedbackCurrentPage);
+        fetchFeedbackData();
       }
     });
     document.getElementById('btn-feedback-next').addEventListener('click', () => {
-      const maxPages = Math.ceil(allFeedbackData.length / feedbackPageSize);
+      const maxPages = Math.ceil(feedbackTotalCount / feedbackPageSize);
       if (feedbackCurrentPage < maxPages) {
         feedbackCurrentPage++;
-        renderFeedbackPage(feedbackCurrentPage);
+        fetchFeedbackData();
+      }
+    });
+
+    // Users Pagination Event Listeners
+    document.getElementById('btn-users-prev').addEventListener('click', () => {
+      if (usersCurrentPage > 1) {
+        usersCurrentPage--;
+        fetchUsersData();
+      }
+    });
+    document.getElementById('btn-users-next').addEventListener('click', () => {
+      const maxPages = Math.ceil(usersTotalCount / usersPageSize);
+      if (usersCurrentPage < maxPages) {
+        usersCurrentPage++;
+        fetchUsersData();
+      }
+    });
+
+    // Webhook Events Pagination Event Listeners
+    document.getElementById('btn-events-prev').addEventListener('click', () => {
+      if (eventsCurrentPage > 1) {
+        eventsCurrentPage--;
+        fetchEventsData();
+      }
+    });
+    document.getElementById('btn-events-next').addEventListener('click', () => {
+      const maxPages = Math.ceil(eventsTotalCount / eventsPageSize);
+      if (eventsCurrentPage < maxPages) {
+        eventsCurrentPage++;
+        fetchEventsData();
+      }
+    });
+
+    // Support Tickets Pagination Event Listeners
+    document.getElementById('btn-support-prev').addEventListener('click', () => {
+      if (supportCurrentPage > 1) {
+        supportCurrentPage--;
+        fetchSupportData();
+      }
+    });
+    document.getElementById('btn-support-next').addEventListener('click', () => {
+      const maxPages = Math.ceil(supportTotalCount / supportPageSize);
+      if (supportCurrentPage < maxPages) {
+        supportCurrentPage++;
+        fetchSupportData();
       }
     });
 
@@ -392,14 +449,31 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ─── PANE 2: USER DATABASE CONTROLLER ───────────────────────────────
-  let allUsersCached = [];
+  let usersTotalCount = 0;
 
   async function fetchUsersData() {
     try {
-      const res = await fetch('/api/admin/users');
+      const searchVal = document.getElementById('userSearchInput').value;
+      const planVal = document.getElementById('userPlanFilter').value;
+      const statusVal = document.getElementById('userStatusFilter').value;
+      
+      const params = new URLSearchParams({
+        page: usersCurrentPage,
+        limit: usersPageSize,
+        search: searchVal,
+        plan: planVal,
+        status: statusVal
+      });
+
+      const res = await fetch(`/api/admin/users?${params.toString()}`);
       if (!res.ok) throw new Error('Failed to fetch user database');
-      allUsersCached = await res.json();
-      filterUsers();
+      const data = await res.json();
+      
+      const users = data.users || [];
+      usersTotalCount = data.count || 0;
+      
+      renderUsersTable(users);
+      renderUsersPagination();
     } catch (err) {
       console.error(err);
       showToast('Error loading user directory', true);
@@ -407,23 +481,34 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function filterUsers() {
-    const searchVal = document.getElementById('userSearchInput').value.toLowerCase();
-    const planVal = document.getElementById('userPlanFilter').value;
-    const statusVal = document.getElementById('userStatusFilter').value;
+    usersCurrentPage = 1;
+    fetchUsersData();
+  }
 
-    const filtered = allUsersCached.filter(u => {
-      const matchesSearch = 
-        u.email.toLowerCase().includes(searchVal) ||
-        (u.full_name && u.full_name.toLowerCase().includes(searchVal)) ||
-        u.id.toLowerCase().includes(searchVal);
-      
-      const matchesPlan = planVal === 'all' || u.plan === planVal;
-      const matchesStatus = statusVal === 'all' || u.subscription_status === statusVal;
+  function renderUsersPagination() {
+    const paginationContainer = document.getElementById('users-pagination');
+    const paginationInfo = document.getElementById('users-pagination-info');
+    const btnPrev = document.getElementById('btn-users-prev');
+    const btnNext = document.getElementById('btn-users-next');
 
-      return matchesSearch && matchesPlan && matchesStatus;
-    });
+    if (!paginationContainer) return;
 
-    renderUsersTable(filtered);
+    if (usersTotalCount === 0) {
+      paginationContainer.style.display = 'none';
+      return;
+    }
+
+    paginationContainer.style.display = 'flex';
+    const maxPages = Math.ceil(usersTotalCount / usersPageSize);
+    
+    if (btnPrev) btnPrev.disabled = (usersCurrentPage === 1);
+    if (btnNext) btnNext.disabled = (usersCurrentPage === maxPages);
+
+    const startIdx = (usersCurrentPage - 1) * usersPageSize + 1;
+    const endIdx = Math.min(usersCurrentPage * usersPageSize, usersTotalCount);
+    if (paginationInfo) {
+      paginationInfo.innerText = `Showing ${startIdx}-${endIdx} of ${usersTotalCount}`;
+    }
   }
 
   function renderUsersTable(users) {
@@ -488,26 +573,60 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ─── PANE 3: WEBHOOK LOGS CONTROLLER ───────────────────────────────
+  let eventsTotalCount = 0;
+
   async function fetchEventsData() {
     try {
-      const res = await fetch('/api/admin/events');
+      const res = await fetch(`/api/admin/events?page=${eventsCurrentPage}&limit=${eventsPageSize}`);
       if (!res.ok) throw new Error('Failed to fetch webhook events');
-      const events = await res.json();
+      const data = await res.json();
+      
+      const events = data.events || [];
+      eventsTotalCount = data.count || 0;
 
       const tbody = document.getElementById('full-events-table');
       tbody.innerHTML = '';
 
       if (events.length === 0) {
         tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted); padding: 24px;">No webhook event logs recorded.</td></tr>`;
+        renderEventsPagination();
         return;
       }
 
       events.forEach(e => {
         tbody.appendChild(createEventRow(e, true));
       });
+
+      renderEventsPagination();
     } catch (err) {
       console.error(err);
       showToast('Error loading webhook audit log', true);
+    }
+  }
+
+  function renderEventsPagination() {
+    const paginationContainer = document.getElementById('events-pagination');
+    const paginationInfo = document.getElementById('events-pagination-info');
+    const btnPrev = document.getElementById('btn-events-prev');
+    const btnNext = document.getElementById('btn-events-next');
+
+    if (!paginationContainer) return;
+
+    if (eventsTotalCount === 0) {
+      paginationContainer.style.display = 'none';
+      return;
+    }
+
+    paginationContainer.style.display = 'flex';
+    const maxPages = Math.ceil(eventsTotalCount / eventsPageSize);
+    
+    if (btnPrev) btnPrev.disabled = (eventsCurrentPage === 1);
+    if (btnNext) btnNext.disabled = (eventsCurrentPage === maxPages);
+
+    const startIdx = (eventsCurrentPage - 1) * eventsPageSize + 1;
+    const endIdx = Math.min(eventsCurrentPage * eventsPageSize, eventsTotalCount);
+    if (paginationInfo) {
+      paginationInfo.innerText = `Showing ${startIdx}-${endIdx} of ${eventsTotalCount}`;
     }
   }
 
@@ -543,20 +662,26 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ─── PANE 4: USER FEEDBACK CONTROLLER ──────────────────────────────
+  // ─── PANE 4: USER FEEDBACK CONTROLLER ──────────────────────────────
+  let feedbackTotalCount = 0;
+
   async function fetchFeedbackData() {
     try {
-      const res = await fetch('/api/admin/feedback');
+      const res = await fetch(`/api/admin/feedback?page=${feedbackCurrentPage}&limit=${feedbackPageSize}`);
       if (!res.ok) throw new Error('Failed to fetch user feedback');
-      allFeedbackData = await res.json();
-      feedbackCurrentPage = 1;
-      renderFeedbackPage(1);
+      const data = await res.json();
+      
+      const feedback = data.feedback || [];
+      feedbackTotalCount = data.count || 0;
+      
+      renderFeedbackPage(feedback);
     } catch (err) {
       console.error(err);
       showToast('Error loading feedback list', true);
     }
   }
 
-  function renderFeedbackPage(page) {
+  function renderFeedbackPage(feedback) {
     const tbody = document.getElementById('feedback-table');
     tbody.innerHTML = '';
 
@@ -565,7 +690,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnPrev = document.getElementById('btn-feedback-prev');
     const btnNext = document.getElementById('btn-feedback-next');
 
-    if (allFeedbackData.length === 0) {
+    if (feedback.length === 0) {
       tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--text-muted); padding: 24px;">No feedback submissions recorded.</td></tr>`;
       if (paginationContainer) paginationContainer.style.display = 'none';
       return;
@@ -573,17 +698,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (paginationContainer) paginationContainer.style.display = 'flex';
 
-    const maxPages = Math.ceil(allFeedbackData.length / feedbackPageSize);
-    const startIdx = (page - 1) * feedbackPageSize;
-    const endIdx = Math.min(startIdx + feedbackPageSize, allFeedbackData.length);
-    const pageData = allFeedbackData.slice(startIdx, endIdx);
+    const maxPages = Math.ceil(feedbackTotalCount / feedbackPageSize);
+    
+    if (btnPrev) btnPrev.disabled = (feedbackCurrentPage === 1);
+    if (btnNext) btnNext.disabled = (feedbackCurrentPage === maxPages);
 
-    // Update pagination controls
-    if (btnPrev) btnPrev.disabled = (page === 1);
-    if (btnNext) btnNext.disabled = (page === maxPages);
-    if (paginationInfo) paginationInfo.innerText = `Showing ${startIdx + 1}-${endIdx} of ${allFeedbackData.length}`;
+    const startIdx = (feedbackCurrentPage - 1) * feedbackPageSize + 1;
+    const endIdx = Math.min(feedbackCurrentPage * feedbackPageSize, feedbackTotalCount);
+    if (paginationInfo) {
+      paginationInfo.innerText = `Showing ${startIdx}-${endIdx} of ${feedbackTotalCount}`;
+    }
 
-    pageData.forEach(f => {
+    feedback.forEach(f => {
       const tr = document.createElement('tr');
       const starFilled = `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="var(--warning)" stroke="var(--warning)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 2px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`;
       const starEmpty = `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--text-dim)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 2px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`;
@@ -607,18 +733,24 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ─── PANE 5: SUPPORT QUEUE CONTROLLER ───────────────────────────────
+  let supportTotalCount = 0;
+
   async function fetchSupportData() {
     try {
       const statusFilter = document.getElementById('ticketStatusFilter').value;
-      const res = await fetch(`/api/admin/tickets?status=${statusFilter}`);
+      const res = await fetch(`/api/admin/tickets?status=${statusFilter}&page=${supportCurrentPage}&limit=${supportPageSize}`);
       if (!res.ok) throw new Error('Failed to fetch tickets');
-      const tickets = await res.json();
+      const data = await res.json();
+      
+      const tickets = data.tickets || [];
+      supportTotalCount = data.count || 0;
 
       const list = document.getElementById('full-support-list');
       list.innerHTML = '';
 
       if (tickets.length === 0) {
         list.innerHTML = `<div style="text-align: center; padding: 40px; color: var(--text-muted);">No support tickets in this queue.</div>`;
+        renderSupportPagination();
         return;
       }
 
@@ -684,11 +816,39 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       });
 
+      renderSupportPagination();
     } catch (err) {
       console.error(err);
       showToast('Error loading support queue', true);
     }
   }
+
+  function renderSupportPagination() {
+    const paginationContainer = document.getElementById('support-pagination');
+    const paginationInfo = document.getElementById('support-pagination-info');
+    const btnPrev = document.getElementById('btn-support-prev');
+    const btnNext = document.getElementById('btn-support-next');
+
+    if (!paginationContainer) return;
+
+    if (supportTotalCount === 0) {
+      paginationContainer.style.display = 'none';
+      return;
+    }
+
+    paginationContainer.style.display = 'flex';
+    const maxPages = Math.ceil(supportTotalCount / supportPageSize);
+    
+    if (btnPrev) btnPrev.disabled = (supportCurrentPage === 1);
+    if (btnNext) btnNext.disabled = (supportCurrentPage === maxPages);
+
+    const startIdx = (supportCurrentPage - 1) * supportPageSize + 1;
+    const endIdx = Math.min(supportCurrentPage * supportPageSize, supportTotalCount);
+    if (paginationInfo) {
+      paginationInfo.innerText = `Showing ${startIdx}-${endIdx} of ${supportTotalCount}`;
+    }
+  }
+
 
   async function updateTicketStatus(ticketId, status) {
     try {
