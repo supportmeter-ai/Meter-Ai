@@ -2272,17 +2272,22 @@ async function migrateExistingTasks() {
 }
 
 // Start Server
-app.listen(PORT, async () => {
-  console.log(`Meter AI server running on port ${PORT}`);
-  console.log(`Landing Page: http://localhost:${PORT}`);
-  console.log(`Feedback API: http://localhost:${PORT}/api/feedback`);
-  console.log(`Profile API:  http://localhost:${PORT}/api/profile`);
-  console.log(`Upgrade API:  http://localhost:${PORT}/api/upgrade`);
-  console.log(`Restore API:  http://localhost:${PORT}/api/restore`);
-  console.log(`Webhook:      http://localhost:${PORT}/api/razorpay/webhook`);
-  console.log(`Supabase:     ${process.env.SUPABASE_SECRET_KEY ? 'Connected' : 'Not configured (no SUPABASE_SECRET_KEY)'}`);
-  console.log(`Razorpay:     ${razorpay ? 'Connected' : 'Not configured (no RAZORPAY_KEY_ID/SECRET)'}`);
-  
-  // Trigger data migration
-  await migrateExistingTasks();
-});
+if (require.main === module) {
+  app.listen(PORT, async () => {
+    console.log(`Meter AI server running on port ${PORT}`);
+    console.log(`Landing Page: http://localhost:${PORT}`);
+    console.log(`Feedback API: http://localhost:${PORT}/api/feedback`);
+    console.log(`Profile API:  http://localhost:${PORT}/api/profile`);
+    console.log(`Upgrade API:  http://localhost:${PORT}/api/upgrade`);
+    console.log(`Restore API:  http://localhost:${PORT}/api/restore`);
+    console.log(`Webhook:      http://localhost:${PORT}/api/razorpay/webhook`);
+    console.log(`Supabase:     ${process.env.SUPABASE_SECRET_KEY ? 'Connected' : 'Not configured (no SUPABASE_SECRET_KEY)'}`);
+    console.log(`Razorpay:     ${razorpay ? 'Connected' : 'Not configured (no RAZORPAY_KEY_ID/SECRET)'}`);
+    
+    // Trigger data migration
+    await migrateExistingTasks();
+  });
+}
+
+module.exports = app;
+
