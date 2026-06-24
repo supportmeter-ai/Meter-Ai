@@ -101,12 +101,12 @@ app.use((req, res, next) => {
   // Content-Security-Policy header
   res.setHeader('Content-Security-Policy', 
     "default-src 'self'; " +
-    "script-src 'self' 'unsafe-inline' https://checkout.razorpay.com https://cdn.jsdelivr.net; " +
+    "script-src 'self' 'unsafe-inline' https://checkout.razorpay.com https://cdn.razorpay.com https://cdn.jsdelivr.net; " +
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
     "img-src 'self' data: https://lh3.googleusercontent.com; " +
     "font-src 'self' data: https://fonts.gstatic.com; " +
-    "frame-src 'self' https://checkout.razorpay.com; " +
-    "connect-src 'self' https://ojlamxgpcgchqrmpuugl.supabase.co wss://ojlamxgpcgchqrmpuugl.supabase.co https://api.razorpay.com;"
+    "frame-src 'self' https://checkout.razorpay.com https://api.razorpay.com; " +
+    "connect-src 'self' https://ojlamxgpcgchqrmpuugl.supabase.co wss://ojlamxgpcgchqrmpuugl.supabase.co https://api.razorpay.com https://cdn.jsdelivr.net;"
   );
 
   if (process.env.NODE_ENV === 'production') {
