@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://meter-ai.app/sitemap.xml
+Sitemap: https://getmeterai.vercel.app/sitemap.xml
