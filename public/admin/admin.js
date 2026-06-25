@@ -61,19 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('hashchange', handleRouting);
     handleRouting(); // trigger on initial load
 
-    // 2. Sidebar Mobile Toggle
-    const menuToggle = document.getElementById('menuToggle');
-    const sidebar = document.getElementById('sidebar');
-    menuToggle.addEventListener('click', () => {
-      sidebar.classList.toggle('mobile-open');
-    });
-
-    // Close sidebar when clicking links on mobile
-    document.querySelectorAll('.menu-link').forEach(link => {
-      link.addEventListener('click', () => {
-        sidebar.classList.remove('mobile-open');
-      });
-    });
 
     // 3. Setup Button Event Listeners
     document.getElementById('manualRefreshBtn').addEventListener('click', () => {

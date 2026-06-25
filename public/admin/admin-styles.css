@@ -1288,7 +1288,6 @@ a {
 
   /* Backdrop overlay when mobile sidebar is open */
   .sidebar-backdrop {
-    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -1296,10 +1295,14 @@ a {
     bottom: 0;
     background: rgba(0, 0, 0, 0.6);
     z-index: 150;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
   }
 
   .sidebar-backdrop.active {
-    display: block;
+    opacity: 1;
+    visibility: visible;
   }
   
   .menu-toggle {
