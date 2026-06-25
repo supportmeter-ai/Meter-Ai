@@ -1,111 +1,79 @@
 # Meter AI
 
-Meter AI is a browser extension and companion web service built for people who use Claude heavily. It gives you the usage information that Claude's own interface withholds — live session tracking, reset countdowns, quota estimation, and conversation transfer to other AI providers — without sending any of your conversation data to a server.
+Meter AI is a browser extension and companion web application designed to track active usage sessions on Claude.ai, forecast limit resets, and manage conversation handoffs to alternative AI providers.
 
 ![Meter AI Infographic](public/assets/infographic.png)
 
----
+## Architecture
 
-## What it does
+The project is divided into two primary directories:
 
-Claude imposes session and weekly limits on how many messages you can send, but it does not surface useful numbers while you are actually working. You find out you have run out only when you are stopped mid-conversation.
-
-Meter AI solves this by reading Claude's own page data locally in your browser and turning it into something usable: a live usage bar, a countdown to your next reset, an estimate of messages remaining, and a summary of your usage history over the past seven days.
-
-When you do hit a limit, the Context Bridge feature copies your current conversation and opens it directly in ChatGPT, Gemini, or Grok so you can keep working without manually copying anything.
-
----
+- `meter-extension/` - A Manifest V3 browser extension for Chrome, Firefox, and Chromium-based browsers.
+- `meter-ai-website/` - An Express backend server and landing page application integrated with Supabase and Razorpay.
 
 ## Features
 
-### Usage Tracking
-
-A lightweight status bar appears below Claude's prompt input and updates automatically on every message you send. It shows session percentage used, estimated messages remaining (calculated per model — Sonnet and Opus have different limits), and a live countdown to your reset time.
-
-### Weekly Quota Estimation
-
-Meter tracks usage across rolling seven-day periods so you can see how much of your weekly budget remains. This is especially useful for Claude Pro and Team accounts where weekly limits apply at the model level.
+### Usage Monitoring
+The extension injects a status bar directly into the Claude.ai user interface. It calculates and displays:
+- Session prompt usage percentage.
+- Estimates of remaining messages for active models.
+- Countdown time remaining until the next limit reset.
 
 ### Context Bridge
+If a rate limit is reached on Claude.ai, a single click transfers the conversation history to ChatGPT, Google Gemini, or Grok. The extension parses the local chat session, formats it as a single prompt, and loads it into the selected platform.
 
-When you reach a rate limit, you can transfer your conversation to another provider in a single click. Meter formats the conversation as a structured prompt and opens it in whichever alternative you choose — ChatGPT, Google Gemini, or Grok — without any manual copy and paste.
+### Privacy and Local Storage
+All conversation history and tracking records are saved locally in the browser's extension storage. No conversation data or context is sent to external servers. The only network requests made by the extension are optional checks to authenticate Pro license status.
 
-### Usage History
-
-Local session logs record prompt counts, model usage, and active time. This builds into a dashboard showing usage trends across days and weeks, all stored entirely in your browser.
-
-### AI Wrapped
-
-An annual summary view shows your total prompt volume, working hours, most active models, and estimated subscription value used across the year.
-
-### Privacy-first Architecture
-
-Everything that touches your conversations and session data stays on your device. The extension reads Claude's page data in the browser sandbox — no content is transmitted to Meter's servers. The only network requests the extension makes are optional Pro license checks, which send an account identifier, not conversation data.
-
-### Google Account Synchronization
-
-Pro subscribers can sign in with Google to verify their license and sync their plan status across devices. Sign-in is optional for the free tier and is used only to verify entitlement, not to collect usage data.
-
-### Premium Membership
-
-Two paid tiers are available, both processed through Razorpay and priced in INR.
-
-**Pro Monthly** — unlocks unlimited Context Bridge handoffs, the full analytics dashboard, and cross-device profile sync for 169 rupees per month. This is a one-time monthly charge with no automatic renewal unless explicitly set up.
-
-**Pro Lifetime** — a single payment of 1,999 rupees for permanent access to all Pro features, including all future updates.
-
-Free users get real-time session tracking, reset countdowns, local storage, and two daily Context Bridge transfers at no cost.
-
-### Lightweight Performance
-
-The extension has no build step, no bundler, and no frontend framework. It is plain JavaScript with a small set of Node.js packages on the backend. Page weight is minimal and the extension does not affect Claude's performance in any measurable way.
+### Administrative Panel
+The backend contains a private admin dashboard accessed at `/admin` for management operations:
+- **Overview & Stats**: View system metrics, recent webhooks, and active tickets.
+- **User Database**: Manage user plan levels (Free, Pro Monthly, Pro Lifetime) and handle manual upgrades or downgrades.
+- **Revenue Tracker**: Inspect payment history and calculate Monthly Recurring Revenue (MRR).
+- **Kanban Task Board**: Manage internal tasks and notes.
+- **Support & Feedback**: Reply to customer support queries using the Resend email service.
+- **System Health**: Verify active integrations with Supabase, Razorpay, and Resend.
 
 ---
 
-## Why Meter AI is different
+## Installation and Configuration
 
-Most productivity tools for AI workflows try to do too much. They add layers, require accounts, and collect data to justify their own infrastructure.
+### 1. Browser Extension Installation
+To load the extension locally in Chrome:
+1. Open Chrome and navigate to `chrome://extensions`.
+2. Toggle **Developer mode** in the top-right corner.
+3. Click **Load unpacked**.
+4. Select the `meter-extension/` directory.
 
-Meter AI does one thing: it gives you information your primary tool should already be showing you, and it does that locally, privately, and without asking you to trust it with anything sensitive.
-
-The free tier is genuinely useful. The Pro tier exists for people who hit the Context Bridge limit regularly or want historical analytics. Neither tier involves conversation data leaving your machine.
-
-The codebase is built to be auditable. There is no obfuscation, no minification, and no external analytics SDK. The logic for reading session data runs entirely in the browser content script. The server handles only license verification, payment processing, and feedback form submission.
-
----
-
-## Technology
-
-- **Extension:** Plain JavaScript content scripts, background service worker, and a popup panel
-- **Website & Backend:** Node.js with Express serving both static files and the REST API
-- **Database:** Supabase (PostgreSQL) with Row Level Security for profile and subscription storage
-- **Authentication:** Supabase Auth with Google OAuth
-- **Payments:** Razorpay subscription and order APIs with HMAC-SHA256 webhook verification
-- **Email:** Resend API for feedback form delivery
-
----
-
-## Project structure
-
-```
-meter-ai-website/
-├── index.html          Landing page markup
-├── styles.css          All page styles and responsive breakpoints
-├── script.js           Client-side logic: auth, payments, UI interactions
-├── server.js           Express API server: profile, upgrade, webhook, feedback routes
-├── schema.sql          Database schema and trigger definitions for Supabase
-├── apply-schema.js     One-time migration utility for initial database setup
-├── robots.txt          Search engine directives
-├── sitemap.xml         URL sitemap for crawlers
-└── assets/             Static image assets
-```
-
----
-
-## License
-
-Source code is provided for reference. All rights reserved. The Meter AI name, brand, and software are proprietary.
-
----
-
-*Built by [Harsha Parisha](https://harshaparisha.in)*
+### 2. Website & Backend Setup
+To run the Express backend server and database migrations:
+1. Navigate to the website directory:
+   ```bash
+   cd meter-ai-website
+   ```
+2. Install the dependencies:
+   ```bash
+   npm install
+   ```
+3. Create a `.env` file in the root of the `meter-ai-website/` directory containing the following configuration parameters:
+   ```env
+   PORT=3000
+   DATABASE_URL="your-postgresql-connection-string"
+   SUPABASE_URL="your-supabase-project-url"
+   SUPABASE_SECRET_KEY="your-supabase-service-role-key"
+   ADMIN_EMAIL="your-admin-email"
+   ADMIN_PASSWORD_HASH="your-bcrypt-password-hash"
+   ADMIN_JWT_SECRET="your-jwt-signing-secret"
+   RAZORPAY_KEY_ID="your-razorpay-key-id"
+   RAZORPAY_KEY_SECRET="your-razorpay-key-secret"
+   RAZORPAY_WEBHOOK_SECRET="your-razorpay-webhook-secret"
+   RESEND_API_KEY="your-resend-api-key"
+   ```
+4. Run the database migration script to construct the schema:
+   ```bash
+   node apply-schema.js
+   ```
+5. Start the web server:
+   ```bash
+   npm start
+   ```
