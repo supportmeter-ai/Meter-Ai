@@ -1,79 +1,68 @@
 # Meter AI
 
-Meter AI is a browser extension and companion web application designed to track active usage sessions on Claude.ai, forecast limit resets, and manage conversation handoffs to alternative AI providers.
+Meter AI is a browser extension and companion web service built for heavy users of Claude.ai. It tracks active session limits, forecasts reset countdowns, logs historical usage analytics locally, and manages conversation handoffs to alternative AI providers when limits are reached.
 
 ![Meter AI Infographic](public/assets/infographic.png)
 
-## Architecture
+## Core Capabilities
 
-The project is divided into two primary directories:
-
-- `meter-extension/` - A Manifest V3 browser extension for Chrome, Firefox, and Chromium-based browsers.
-- `meter-ai-website/` - An Express backend server and landing page application integrated with Supabase and Razorpay.
-
-## Features
-
-### Usage Monitoring
-The extension injects a status bar directly into the Claude.ai user interface. It calculates and displays:
-- Session prompt usage percentage.
-- Estimates of remaining messages for active models.
-- Countdown time remaining until the next limit reset.
+### Live Session Tracking
+Meter AI injects a status bar directly underneath the prompt input field on Claude.ai. It calculates and visualizes:
+- **Usage Percentage**: Active tracking of prompt and completion token volumes relative to Claude's model limits.
+- **Message Projections**: Live estimates of remaining messages for both Claude 3.5 Sonnet and Claude 3 Opus.
+- **Reset Countdown**: A precise timer displaying exactly when the current usage quota resets.
 
 ### Context Bridge
-If a rate limit is reached on Claude.ai, a single click transfers the conversation history to ChatGPT, Google Gemini, or Grok. The extension parses the local chat session, formats it as a single prompt, and loads it into the selected platform.
+When Claude.ai rate limits are hit, Context Bridge enables a single-click transition of the active chat. The extension parses the local conversation context, structures it, and opens it directly in:
+- ChatGPT
+- Google Gemini
+- Grok
 
-### Privacy and Local Storage
-All conversation history and tracking records are saved locally in the browser's extension storage. No conversation data or context is sent to external servers. The only network requests made by the extension are optional checks to authenticate Pro license status.
+No manual copy-and-paste is required. The bridge formats the history so users can pick up their task immediately on the new platform.
 
-### Administrative Panel
-The backend contains a private admin dashboard accessed at `/admin` for management operations:
-- **Overview & Stats**: View system metrics, recent webhooks, and active tickets.
-- **User Database**: Manage user plan levels (Free, Pro Monthly, Pro Lifetime) and handle manual upgrades or downgrades.
-- **Revenue Tracker**: Inspect payment history and calculate Monthly Recurring Revenue (MRR).
-- **Kanban Task Board**: Manage internal tasks and notes.
-- **Support & Feedback**: Reply to customer support queries using the Resend email service.
-- **System Health**: Verify active integrations with Supabase, Razorpay, and Resend.
+### Rolling Usage Analytics
+All prompt counts, active hours, and model interactions are compiled into local analytics. Users can review:
+- Daily and weekly usage trends.
+- Rolling seven-day quota summaries to help budget message distribution.
+- Model efficiency metrics across different workspace projects.
+
+### Privacy-First Architecture
+Meter AI does not transmit conversation contents or prompt texts to external servers. All text processing and history storage occur locally within the browser extension's sandbox. The companion backend database is utilized solely for authenticating account subscriptions and syncing license status across devices.
+
+### Year-in-Review Wrapped
+An annual statistics visualizer aggregates total prompts sent, productive hours logged, preferred models, and estimated subscription value realized throughout the year.
 
 ---
 
-## Installation and Configuration
+## Getting Started
 
-### 1. Browser Extension Installation
-To load the extension locally in Chrome:
-1. Open Chrome and navigate to `chrome://extensions`.
-2. Toggle **Developer mode** in the top-right corner.
-3. Click **Load unpacked**.
-4. Select the `meter-extension/` directory.
+### 1. Install the Extension
+Add the Meter AI extension to the browser via the Chrome Web Store. Once installed, pin the extension to the browser toolbar for quick access.
 
-### 2. Website & Backend Setup
-To run the Express backend server and database migrations:
-1. Navigate to the website directory:
-   ```bash
-   cd meter-ai-website
-   ```
-2. Install the dependencies:
-   ```bash
-   npm install
-   ```
-3. Create a `.env` file in the root of the `meter-ai-website/` directory containing the following configuration parameters:
-   ```env
-   PORT=3000
-   DATABASE_URL="your-postgresql-connection-string"
-   SUPABASE_URL="your-supabase-project-url"
-   SUPABASE_SECRET_KEY="your-supabase-service-role-key"
-   ADMIN_EMAIL="your-admin-email"
-   ADMIN_PASSWORD_HASH="your-bcrypt-password-hash"
-   ADMIN_JWT_SECRET="your-jwt-signing-secret"
-   RAZORPAY_KEY_ID="your-razorpay-key-id"
-   RAZORPAY_KEY_SECRET="your-razorpay-key-secret"
-   RAZORPAY_WEBHOOK_SECRET="your-razorpay-webhook-secret"
-   RESEND_API_KEY="your-resend-api-key"
-   ```
-4. Run the database migration script to construct the schema:
-   ```bash
-   node apply-schema.js
-   ```
-5. Start the web server:
-   ```bash
-   npm start
-   ```
+### 2. Accessing the Dashboard
+Log into the companion web interface to activate account profiles. Google authentication is used to securely manage user profiles and synchronize plan status.
+
+### 3. Usage
+- **Monitoring**: Open Claude.ai. The status bar will automatically initialize at the bottom of the main chat workspace.
+- **Handoffs**: When rate-limited, select the preferred alternative provider from the popup menu or status link. The extension will automatically migrate the chat history to the destination tab.
+
+---
+
+## Subscription Plans
+
+Meter AI offers three service tiers tailored to different usage patterns:
+
+### Free Tier
+- Real-time session monitoring and limit forecasting.
+- Local usage history logs.
+- Two Context Bridge transfers per day.
+
+### Pro Monthly (₹169/month)
+- Unlimited Context Bridge handoffs.
+- Full access to historical analytics dashboards.
+- Cross-device profile synchronization.
+- One-time monthly charge with manual renewal options.
+
+### Pro Lifetime (₹1,999 one-time payment)
+- Permanent access to all present and future Pro features.
+- No recurring subscription charges.
