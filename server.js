@@ -1788,8 +1788,9 @@ app.get('/api/admin/health', requireAdmin, async (req, res) => {
 
   // 3. Razorpay client health
   if (razorpay) {
+    const isLive = process.env.RAZORPAY_KEY_ID && process.env.RAZORPAY_KEY_ID.startsWith('rzp_live_');
     healthData.services.razorpay.status = 'healthy';
-    healthData.services.razorpay.message = 'Initialized (Test Mode)';
+    healthData.services.razorpay.message = isLive ? 'Initialized (Live Mode)' : 'Initialized (Test Mode)';
   } else {
     healthData.services.razorpay.status = 'unhealthy';
     healthData.services.razorpay.message = 'Credentials missing in environment';

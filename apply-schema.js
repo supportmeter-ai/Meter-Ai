@@ -20,7 +20,7 @@ async function run() {
   console.log("   METER AI DATABASE SCHEMA MIGRATOR    ");
   console.log("=========================================\n");
   
-  console.log("Connecting to database pooler...");
+  console.log(`Connecting to connection pooler: ${poolerConfig.host}:${poolerConfig.port}...`);
   const client = new Client(poolerConfig);
   
   try {
