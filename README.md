@@ -2,7 +2,7 @@
 
 Meter AI is a browser extension and companion web service built for people who use Claude heavily. It gives you the usage information that Claude's own interface withholds — live session tracking, reset countdowns, quota estimation, and conversation transfer to other AI providers — without sending any of your conversation data to a server.
 
-![Meter AI Infographic](assets/infographic.png)
+![Meter AI Infographic](public/assets/infographic.png)
 
 ---
 
