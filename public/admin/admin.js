@@ -349,8 +349,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function renderOverviewEventsPage(page) {
     const tbody = document.getElementById('overview-events-table');
+    const mobileList = document.getElementById('overview-events-mobile-list');
     if (!tbody) return;
     tbody.innerHTML = '';
+    if (mobileList) mobileList.innerHTML = '';
 
     const paginationContainer = document.getElementById('overview-events-pagination');
     const paginationInfo = document.getElementById('overview-events-pagination-info');
@@ -359,6 +361,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (allOverviewEvents.length === 0) {
       tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--text-muted);">No webhook events recorded.</td></tr>`;
+      if (mobileList) mobileList.innerHTML = `<div style="text-align: center; color: var(--text-muted);">No webhook events recorded.</div>`;
       if (paginationContainer) paginationContainer.style.display = 'none';
       return;
     }
@@ -381,6 +384,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     pageData.forEach(e => {
       tbody.appendChild(createEventRow(e));
+      if (mobileList) mobileList.appendChild(createEventCard(e));
     });
   }
 
@@ -500,10 +504,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function renderUsersTable(users) {
     const tbody = document.getElementById('user-database-table');
+    const mobileList = document.getElementById('users-mobile-list');
     tbody.innerHTML = '';
+    if (mobileList) mobileList.innerHTML = '';
 
     if (users.length === 0) {
       tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: var(--text-muted); padding: 24px;">No users match current filters.</td></tr>`;
+      if (mobileList) mobileList.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 24px;">No users match current filters.</div>`;
       return;
     }
 
@@ -531,21 +538,60 @@ document.addEventListener('DOMContentLoaded', () => {
         <td style="font-size: 12px; color: var(--text-muted);">${formatDate(u.created_at)}</td>
         <td>${actionBtn}</td>
       `;
-
       tbody.appendChild(tr);
+
+      // Render Mobile Card
+      if (mobileList) {
+        const card = document.createElement('div');
+        card.className = 'mobile-card';
+        card.innerHTML = `
+          <div class="card-header-row">
+            <div class="user-details">
+              <div class="user-name">${escapeHtml(u.full_name || 'Unnamed')}</div>
+              <div class="user-email">${escapeHtml(u.email)}</div>
+            </div>
+            <div class="user-badges">
+              <span class="badge ${u.plan}">${u.plan}</span>
+              <span class="badge ${u.subscription_status}">${u.subscription_status}</span>
+            </div>
+          </div>
+          <div class="card-details-row">
+            <div class="detail-item">
+              <span class="detail-label">Customer ID</span>
+              <span class="detail-value font-mono">${escapeHtml(u.razorpay_customer_id || '—')}</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Subscription ID</span>
+              <span class="detail-value font-mono">${escapeHtml(u.razorpay_subscription_id || '—')}</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Expires On</span>
+              <span class="detail-value">${u.subscription_end ? formatDate(u.subscription_end) : '—'}</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Signed Up</span>
+              <span class="detail-value">${formatDate(u.created_at)}</span>
+            </div>
+          </div>
+          <div class="card-actions-row">
+            ${actionBtn}
+          </div>
+        `;
+        mobileList.appendChild(card);
+      }
     });
 
     // Wire up events
     document.querySelectorAll('.activate-user-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
-        document.getElementById('activateEmail').value = e.target.dataset.email;
+        document.getElementById('activateEmail').value = e.currentTarget.dataset.email;
         document.getElementById('activateModalOverlay').style.display = 'flex';
       });
     });
 
     document.querySelectorAll('.downgrade-user-btn').forEach(btn => {
       btn.addEventListener('click', async (e) => {
-        const email = e.target.dataset.email;
+        const email = e.currentTarget.dataset.email;
         const confirmed = await showConfirm(
           "Downgrade User Profile",
           `Are you absolutely sure you want to manually downgrade ${email} to the free tier immediately?`
@@ -572,16 +618,20 @@ document.addEventListener('DOMContentLoaded', () => {
       eventsTotalCount = data.count || 0;
 
       const tbody = document.getElementById('full-events-table');
+      const mobileList = document.getElementById('full-events-mobile-list');
       tbody.innerHTML = '';
+      if (mobileList) mobileList.innerHTML = '';
 
       if (events.length === 0) {
         tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted); padding: 24px;">No webhook event logs recorded.</td></tr>`;
+        if (mobileList) mobileList.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 24px;">No webhook event logs recorded.</div>`;
         renderEventsPagination();
         return;
       }
 
       events.forEach(e => {
         tbody.appendChild(createEventRow(e, true));
+        if (mobileList) mobileList.appendChild(createEventCard(e));
       });
 
       renderEventsPagination();
@@ -648,6 +698,41 @@ document.addEventListener('DOMContentLoaded', () => {
     return tr;
   }
 
+  function createEventCard(e) {
+    const card = document.createElement('div');
+    card.className = 'mobile-card';
+    
+    let eventStyle = 'color: var(--text-main); font-weight: 500;';
+    if (e.event.includes('failed') || e.event.includes('cancelled') || e.event.includes('expired')) {
+      eventStyle = 'color: var(--danger); font-weight: 500;';
+    } else if (e.event.includes('success') || e.event.includes('active') || e.event.includes('charged')) {
+      eventStyle = 'color: var(--success); font-weight: 500;';
+    }
+
+    card.innerHTML = `
+      <div class="card-header-row">
+        <div class="event-name" style="${eventStyle}">${escapeHtml(e.event)}</div>
+        <div class="event-date">${formatDate(e.created_at)}</div>
+      </div>
+      <div class="card-details-row">
+        <div class="detail-item">
+          <span class="detail-label">Payment ID</span>
+          <span class="detail-value font-mono">${escapeHtml(e.payment_id || '—')}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Subscription ID</span>
+          <span class="detail-value font-mono">${escapeHtml(e.subscription_id || '—')}</span>
+        </div>
+        ${e.profiles ? `
+        <div class="detail-item" style="grid-column: span 2;">
+          <span class="detail-label">User Email</span>
+          <span class="detail-value">${escapeHtml(e.profiles.email)}</span>
+        </div>` : ''}
+      </div>
+    `;
+    return card;
+  }
+
   // ─── PANE 4: USER FEEDBACK CONTROLLER ──────────────────────────────
   // ─── PANE 4: USER FEEDBACK CONTROLLER ──────────────────────────────
   let feedbackTotalCount = 0;
@@ -670,7 +755,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function renderFeedbackPage(feedback) {
     const tbody = document.getElementById('feedback-table');
+    const mobileList = document.getElementById('feedback-mobile-list');
     tbody.innerHTML = '';
+    if (mobileList) mobileList.innerHTML = '';
 
     const paginationContainer = document.getElementById('feedback-pagination');
     const paginationInfo = document.getElementById('feedback-pagination-info');
@@ -679,6 +766,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (feedback.length === 0) {
       tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--text-muted); padding: 24px;">No feedback submissions recorded.</td></tr>`;
+      if (mobileList) mobileList.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 24px;">No feedback submissions recorded.</div>`;
       if (paginationContainer) paginationContainer.style.display = 'none';
       return;
     }
@@ -716,6 +804,31 @@ document.addEventListener('DOMContentLoaded', () => {
         <td style="font-size: 12px; color: var(--text-muted); vertical-align: middle;">${formatDate(f.created_at)}</td>
       `;
       tbody.appendChild(tr);
+
+      // Render Mobile Card
+      if (mobileList) {
+        const card = document.createElement('div');
+        card.className = 'mobile-card';
+        card.innerHTML = `
+          <div class="card-header-row">
+            <div class="user-details">
+              <div class="user-name">${escapeHtml(f.user_name || 'Anonymous')}</div>
+              <div class="user-email">${f.user_email ? escapeHtml(f.user_email) : '—'}</div>
+            </div>
+            <div class="user-rating" style="display: flex;">${ratingStars}</div>
+          </div>
+          <div class="card-message-row">
+            <p class="card-message">${escapeHtml(f.message)}</p>
+          </div>
+          <div class="card-details-row">
+            <div class="detail-item">
+              <span class="detail-label">Submitted</span>
+              <span class="detail-value">${formatDate(f.created_at)}</span>
+            </div>
+          </div>
+        `;
+        mobileList.appendChild(card);
+      }
     });
   }
 
@@ -1189,10 +1302,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Render transactions table
       const tbody = document.getElementById('revenue-history-table');
+      const mobileList = document.getElementById('revenue-history-mobile-list');
       tbody.innerHTML = '';
+      if (mobileList) mobileList.innerHTML = '';
 
       if (!data.paymentHistory || data.paymentHistory.length === 0) {
         tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--text-muted); padding: 24px;">No transaction logs recorded.</td></tr>`;
+        if (mobileList) mobileList.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 24px;">No transaction logs recorded.</div>`;
         return;
       }
 
@@ -1215,6 +1331,35 @@ document.addEventListener('DOMContentLoaded', () => {
           <td style="font-size: 12px; color: var(--text-muted);">${formatDate(p.created_at)}</td>
         `;
         tbody.appendChild(tr);
+
+        // Render Mobile Card
+        if (mobileList) {
+          const card = document.createElement('div');
+          card.className = 'mobile-card';
+          card.innerHTML = `
+            <div class="card-header-row">
+              <div class="user-details">
+                <div class="user-email" style="font-weight: 600; color: var(--text-main); font-size: 14px;">${escapeHtml(p.user_email)}</div>
+                <div class="payment-desc" style="font-size: 12px; color: var(--text-muted);">${escapeHtml(p.description)}</div>
+              </div>
+              <div class="payment-amount-status">
+                <div class="payment-amount">₹${p.amount}</div>
+                <span class="payment-status-text" style="${statusStyle}">${escapeHtml(p.status)}</span>
+              </div>
+            </div>
+            <div class="card-details-row">
+              <div class="detail-item">
+                <span class="detail-label">Payment ID</span>
+                <span class="detail-value font-mono">${escapeHtml(p.payment_id || '—')}</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Date</span>
+                <span class="detail-value">${formatDate(p.created_at)}</span>
+              </div>
+            </div>
+          `;
+          mobileList.appendChild(card);
+        }
       });
     } catch (err) {
       console.error(err);
@@ -1871,8 +2016,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // ─── Mobile Sidebar Toggle & Backdrop ──────────────────────────
-  (function setupMobileSidebar() {
+  // ─── Mobile Sidebar Toggle, Backdrop, Gestures & Inputs ──────────────────────────
+  (function setupMobileUX() {
     const menuToggle = document.getElementById('menuToggle');
     const sidebar = document.getElementById('sidebar');
     const backdrop = document.getElementById('sidebarBackdrop');
@@ -1909,6 +2054,155 @@ document.addEventListener('DOMContentLoaded', () => {
           closeSidebar();
         }
       });
+    });
+
+    // Touch Swipe Gestures for Sidebar Drawer (optimized for 60fps GPU transforms)
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchMoveX = 0;
+    let isDraggingSidebar = false;
+
+    document.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+      const isOpen = sidebar.classList.contains('mobile-open');
+      
+      // Edge drag start threshold (clientX < 40px)
+      if (!isOpen && touchStartX < 40) {
+        isDraggingSidebar = true;
+        sidebar.style.transition = 'none';
+        if (backdrop) {
+          backdrop.style.visibility = 'visible';
+          backdrop.style.transition = 'none';
+        }
+      }
+      
+      if (isOpen && touchStartX < 320) {
+        isDraggingSidebar = true;
+        sidebar.style.transition = 'none';
+        if (backdrop) backdrop.style.transition = 'none';
+      }
+    }, { passive: true });
+
+    document.addEventListener('touchmove', (e) => {
+      if (!isDraggingSidebar) return;
+      touchMoveX = e.touches[0].clientX;
+      const isOpen = sidebar.classList.contains('mobile-open');
+      const width = sidebar.offsetWidth || 300;
+
+      if (!isOpen) {
+        const translate = Math.min(0, -width + touchMoveX);
+        sidebar.style.transform = `translateX(${translate}px)`;
+        sidebar.style.opacity = `${Math.min(1, touchMoveX / width)}`;
+        if (backdrop) {
+          backdrop.style.opacity = `${(Math.min(1, touchMoveX / width)) * 0.55}`;
+        }
+      } else {
+        const dragDistance = touchStartX - touchMoveX;
+        if (dragDistance > 0) {
+          const translate = Math.max(-width, -dragDistance);
+          sidebar.style.transform = `translateX(${translate}px)`;
+          const ratio = (width - dragDistance) / width;
+          sidebar.style.opacity = `${Math.max(0, ratio)}`;
+          if (backdrop) {
+            backdrop.style.opacity = `${Math.max(0, ratio * 0.55)}`;
+          }
+        }
+      }
+    }, { passive: true });
+
+    document.addEventListener('touchend', (e) => {
+      if (!isDraggingSidebar) return;
+      isDraggingSidebar = false;
+
+      sidebar.style.transition = '';
+      if (backdrop) backdrop.style.transition = '';
+
+      const isOpen = sidebar.classList.contains('mobile-open');
+      const currentX = e.changedTouches[0].clientX;
+
+      if (!isOpen) {
+        if (currentX > 100) {
+          openSidebar();
+        } else {
+          closeSidebar();
+        }
+      } else {
+        const dragDistance = touchStartX - currentX;
+        if (dragDistance > 100) {
+          closeSidebar();
+        } else {
+          openSidebar();
+        }
+      }
+
+      sidebar.style.transform = '';
+      sidebar.style.opacity = '';
+      if (backdrop) {
+        backdrop.style.opacity = '';
+        backdrop.style.visibility = '';
+      }
+    }, { passive: true });
+
+    // Pull-to-Refresh Gesture (rubber band effect scrolling contentArea)
+    (function setupPullToRefresh() {
+      const contentArea = document.querySelector('.content-area');
+      if (!contentArea) return;
+
+      let startY = 0;
+      let currentPull = 0;
+      let isPulling = false;
+      const refreshIndicator = document.getElementById('refreshIndicator');
+
+      contentArea.addEventListener('touchstart', (e) => {
+        if (contentArea.scrollTop === 0 && e.touches.length === 1) {
+          startY = e.touches[0].clientY;
+          isPulling = true;
+          contentArea.style.transition = 'none';
+        }
+      }, { passive: true });
+
+      contentArea.addEventListener('touchmove', (e) => {
+        if (!isPulling) return;
+        const currentY = e.touches[0].clientY;
+        const diff = currentY - startY;
+
+        if (diff > 0) {
+          currentPull = Math.min(60, diff * 0.4);
+          contentArea.style.transform = `translateY(${currentPull}px)`;
+          if (refreshIndicator) {
+            refreshIndicator.style.opacity = '1';
+            refreshIndicator.querySelector('span:last-child').innerText = diff > 80 ? 'Release to refresh' : 'Pull to refresh';
+          }
+        } else {
+          isPulling = false;
+          contentArea.style.transform = '';
+        }
+      }, { passive: true });
+
+      contentArea.addEventListener('touchend', () => {
+        if (!isPulling) return;
+        isPulling = false;
+
+        contentArea.style.transition = 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
+        contentArea.style.transform = '';
+
+        if (currentPull >= 30) {
+          showToast('Refreshing dashboard...');
+          fetchPaneData(currentPane, true);
+        }
+
+        currentPull = 0;
+      });
+    })();
+
+    // Input keyboard scroll alignment to prevent soft keyboard overlap on iOS Safari
+    document.addEventListener('focusin', (e) => {
+      if (e.target && ['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) {
+        setTimeout(() => {
+          e.target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 320); // Delay matches safe transition timing for virtual keyboard reveal
+      }
     });
   })();
 });

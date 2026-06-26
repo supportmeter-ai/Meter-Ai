@@ -521,6 +521,10 @@ a {
   border-radius: var(--radius-md);
 }
 
+.mobile-list {
+  display: none !important;
+}
+
 .data-table {
   width: 100%;
   border-collapse: collapse;
@@ -1270,67 +1274,137 @@ a {
 @media (max-width: 768px) {
   body {
     flex-direction: column;
+    overflow-x: hidden;
   }
-  
+
+  /* Viewport Safe Area Landscape Padding support */
+  .main-wrapper {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+  }
+
+  /* Slide-over Drawer (optimized for 60fps GPU transforms) */
   .sidebar {
     position: fixed;
     left: 0;
     top: 0;
     bottom: 0;
     transform: translateX(-100%);
-    width: var(--sidebar-width);
-    z-index: 200;
-  }
-  
-  .sidebar.mobile-open {
-    transform: translateX(0);
+    width: 80vw;
+    max-width: 300px;
+    z-index: 250;
+    opacity: 0;
+    will-change: transform;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+    padding-top: max(16px, env(safe-area-inset-top));
+    padding-bottom: 0;
   }
 
-  /* Backdrop overlay when mobile sidebar is open */
+  .sidebar.mobile-open {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  /* Backdrop blur overlay */
   .sidebar-backdrop {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 150;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 200;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    will-change: opacity, visibility;
+    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .sidebar-backdrop.active {
     opacity: 1;
     visibility: visible;
   }
-  
-  .menu-toggle {
-    display: block;
+
+  .btn-icon-sidebar {
+    display: none !important; /* Hide collapse btn on mobile drawer */
   }
-  
+
+  /* Sticky Header with Backdrop Blur */
   .header {
-    padding: 12px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: rgba(26, 24, 22, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--card-border);
+    padding: calc(12px + env(safe-area-inset-top)) 16px 12px 16px;
     height: auto;
-    min-height: 70px;
-    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     gap: 12px;
   }
 
+  .menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: var(--text-main);
+    font-size: 24px;
+    cursor: pointer;
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .menu-toggle:active {
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+
   .header-actions {
-    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
     gap: 8px;
   }
-  
-  .content-area {
-    padding: 20px;
+
+  .header-title-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
-  
+
+  .content-area {
+    padding: 16px;
+    padding-bottom: calc(24px + env(safe-area-inset-bottom));
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .sidebar-footer {
+    position: sticky;
+    bottom: 0;
+    background-color: var(--bg-sidebar);
+    padding: 16px 20px calc(16px + env(safe-area-inset-bottom)) 20px;
+    border-top: 1px solid var(--card-border);
+    z-index: 10;
+  }
+
+  .menu-link {
+    min-height: 48px;
+    font-size: 15px;
+    padding: 12px 16px;
+  }
+
   .panel-grid {
     grid-template-columns: 1fr !important;
-    gap: 20px !important;
+    gap: 16px !important;
   }
-  
+
   .card-title {
     flex-wrap: wrap;
     gap: 12px;
@@ -1341,55 +1415,204 @@ a {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
+    width: 100%;
   }
-  
+
   .stats-grid {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 12px;
   }
-  
+
   .search-bar {
     flex-direction: column;
     gap: 8px;
+    width: 100%;
   }
 
-  .data-table th,
-  .data-table td {
-    white-space: nowrap;
-  }
-  
-  #pane-notes .panel-grid {
-    grid-template-columns: 1fr !important;
-  }
-  
-  #pane-feedback .panel-grid {
-    grid-template-columns: 1fr !important;
-  }
-  
-  #pane-health .panel-grid {
-    grid-template-columns: 1fr !important;
-  }
-  
-  #pane-settings .panel-grid {
-    grid-template-columns: 1fr !important;
+  .search-input, .filter-select, .search-input-sm, .filter-select-sm, .btn-action-primary, .btn-action-sm, .btn-quick-add, .modal-input, .modal-textarea, #founderNotepad {
+    min-height: 44px;
+    font-size: 16px !important; /* iOS zoom prevention */
   }
 
-  /* Mobile Kanban & Tables Responsive Overrides */
-  .card, .panel-grid > div {
-    min-width: 0;
+  /* Table to Card Styles */
+  .table-wrapper table.data-table {
+    display: none !important; /* Hide native table structure on mobile */
   }
 
   .table-wrapper {
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    overflow-x: visible !important; /* Prevent scrollbars on mobile wrappers */
   }
 
-  .data-table {
+  .mobile-list {
+    display: flex !important;
+    flex-direction: column;
+    gap: 12px;
     width: 100%;
-    min-width: 600px;
+    margin-top: 8px;
   }
 
+  .mobile-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .card-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .user-details, .payment-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .user-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-main);
+  }
+
+  .user-email {
+    font-size: 12px;
+    color: var(--text-muted);
+    word-break: break-all;
+  }
+
+  .user-badges {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+  }
+
+  .card-details-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.08);
+  }
+
+  .detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .detail-label {
+    font-size: 9px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  .detail-value {
+    font-size: 12px;
+    color: var(--text-muted);
+    word-break: break-all;
+  }
+
+  .font-mono {
+    font-family: monospace;
+  }
+
+  .card-actions-row {
+    margin-top: 4px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .card-actions-row .btn-action-primary,
+  .card-actions-row .btn-action-sm {
+    min-height: 44px;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-message-row {
+    padding: 8px 12px;
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: var(--radius-md);
+    border-left: 2px solid var(--accent);
+  }
+
+  .card-message {
+    font-size: 13px;
+    color: var(--text-main);
+    line-height: 1.4;
+  }
+
+  .payment-amount-status {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+  }
+
+  .payment-amount {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-main);
+  }
+
+  .payment-status-text {
+    font-size: 11px;
+    font-weight: 500;
+  }
+
+  .event-name {
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .event-date {
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  /* Modals as Bottom Sheets */
+  .modal-overlay {
+    align-items: flex-end !important;
+  }
+
+  .modal {
+    width: 100% !important;
+    max-width: none !important;
+    border-radius: 20px 20px 0 0 !important;
+    padding: 24px 20px calc(24px + env(safe-area-inset-bottom)) 20px !important;
+    animation: slideUpBottom 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+    position: relative;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.4) !important;
+  }
+
+  .modal::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 36px;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 2px;
+  }
+
+  /* Kanban Board Mobile Snap-scroll */
   .kanban-board-container {
     height: auto;
     overflow-x: auto;
@@ -1398,13 +1621,14 @@ a {
     scroll-snap-type: x mandatory;
     padding-bottom: 12px;
     -webkit-overflow-scrolling: touch;
+    gap: 16px;
   }
 
   .kanban-column {
-    flex: 0 0 280px;
-    max-width: 280px;
-    height: 600px;
-    scroll-snap-align: start;
+    flex: 0 0 85vw;
+    max-width: 320px;
+    height: 520px;
+    scroll-snap-align: center;
   }
 
   .kanban-control-bar {
@@ -1420,6 +1644,7 @@ a {
   .btn-quick-add {
     flex: 1 1 calc(33.333% - 8px);
     justify-content: center;
+    min-height: 44px;
   }
 
   .kanban-filters-inline {
@@ -1591,3 +1816,25 @@ select option {
   }
 }
 
+/* Accessibility: High contrast support & Visible focus states for keyboard users */
+:focus-visible {
+  outline: 2px solid var(--accent) !important;
+  outline-offset: 2px !important;
+}
+
+/* Accessible color contrast adjustments for muted text on dark bg */
+.policy-card, .detail-value, .stat-subtext, .health-status, .ticket-email {
+  color: #BDB7B0 !important; /* Lighter warm gray for higher contrast compliance */
+}
+
+/* Reduced Motion Override block */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-delay: 0s !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-delay: 0s !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
