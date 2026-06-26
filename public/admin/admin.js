@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const usersPageSize = 10;
 
   let eventsCurrentPage = 1;
-  const eventsPageSize = 20;
+  const eventsPageSize = 6;
 
   let supportCurrentPage = 1;
   const supportPageSize = 5;
