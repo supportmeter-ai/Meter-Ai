@@ -3,31 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meter AI — Real-Time Claude Session & Context Window Tracker</title>
-  <meta name="description" content="Meter AI is a browser extension that tracks your Claude.ai session in real time — monitor context window usage, get alerts before hitting limits, and hand off conversations across LLMs seamlessly.">
+  <title>Meter AI | Track Claude Usage & Avoid Rate Limits</title>
+  <meta name="description" content="A local-first browser extension for Claude that tracks your session usage in real-time. Avoid unexpected rate limits and keep your workflows moving.">
   <meta name="theme-color" content="#1A1816">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://checkout.razorpay.com">
+  <link rel="preconnect" href="https://ojlamxgpcgchqrmpuugl.supabase.co">
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+  <link rel="dns-prefetch" href="https://checkout.razorpay.com">
+  <link rel="dns-prefetch" href="https://ojlamxgpcgchqrmpuugl.supabase.co">
   <link rel="canonical" href="https://getmeterai.vercel.app" />
   <meta name="google-site-verification" content="Ffz3f4NpZ6qlmG9sa4P48Al3XAKTNV-ga7GnoCz2ZNY" />
   <link rel="stylesheet" href="styles.css?v=1.0.2">
   <link rel="manifest" href="/manifest.json">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D85A30' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'><path d='M5.5 18a7.6 7.6 0 1 1 13 0'/><line x1='12' y1='14' x2='16.5' y2='9.5'/><circle cx='12' cy='14' r='2' fill='%23D85A30' stroke='none'/></svg>">
+  <link rel="icon" type="image/svg+xml" href="/assets/logo.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon-16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Meter AI — Real-Time Claude Session Tracker">
-  <meta property="og:description" content="Track your Claude.ai context window live. Get alerts, monitor token usage, and hand off conversations to other LLMs without losing context.">
+  <meta property="og:title" content="Meter AI | Track Claude Usage &amp; Avoid Rate Limits">
+  <meta property="og:description" content="A local-first browser extension for Claude that tracks your session usage in real-time. Avoid unexpected rate limits and keep your workflows moving.">
   <meta property="og:url" content="https://getmeterai.vercel.app">
   <meta property="og:image" content="https://getmeterai.vercel.app/og-image.png">
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Meter AI">
+  <meta property="og:locale" content="en_US">
 
   <!-- Twitter Cards -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Meter AI — Real-Time Claude Session Tracker">
-  <meta name="twitter:description" content="Never get cut off mid-conversation again. Meter AI tracks your Claude context window in real time.">
+  <meta name="twitter:title" content="Meter AI | Track Claude Usage &amp; Avoid Rate Limits">
+  <meta name="twitter:description" content="A local-first browser extension for Claude that tracks your session usage in real-time. Avoid unexpected rate limits and keep your workflows moving.">
   <meta name="twitter:image" content="https://getmeterai.vercel.app/og-image.png">
 
+  <!-- Search Ecosystem Graph (JSON-LD) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -37,7 +48,21 @@
         "@id": "https://getmeterai.vercel.app/#organization",
         "name": "Meter AI",
         "url": "https://getmeterai.vercel.app",
-        "logo": "https://getmeterai.vercel.app/assets/logo.png"
+        "logo": "https://getmeterai.vercel.app/assets/logo.png",
+        "sameAs": [
+          "https://github.com/HarshaParisha",
+          "https://www.linkedin.com/in/parisha-harshavardhan/"
+        ],
+        "brand": {
+          "@id": "https://getmeterai.vercel.app/#brand"
+        }
+      },
+      {
+        "@type": "Brand",
+        "@id": "https://getmeterai.vercel.app/#brand",
+        "name": "Meter AI",
+        "logo": "https://getmeterai.vercel.app/assets/logo.png",
+        "description": "Privacy-first utility tools for Large Language Models power users."
       },
       {
         "@type": "WebSite",
@@ -49,13 +74,23 @@
         }
       },
       {
+        "@type": "Person",
+        "@id": "https://getmeterai.vercel.app/#founder",
+        "name": "Harsha Parisha",
+        "url": "https://getmeterai.vercel.app/author/harsha-parisha",
+        "sameAs": [
+          "https://github.com/HarshaParisha",
+          "https://www.linkedin.com/in/parisha-harshavardhan/"
+        ]
+      },
+      {
         "@type": "SoftwareApplication",
         "@id": "https://getmeterai.vercel.app/#software",
         "name": "Meter AI",
         "url": "https://getmeterai.vercel.app",
         "applicationCategory": "BrowserApplication",
-        "operatingSystem": "Chrome, Firefox",
-        "description": "Real-time Claude.ai context window tracker and LLM session monitor. Track token usage, get alerts before hitting limits, and hand off conversations seamlessly across AI models.",
+        "operatingSystem": "Chrome, Firefox, Edge, Brave, Opera",
+        "description": "Real-time Claude.ai session tracker, token monitor, and multi-model conversation bridge.",
         "offers": [
           {
             "@type": "Offer",
@@ -68,12 +103,31 @@
             "name": "Pro Monthly",
             "price": "169",
             "priceCurrency": "INR"
+          },
+          {
+            "@type": "Offer",
+            "name": "Pro Lifetime",
+            "price": "1999",
+            "priceCurrency": "INR"
           }
         ],
         "author": {
-          "@type": "Person",
-          "name": "Harsha Parisha",
-          "url": "https://harshaparisha.in"
+          "@id": "https://getmeterai.vercel.app/#founder"
+        },
+        "sameAs": [
+          "https://chromewebstore.google.com"
+        ]
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://getmeterai.vercel.app/#webpage",
+        "url": "https://getmeterai.vercel.app",
+        "name": "Meter AI — Real-Time Claude Session &amp; Context Window Tracker",
+        "isPartOf": {
+          "@id": "https://getmeterai.vercel.app/#website"
+        },
+        "about": {
+          "@id": "https://getmeterai.vercel.app/#software"
         }
       },
       {
@@ -85,42 +139,6 @@
             "position": 1,
             "name": "Home",
             "item": "https://getmeterai.vercel.app"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Features",
-            "item": "https://getmeterai.vercel.app/features"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "Pricing",
-            "item": "https://getmeterai.vercel.app/pricing"
-          },
-          {
-            "@type": "ListItem",
-            "position": 4,
-            "name": "Install",
-            "item": "https://getmeterai.vercel.app/install"
-          },
-          {
-            "@type": "ListItem",
-            "position": 5,
-            "name": "FAQ",
-            "item": "https://getmeterai.vercel.app/faq"
-          },
-          {
-            "@type": "ListItem",
-            "position": 6,
-            "name": "Changelog",
-            "item": "https://getmeterai.vercel.app/changelog"
-          },
-          {
-            "@type": "ListItem",
-            "position": 7,
-            "name": "About",
-            "item": "https://getmeterai.vercel.app/about"
           }
         ]
       }
@@ -237,7 +255,7 @@
             </a>
             <a href="#pricing" class="dropdown-link-item">
               <span class="link-item-title">Pro</span>
-              <span class="link-item-desc">2 / month or 20 lifetime for unlimited access.</span>
+              <span class="link-item-desc">₹169/month or ₹1,999 lifetime for unlimited access.</span>
             </a>
           </div>
         </div>
@@ -288,6 +306,7 @@
         <span class="section-label">🎉 Introducing Meter AI &nbsp;·&nbsp; Built for Claude power users</span>
         <h1>Claude tells you how much you've used.<br><em>Meter AI tells you everything else.</em></h1>
         <p class="hero-subtitle">A lightweight, privacy-first companion browser utility for Claude.ai. Track active session limits, predict count down resets, save history, and bridge context to other LLMs without third-party servers.</p>
+        
         <div class="hero-actions">
           <a href="https://chromewebstore.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary animate-btn">
             <span class="animated-roll">Install for Chrome</span>
@@ -299,10 +318,10 @@
         
         <div class="happy-users-badge">
           <div class="avatar-group">
-            <img class="avatar-img" src="/assets/avatar1.png" alt="User avatar" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\\'none\' stroke=\\'%23A8A29B\' stroke-width=\\'2\' stroke-linecap=\\'round\' stroke-linejoin=\\'round\'><circle cx=\\'12\' cy=\\'12\' r=\\'10\'/><path d=\\'M8 14s1.5-2 4-2 4 2 4 2\'/><circle cx=\\'9\' cy=\\'9\' r=\\'1\'/><circle cx=\\'15\' cy=\\'9\' r=\\'1\'/></svg>'">
-            <img class="avatar-img" src="/assets/avatar2.png" alt="User avatar" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\\'none\' stroke=\\'%23A8A29B\' stroke-width=\\'2\' stroke-linecap=\\'round\' stroke-linejoin=\\'round\'><circle cx=\\'12\' cy=\\'12\' r=\\'10\'/><path d=\\'M8 14s1.5-2 4-2 4 2 4 2\'/><circle cx=\\'9\' cy=\\'9\' r=\\'1\'/><circle cx=\\'15\' cy=\\'9\' r=\\'1\'/></svg>'">
-            <img class="avatar-img" src="/assets/avatar3.png" alt="User avatar" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\\'none\' stroke=\\'%23A8A29B\' stroke-width=\\'2\' stroke-linecap=\\'round\' stroke-linejoin=\\'round\'><circle cx=\\'12\' cy=\\'12\' r=\\'10\'/><path d=\\'M8 14s1.5-2 4-2 4 2 4 2\'/><circle cx=\\'9\' cy=\\'9\' r=\\'1\'/><circle cx=\\'15\' cy=\\'9\' r=\\'1\'/></svg>'">
-            <img class="avatar-img" src="/assets/avatar4.png" alt="User avatar" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\\'none\' stroke=\\'%23A8A29B\' stroke-width=\\'2\' stroke-linecap=\\'round\' stroke-linejoin=\\'round\'><circle cx=\\'12\' cy=\\'12\' r=\\'10\'/><path d=\\'M8 14s1.5-2 4-2 4 2 4 2\'/><circle cx=\\'9\' cy=\\'9\' r=\\'1\'/><circle cx=\\'15\' cy=\\'9\' r=\\'1\'/></svg>'">
+            <img class="avatar-img" src="/assets/avatar1.png" alt="User avatar" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRDg1QTMwIiBzdHJva2Utd2lkdGg9IjIuOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNNS41IDE4YTcuNiA3LjYgMCAxIDEgMTMgMCIvPjxsaW5lIHgxPSIxMiIgeTE9IjE0IiB4Mj0iMTYuNSIgeTI9IjkuNSIvPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTQiIHI9IjIiIGZpbGw9IiNEODVBMzAiIHN0cm9rZT0ibm9uZSIvPjwvc3ZnPg==';">
+            <img class="avatar-img" src="/assets/avatar2.png" alt="User avatar" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQThBMjlCIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiLz48cGF0aCBkPSJNOCAxNHMxLjUtMiA0LTIgNCAyIDQgMiIvPjxjaXJjbGUgY3g9IjkiIGN5PSI5IiByPSIxIi8+PGNpcmNsZSBjeD0iMTUiIGN5PSI5IiByPSIxIi8+PC9zdmc+';">
+            <img class="avatar-img" src="/assets/avatar3.png" alt="User avatar" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQThBMjlCIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiLz48cGF0aCBkPSJNOCAxNHMxLjUtMiA0LTIgNCAyIDQgMiIvPjxjaXJjbGUgY3g9IjkiIGN5PSI5IiByPSIxIi8+PGNpcmNsZSBjeD0iMTUiIGN5PSI5IiByPSIxIi8+PC9zdmc+';">
+            <img class="avatar-img" src="/assets/avatar4.png" alt="User avatar" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQThBMjlCIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiLz48cGF0aCBkPSJNOCAxNHMxLjUtMiA0LTIgNCAyIDQgMiIvPjxjaXJjbGUgY3g9IjkiIGN5PSI5IiByPSIxIi8+PGNpcmNsZSBjeD0iMTUiIGN5PSI5IiByPSIxIi8+PC9zdmc+';">
           </div>
           <span class="happy-users-text">More than 200+ happy users</span>
         </div>

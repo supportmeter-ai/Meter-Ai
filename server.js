@@ -217,6 +217,10 @@ app.get('/terms', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'terms.html'));
 });
 
+app.get('/specs', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'specs.html'));
+});
+
 // HTML Sanitizer helper (simple escape to avoid XSS)
 function escapeHTML(str) {
   if (!str) return '';
@@ -2151,22 +2155,38 @@ app.use((req, res, next) => {
   next();
 });
 
+// Force no-cache on HTML and clean URL requests to ensure updates are seen immediately
+app.use((req, res, next) => {
+  const ext = path.extname(req.path).toLowerCase();
+  if (!ext || ext === '.html') {
+    res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+  }
+  next();
+});
+
 // ─── STATIC FILES & ROUTING FOR CLEAN URLs ──────────────────────────
+// Redirect middleware to remove .html from URLs (ensuring clean URLs and avoiding duplicate indexing)
+app.use((req, res, next) => {
+  const ext = path.extname(req.path).toLowerCase();
+  if (ext === '.html') {
+    const cleanPath = req.path.slice(0, -5); // remove '.html'
+    return res.redirect(301, cleanPath + req.url.slice(req.path.length)); // preserve query string if any
+  }
+  next();
+});
+
 const staticCacheOptions = {
-  maxAge: '1d',
+  maxAge: '30d',
   setHeaders: (res, filePath) => {
     const ext = path.extname(filePath).toLowerCase();
     // Do not cache HTML files, robots, sitemaps, manifests, or service worker
     if (ext === '.html' || filePath.endsWith('robots.txt') || filePath.endsWith('sitemap.xml') || filePath.endsWith('manifest.json') || filePath.endsWith('manifest.webmanifest') || filePath.endsWith('sw.js')) {
       res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
     } else {
-      res.setHeader('Cache-Control', 'public, max-age=86400'); // 1 day cache for CSS, JS, images, fonts
+      res.setHeader('Cache-Control', 'public, max-age=2592000'); // 30 days cache for CSS, JS, images, fonts
     }
   }
 };
-
-// Serve static assets out of the public directory
-app.use(express.static(path.join(__dirname, 'public'), staticCacheOptions));
 
 // Specific Clean URL routes
 app.get('/features', (req, res) => {
@@ -2200,6 +2220,110 @@ app.get('/privacy', (req, res) => {
 app.get('/terms', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'terms.html'));
 });
+
+app.get('/specs', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'specs.html'));
+});
+
+app.get('/author/harsha-parisha', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'author', 'harsha-parisha.html'));
+});
+
+app.get('/transparency', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'transparency.html'));
+});
+
+// ─── RESEARCH HUB ROUTES ─────────────────────────────────────────────
+app.get('/research', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'research', 'index.html'));
+});
+
+app.get('/research/claude-session-limit-study', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'research', 'claude-session-limit-study.html'));
+});
+
+app.get('/research/context-window-decay-benchmarks', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'research', 'context-window-decay-benchmarks.html'));
+});
+
+// ─── DOCUMENTATION HUB ROUTES ───────────────────────────────────────
+app.get('/docs', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'docs', 'index.html'));
+});
+
+app.get('/docs/context-bridge', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'docs', 'context-bridge.html'));
+});
+
+app.get('/docs/usage-tracker', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'docs', 'usage-tracker.html'));
+});
+
+app.get('/docs/how-it-works', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'docs', 'how-it-works.html'));
+});
+
+app.get('/docs/troubleshooting', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'docs', 'troubleshooting.html'));
+});
+
+// ─── LEARNING CENTER ROUTES ─────────────────────────────────────────
+app.get('/learn', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'learn', 'index.html'));
+});
+
+app.get('/learn/what-is-ai-usage-tracking', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'learn', 'what-is-ai-usage-tracking.html'));
+});
+
+app.get('/learn/how-claude-limits-work', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'learn', 'how-claude-limits-work.html'));
+});
+
+app.get('/learn/how-context-windows-work', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'learn', 'how-context-windows-work.html'));
+});
+
+// ─── TRUST CENTER ROUTE ─────────────────────────────────────────────
+app.get('/trust', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'trust', 'index.html'));
+});
+
+// ─── DEVELOPER PORTAL ROUTE ──────────────────────────────────────────
+app.get('/developers', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'developers', 'index.html'));
+});
+
+// ─── AI GLOSSARY ROUTE ──────────────────────────────────────────────
+app.get('/glossary', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'glossary', 'index.html'));
+});
+
+// ─── COMPARISON CENTER ROUTES ────────────────────────────────────────
+app.get('/compare', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'compare', 'index.html'));
+});
+
+app.get('/compare/meter-ai-vs-tally', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'compare', 'meter-ai-vs-tally.html'));
+});
+
+app.get('/compare/meter-ai-vs-claude-built-in', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'compare', 'meter-ai-vs-claude-built-in.html'));
+});
+
+// ─── USE CASES / SOLUTIONS ROUTES ──────────────────────────────────
+app.get('/solutions', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'solutions', 'index.html'));
+});
+
+// ─── RELEASE NOTES ROUTE ─────────────────────────────────────────────
+app.get('/changelog/v1-0', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'changelog', 'v1-0.html'));
+});
+
+// Serve static assets out of the public directory (placed after custom clean URL routes)
+app.use(express.static(path.join(__dirname, 'public'), staticCacheOptions));
 
 // Explicit SEO routes
 app.get('/robots.txt', (req, res) => {

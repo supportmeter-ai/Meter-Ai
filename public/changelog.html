@@ -3,30 +3,79 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meter AI Changelog — Version History & Releases</title>
-  <meta name="description" content="Track the latest features, improvements, bug fixes, and release notes for the Meter AI extension. See how we're improving Claude.ai session tracking.">
+  <title>What's New | Meter AI</title>
+  <meta name="description" content="Read about the latest features and workflow enhancements in Meter AI. See how we are making Claude session tracking more reliable.">
   <link rel="canonical" href="https://getmeterai.vercel.app/changelog" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://checkout.razorpay.com">
+  <link rel="preconnect" href="https://ojlamxgpcgchqrmpuugl.supabase.co">
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+  <link rel="dns-prefetch" href="https://checkout.razorpay.com">
+  <link rel="dns-prefetch" href="https://ojlamxgpcgchqrmpuugl.supabase.co">
   <link rel="stylesheet" href="styles.css?v=1.0.2">
   <link rel="manifest" href="/manifest.json">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D85A30' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'><path d='M5.5 18a7.6 7.6 0 1 1 13 0'/><line x1='12' y1='14' x2='16.5' y2='9.5'/><circle cx='12' cy='14' r='2' fill='%23D85A30' stroke='none'/></svg>">
+  <link rel="icon" type="image/svg+xml" href="/assets/logo.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon-16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Meter AI Changelog — Version History & Releases">
-  <meta property="og:description" content="Track your Claude.ai context window live. Get alerts, monitor token usage, and hand off conversations to other LLMs without losing context.">
+  <meta property="og:title" content="What's New | Meter AI">
+  <meta property="og:description" content="Read about the latest features and workflow enhancements in Meter AI. See how we are making Claude session tracking more reliable.">
   <meta property="og:url" content="https://getmeterai.vercel.app/changelog">
   <meta property="og:image" content="https://getmeterai.vercel.app/og-image.png">
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Meter AI">
+  <meta property="og:locale" content="en_US">
 
-  <!-- Twitter Cards -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Meter AI Changelog — Version History & Releases">
-  <meta name="twitter:description" content="Never get cut off mid-conversation again. Meter AI tracks your Claude context window in real time.">
-  <meta name="twitter:image" content="https://getmeterai.vercel.app/og-image.png">
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://getmeterai.vercel.app/#website",
+        "url": "https://getmeterai.vercel.app",
+        "name": "Meter AI"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://getmeterai.vercel.app/changelog/#webpage",
+        "url": "https://getmeterai.vercel.app/changelog",
+        "name": "What's New in Meter AI &mdash; Product Updates &amp; Enhancements",
+        "isPartOf": {
+          "@id": "https://getmeterai.vercel.app/#website"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .subpage-container h2 {
+      margin-top: 36px !important;
+      margin-bottom: 12px !important;
+      font-size: 20px !important;
+    }
+    .subpage-container h3 {
+      font-size: 16px !important;
+      margin-top: 24px !important;
+      margin-bottom: 8px !important;
+      font-family: var(--font-heading);
+    }
+    .subpage-container p, .subpage-container li {
+      margin-bottom: 16px !important;
+      line-height: 1.6 !important;
+      font-size: 14.5px !important;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- ═══ Navigation ═══ -->
+  <!-- Navigation -->
   <nav class="nav" id="nav">
     <a href="/" class="nav-brand">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" class="nav-logo-icon">
@@ -38,36 +87,12 @@
     </a>
     
     <div class="nav-tabs">
-      <div class="nav-tab-container">
-        <a href="/features" class="nav-tab" data-section="features">
-          <span class="animated-roll">Features</span>
-        </a>
-      </div>
-      <div class="nav-tab-container">
-        <a href="/pricing" class="nav-tab" data-section="pricing">
-          <span class="animated-roll">Pricing</span>
-        </a>
-      </div>
-      <div class="nav-tab-container">
-        <a href="/install" class="nav-tab" data-section="install">
-          <span class="animated-roll">Install</span>
-        </a>
-      </div>
-      <div class="nav-tab-container">
-        <a href="/faq" class="nav-tab" data-section="faq">
-          <span class="animated-roll">FAQ</span>
-        </a>
-      </div>
-      <div class="nav-tab-container">
-        <a href="/changelog" class="nav-tab active" data-section="changelog">
-          <span class="animated-roll">Changelog</span>
-        </a>
-      </div>
-      <div class="nav-tab-container">
-        <a href="/about" class="nav-tab" data-section="about">
-          <span class="animated-roll">About</span>
-        </a>
-      </div>
+      <div class="nav-tab-container"><a href="/features" class="nav-tab"><span class="animated-roll">Features</span></a></div>
+      <div class="nav-tab-container"><a href="/pricing" class="nav-tab"><span class="animated-roll">Pricing</span></a></div>
+      <div class="nav-tab-container"><a href="/install" class="nav-tab"><span class="animated-roll">Install</span></a></div>
+      <div class="nav-tab-container"><a href="/faq" class="nav-tab"><span class="animated-roll">FAQ</span></a></div>
+      <div class="nav-tab-container"><a href="/changelog" class="nav-tab active"><span class="animated-roll">Changelog</span></a></div>
+      <div class="nav-tab-container"><a href="/about" class="nav-tab"><span class="animated-roll">About</span></a></div>
     </div>
 
     <div class="nav-actions">
@@ -78,55 +103,95 @@
     </div>
   </nav>
 
-  <!-- ═══ Content ═══ -->
+  <!-- Content -->
   <main class="subpage-container">
     <a href="/" class="subpage-back-link">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
       Back to Home
     </a>
 
-    <h1>Changelog & Product Updates</h1>
-    
-    <p>We are constantly improving Meter AI to make your AI workspace tracking more transparent, secure, and performant. Keep track of all release versions, critical backend optimizations, and visual UI upgrades below.</p>
-
-    <h2>v1.0.2 — Security Hardening & Reverted Footers</h2>
-    <p><em>Released: June 24, 2026</em>
-      <ul>
-        <li>Configured strict Content Security Policy (CSP) headers globally on the server.</li>
-        <li>Restricted CORS origins to authorize only extension sandboxes and official dev environments.</li>
-        <li>Hardened JWT validation rules for admin routes. Direct admin static file queries now correctly throw 403 authorization failures.</li>
-        <li>Reverted page footers to original centered minimal design for premium aesthetics.</li>
-      </ul>
+    <h1>What's New in Meter AI</h1>
+    <p style="font-size: 15px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 24px;">
+      Meter AI evolves continuously based on community feedback, browser updates, and AI workspace enhancements.
     </p>
 
-    <h2>v1.0.1 — Multi-Browser Optimization & Offline Analytics</h2>
-    <p><em>Released: May 12, 2026</em>
-      <ul>
-        <li>Optimized extension manifest properties for full Firefox Add-on marketplace compliance.</li>
-        <li>Improved off-line data state caching logic inside standard browser workers.</li>
-        <li>Refined algorithm for remaining prompt estimations and reset timer sync schedules.</li>
-      </ul>
-    </p>
+    <!-- Why We Publish Updates Box -->
+    <div style="background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; margin-bottom: 32px;">
+      <h3 style="margin-top: 0; font-size: 15px; font-family: var(--font-heading);">Why We Publish Updates</h3>
+      <p style="font-size: 13.5px; color: var(--text-secondary); margin-bottom: 0; line-height: 1.6;">
+        Meter AI evolves continuously as AI platforms change and new workflows emerge. This page highlights meaningful improvements that change how the product feels to use, rather than documenting every internal engineering task.
+      </p>
+    </div>
 
-    <h2>v1.0.0 — Initial Stable Release</h2>
-    <p><em>Released: April 02, 2026</em>
-      <ul>
-        <li>Live context window tracker progress bar injection on Claude.ai workspace columns.</li>
-        <li>Context Bridge™ conversation packet extraction for single-click sends to external LLMs.</li>
-        <li>Local database storing, prompt calculations, and activity charts.</li>
-        <li>Subscription integration panel using secure Razorpay checkout interfaces.</li>
-      </ul>
-    </p>
+    <!-- Product Evolution Themes -->
+    <h2>Product Evolution &amp; Enhancements</h2>
 
-    <div class="subpage-cta-box">
-      <h3>Stay updated with the latest versions</h3>
-      <p>Download or refresh your browser extension to receive the latest tracking performance fixes.</p>
-      <a href="/install" class="btn btn-primary" style="display: inline-flex;">Install the Extension</a>
-      <p style="font-size: 12px; margin-top: 16px; margin-bottom: 0;">Learn more about our <a href="/features" style="color: var(--accent); text-decoration: underline;">features</a> or view <a href="/pricing" style="color: var(--accent); text-decoration: underline;">pricing packages</a>.</p>
+    <div style="display: flex; flex-direction: column; gap: 24px; margin-top: 16px;">
+      
+      <!-- Tracking & Insights -->
+      <div class="subpage-cta-box" style="padding: 24px; text-align: left; margin: 0; background: none; border: 1px solid var(--border);">
+        <h3 style="margin-top: 0; font-size: 18px !important; color: var(--accent);">Tracking &amp; Insights</h3>
+        <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px;">
+          We have improved the local calculations to help you stay ahead of rate limits without losing focus on your prompt loops.
+        </p>
+        <ul style="padding-left: 20px; line-height: 1.7; font-size: 13.5px; color: var(--text-secondary);">
+          <li style="margin-bottom: 8px;"><strong>Live capacity updates:</strong> Live visual indicators help you understand how much of your available conversation capacity has been used.</li>
+          <li style="margin-bottom: 8px;"><strong>Conservative estimating:</strong> Estimates are calculated more conservatively to prevent sudden limits lockouts.</li>
+          <li style="margin-bottom: 0;"><strong>Active session timers:</strong> Estimates for remaining counts and timer sync schedules refresh when you switch threads.</li>
+        </ul>
+      </div>
+
+      <!-- Context Bridge -->
+      <div class="subpage-cta-box" style="padding: 24px; text-align: left; margin: 0; background: none; border: 1px solid var(--border);">
+        <h3 style="margin-top: 0; font-size: 18px !important; color: var(--accent);">Context Bridge</h3>
+        <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px;">
+          Seamlessly transition active workspaces when rate limits trigger.
+        </p>
+        <ul style="padding-left: 20px; line-height: 1.7; font-size: 13.5px; color: var(--text-secondary);">
+          <li style="margin-bottom: 8px;"><strong>Preserved formatting:</strong> Transfer active conversations to another supported AI model with formatting preserved as much as possible.</li>
+          <li style="margin-bottom: 0;"><strong>Single-click migration:</strong> Quickly extract the conversation structure and copy it with clean formatting to avoid code block drift.</li>
+        </ul>
+      </div>
+
+      <!-- Everyday Improvements -->
+      <div class="subpage-cta-box" style="padding: 24px; text-align: left; margin: 0; background: none; border: 1px solid var(--border);">
+        <h3 style="margin-top: 0; font-size: 18px !important; color: var(--accent);">Everyday Improvements</h3>
+        <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px;">
+          Enhancements designed to make daily session management more intuitive.
+        </p>
+        <ul style="padding-left: 20px; line-height: 1.7; font-size: 13.5px; color: var(--text-secondary);">
+          <li style="margin-bottom: 8px;"><strong>Responsive settings toolbar:</strong> Manage your notification choices and warning thresholds directly from the toolbar extension menu.</li>
+          <li style="margin-bottom: 0;"><strong>Cross-browser layouts:</strong> Visual styling is optimized for Google Chrome, Brave, Arc, and Microsoft Edge browser window formats.</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Coming Soon Section -->
+    <div style="border-top: 1px solid var(--border); padding-top: 24px; margin-top: 40px; margin-bottom: 24px;">
+      <h2 style="font-size: 18px; margin-top: 0; font-family: var(--font-heading);">What We're Exploring</h2>
+      <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px;">
+        We are researching additional ways to improve your daily workflows. Here is a preview of updates currently in development:
+      </p>
+      <ul style="padding-left: 20px; line-height: 1.7; font-size: 13.5px; color: var(--text-secondary);">
+        <li style="margin-bottom: 8px;">Support for additional AI platforms.</li>
+        <li style="margin-bottom: 8px;">Smarter usage insights and visual history dashboards.</li>
+        <li style="margin-bottom: 8px;">Better workflow automation features.</li>
+        <li style="margin-bottom: 0;">Accessibility and experience enhancements.</li>
+      </ul>
+    </div>
+
+    <div style="border-top: 1px solid var(--border); padding-top: 24px; margin-top: 36px; margin-bottom: 24px;">
+      <p style="font-size: 14.5px; color: var(--text-primary); line-height: 1.6; margin-bottom: 12px; font-weight: 500;">
+        If you updated Meter AI today, your session limits will feel more predictable, your context migrations will be smoother, and your settings panel will operate more quietly.
+      </p>
+      <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 0;">
+        Need help with an update? <a href="/docs/troubleshooting" style="color: var(--accent); text-decoration: underline;">Explore Common Fixes &rarr;</a>
+      </p>
     </div>
   </main>
 
-  <!-- ═══ Footer ═══ -->
+  <!-- Footer -->
   <footer class="footer">
     <div class="container footer-content-centered">
       <span class="footer-logo">Meter<span class="brand-ai">AI</span></span>
@@ -136,19 +201,19 @@
       
       <div class="footer-links-row">
         <a href="/features">Features</a>
-        <span>·</span>
+        <span>&middot;</span>
         <a href="/pricing">Pricing</a>
-        <span>·</span>
+        <span>&middot;</span>
         <a href="/install">Install</a>
-        <span>·</span>
+        <span>&middot;</span>
         <a href="/faq">FAQ</a>
-        <span>·</span>
+        <span>&middot;</span>
         <a href="/changelog">Changelog</a>
-        <span>·</span>
+        <span>&middot;</span>
         <a href="/about">About</a>
-        <span>·</span>
+        <span>&middot;</span>
         <a href="/privacy">Privacy Policy</a>
-        <span>·</span>
+        <span>&middot;</span>
         <a href="/terms">Terms of Service</a>
       </div>
       
@@ -198,7 +263,7 @@
     </div>
   </footer>
 
-  <!-- ═══ Modals ═══ -->
+  <!-- Modals -->
   <!-- Feedback Modal -->
   <div id="feedback-modal" class="feedback-modal-overlay" style="display: none;">
     <div class="feedback-modal-card">

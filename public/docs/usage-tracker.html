@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Understanding Your AI Usage | Meter AI</title>
+  <meta name="description" content="Learn how the usage tracker measures your conversation size, how to read indicator colors, and workflow strategies to avoid lockouts.">
+  <link rel="canonical" href="https://getmeterai.vercel.app/docs/usage-tracker" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/styles.css?v=1.0.2">
+  <link rel="icon" type="image/svg+xml" href="/assets/logo.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Understanding Your AI Usage | Meter AI">
+  <meta property="og:description" content="Learn how the usage tracker measures your conversation size, how to read indicator colors, and workflow strategies to avoid lockouts.">
+  <meta property="og:url" content="https://getmeterai.vercel.app/docs/usage-tracker">
+  <meta property="og:image" content="https://getmeterai.vercel.app/og-image.png">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Meter AI">
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://getmeterai.vercel.app/#website",
+        "url": "https://getmeterai.vercel.app",
+        "name": "Meter AI"
+      },
+      {
+        "@type": "TechArticle",
+        "@id": "https://getmeterai.vercel.app/docs/usage-tracker/#webpage",
+        "url": "https://getmeterai.vercel.app/docs/usage-tracker",
+        "name": "Understanding Your AI Usage | Meter AI",
+        "headline": "Understanding Your AI Usage",
+        "description": "Learn how the usage tracker measures your conversation size, how to read indicator colors, and workflow strategies to avoid lockouts.",
+        "isPartOf": {
+          "@id": "https://getmeterai.vercel.app/#website"
+        },
+        "author": {
+          "@type": "Organization",
+          "name": "Meter AI",
+          "url": "https://getmeterai.vercel.app"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .subpage-container h2 {
+      margin-top: 36px !important;
+      margin-bottom: 12px !important;
+      font-size: 20px !important;
+    }
+    .subpage-container p, .subpage-container li {
+      margin-bottom: 16px !important;
+      line-height: 1.6 !important;
+      font-size: 14.5px !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <a href="/" class="nav-brand">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" class="nav-logo-icon">
+        <path d="M5.5 18a7.6 7.6 0 1 1 13 0" />
+        <line x1="12" y1="14" x2="16.5" y2="9.5" />
+        <circle cx="12" cy="14" r="2" fill="currentColor" stroke="none" />
+      </svg>
+      <span class="nav-logo-text">Meter<span class="brand-ai">AI</span></span>
+    </a>
+    
+    <div class="nav-tabs">
+      <div class="nav-tab-container"><a href="/features" class="nav-tab"><span class="animated-roll">Features</span></a></div>
+      <div class="nav-tab-container"><a href="/pricing" class="nav-tab"><span class="animated-roll">Pricing</span></a></div>
+      <div class="nav-tab-container"><a href="/install" class="nav-tab"><span class="animated-roll">Install</span></a></div>
+      <div class="nav-tab-container"><a href="/faq" class="nav-tab"><span class="animated-roll">FAQ</span></a></div>
+      <div class="nav-tab-container"><a href="/changelog" class="nav-tab"><span class="animated-roll">Changelog</span></a></div>
+      <div class="nav-tab-container"><a href="/about" class="nav-tab"><span class="animated-roll">About</span></a></div>
+    </div>
+
+    <div class="nav-actions">
+      <a href="https://chromewebstore.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary nav-btn">
+        <span class="animated-roll">Install for Chrome</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Content -->
+  <main class="subpage-container">
+    <a href="/docs" class="subpage-back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      Back to Knowledge Center
+    </a>
+
+    <h1>Understanding Your AI Usage</h1>
+
+    <section>
+      <p>As you work with AI platforms, your conversation grows in size. Each message you submit requires the AI to re-evaluate the entire history of the session. Meter AI tracks this growth in real-time, giving you warning indicators before you reach rate limits or run into session interruptions.</p>
+    </section>
+
+    <section>
+      <h2>What the Tracker Measures</h2>
+      <p>The usage tracker analyzes the volume of text in your active conversation. It measures the characters in your prompts, files, and the AI's replies to build an ongoing picture of your workspace size. Based on typical workspace limits, it estimates when your conversation is approaching a point where the provider may apply a usage cooldown.</p>
+    </section>
+
+    <!-- Callout Box: Estimates Disclaimer -->
+    <div style="background: rgba(216, 90, 48, 0.05); border: 1px solid rgba(216, 90, 48, 0.2); border-radius: var(--radius-md); padding: 20px; margin: 24px 0;">
+      <p style="margin-bottom: 0; font-size: 14px; line-height: 1.6; color: var(--text-primary); font-weight: 500;">
+        <strong>An Important Note on Estimates:</strong> Meter AI calculates usage estimates locally. AI providers do not share your exact server-side token usage in real-time. Because of this, the progress indicators are helpful approximations based on observable text volume rather than official counts.
+      </p>
+    </div>
+
+    <section>
+      <h2>Reading the Indicators</h2>
+      <p>The tracker uses color-coded warning levels directly on the page to help you manage your momentum:</p>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 20px 0;">
+        <div style="background: var(--bg-secondary); border: 1px solid rgba(0,255,100,0.1); border-radius: var(--radius-md); padding: 20px;">
+          <h3 style="margin-top: 0; font-size: 16px; color: #00E676; font-family: var(--font-heading);">Green</h3>
+          <p style="font-size: 13.5px; color: var(--text-secondary); margin-bottom: 0; line-height: 1.5;">Low usage. Response speeds are high. You can submit files and complex code freely.</p>
+        </div>
+        <div style="background: var(--bg-secondary); border: 1px solid rgba(255,193,7,0.1); border-radius: var(--radius-md); padding: 20px;">
+          <h3 style="margin-top: 0; font-size: 16px; color: #FFC107; font-family: var(--font-heading);">Amber</h3>
+          <p style="font-size: 13.5px; color: var(--text-secondary); margin-bottom: 0; line-height: 1.5;">Moderate usage. The conversation is growing. You may begin to notice minor delays before replies start.</p>
+        </div>
+        <div style="background: var(--bg-secondary); border: 1px solid rgba(255,82,82,0.1); border-radius: var(--radius-md); padding: 20px;">
+          <h3 style="margin-top: 0; font-size: 16px; color: #FF5252; font-family: var(--font-heading);">Red</h3>
+          <p style="font-size: 13.5px; color: var(--text-secondary); margin-bottom: 0; line-height: 1.5;">High usage. Handoff or starting a new session is recommended to avoid rate limits.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Strategies for Managing Usage</h2>
+      <p>You can optimize your AI sessions using a few straightforward habits:</p>
+      <ul style="padding-left: 20px; line-height: 1.7; margin-bottom: 24px;">
+        <li style="margin-bottom: 10px;"><strong>Start fresh for new topics:</strong> Keep threads focused. Asking unrelated questions in a long thread forces the model to reprocess unrelated history, exhausting your limits faster.</li>
+        <li style="margin-bottom: 10px;"><strong>Consolidate files:</strong> Remove attachments from your thread once the model has finished analyzing them.</li>
+        <li style="margin-bottom: 0;"><strong>Plan complex sessions:</strong> Keep code references direct. Exclude system files or library outputs that the model does not need to read.</li>
+      </ul>
+    </section>
+
+    <!-- Next Step Box -->
+    <div style="border-top: 1px solid var(--border); padding-top: 24px; margin-top: 36px; margin-bottom: 24px;">
+      <h3 style="margin-top: 0; font-family: var(--font-heading); font-size: 16px;">Next Step</h3>
+      <p style="font-size: 14.5px; margin-bottom: 0;">
+        Ready to transition a thread before you reach usage limits? Explore our <a href="/docs/context-bridge" style="color: var(--accent); text-decoration: underline; font-weight: 500;">Context Bridge Guide &rarr;</a>
+      </p>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content-centered">
+      <span class="footer-logo">Meter<span class="brand-ai">AI</span></span>
+      <p class="footer-tagline">Built for people who spend serious time with AI.</p>
+      
+      <div class="footer-links-row">
+        <a href="/features">Features</a>
+        <span>&middot;</span>
+        <a href="/pricing">Pricing</a>
+        <span>&middot;</span>
+        <a href="/install">Install</a>
+        <span>&middot;</span>
+        <a href="/faq">FAQ</a>
+        <span>&middot;</span>
+        <a href="/changelog">Changelog</a>
+        <span>&middot;</span>
+        <a href="/about">About</a>
+        <span>&middot;</span>
+        <a href="/specs">Specs</a>
+        <span>&middot;</span>
+        <a href="/research">Research</a>
+        <span>&middot;</span>
+        <a href="/privacy">Privacy Policy</a>
+        <span>&middot;</span>
+        <a href="/terms">Terms of Service</a>
+      </div>
+      
+      <div class="footer-copy-row" style="margin-top: 24px; font-size: 13px; color: var(--text-muted);">
+        &copy; 2026 Meter AI. All rights reserved.
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

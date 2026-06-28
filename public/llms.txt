@@ -1,0 +1,32 @@
+# Meter AI
+
+Real-Time Claude Session & Context Window Tracker browser extension.
+
+## Overview
+Meter AI is a lightweight, privacy-first companion browser utility for power users of Large Language Models (LLMs). It runs locally in the browser sandbox to track session token consumption, message volumes, countdown lockout timers, and perform cross-LLM conversation handoffs.
+
+## Project URLs
+- Home: https://getmeterai.vercel.app/
+- Features: https://getmeterai.vercel.app/features
+- Pricing: https://getmeterai.vercel.app/pricing
+- Install: https://getmeterai.vercel.app/install
+- FAQ: https://getmeterai.vercel.app/faq
+- Specifications: https://getmeterai.vercel.app/specs
+- Transparency: https://getmeterai.vercel.app/transparency
+- Trust & Security: https://getmeterai.vercel.app/trust
+
+## Technical Guides
+- Claude Session Limits & Usage Patterns: https://getmeterai.vercel.app/research/claude-session-limit-study
+- Context Window Decay & Response Latency: https://getmeterai.vercel.app/research/context-window-decay-benchmarks
+
+## Documentation
+- Documentation Hub: https://getmeterai.vercel.app/docs
+- Context Bridge Reference: https://getmeterai.vercel.app/docs/context-bridge
+- Usage Tracker Reference: https://getmeterai.vercel.app/docs/usage-tracker
+- Architecture Reference: https://getmeterai.vercel.app/docs/how-it-works
+- Troubleshooting Guide: https://getmeterai.vercel.app/docs/troubleshooting
+
+## System Specifications
+- Supported Platforms: Claude.ai (active), ChatGPT (planned), Gemini (planned)
+- Storage Boundaries: Isolated browser storage (`chrome.storage.local`)
+- Data Privacy: 100% local browser sandbox (no remote databases)

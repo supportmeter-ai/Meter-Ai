@@ -85,3 +85,6 @@ temp/
 # ─── Database Migration Utilities ────────────────────────────────
 # apply-schema.js is a dev utility — keep schema.sql for reference
 # apply-schema.js
+
+# ─── Agent Scratchpads ───────────────────────────────────────────
+scratch/

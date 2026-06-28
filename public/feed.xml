@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>Meter AI - Release Changelog &amp; Technical Updates</title>
+  <link>https://getmeterai.vercel.app/changelog</link>
+  <description>Stay updated with the latest releases, security updates, and performance optimizations for the Meter AI browser extension.</description>
+  <language>en-us</language>
+  <lastBuildDate>Fri, 26 Jun 2026 12:00:00 UTC</lastBuildDate>
+  <atom:link href="https://getmeterai.vercel.app/feed.xml" rel="self" type="application/rss+xml" />
+  
+  <item>
+    <title>Meter AI v1.0.0 Stable Production Release</title>
+    <link>https://getmeterai.vercel.app/changelog/v1-0</link>
+    <guid isPermaLink="true">https://getmeterai.vercel.app/changelog/v1-0</guid>
+    <pubDate>Fri, 26 Jun 2026 10:00:00 UTC</pubDate>
+    <description><![CDATA[
+      We are proud to announce the stable production release of Meter AI v1.0.0! This release introduces real-time Claude.ai session and context window tracking, live remaining prompt predictions, a local-first history engine, and the Context Bridge supporting conversation handoffs to ChatGPT, Gemini, and Grok.
+    ]]></description>
+  </item>
+</channel>
+</rss>

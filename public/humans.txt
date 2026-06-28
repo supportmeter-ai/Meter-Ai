@@ -1,0 +1,11 @@
+/* TEAM */
+Founder: Harsha Parisha
+Website: https://harshaparisha.in
+GitHub: https://github.com/HarshaParisha
+Location: India
+
+/* SITE */
+Last update: 2026-06-26
+Standards: HTML5, CSS3, Vanilla Javascript
+Tech Stack: Node.js, Express, Supabase (for telemetry-free licensing), Razorpay (payments), Vercel
+Design System: Editorial Minimal, Obsidian Dark theme

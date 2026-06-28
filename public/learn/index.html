@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learn | Meter AI</title>
+  <meta name="description" content="Access free guides on context windows, model rate limits, and prompt tracking to optimize your AI developer workflows.">
+  <link rel="canonical" href="https://getmeterai.vercel.app/learn" />
+  <link rel="stylesheet" href="/styles.css?v=1.0.2">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" type="image/svg+xml" href="/assets/logo.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Learn | Meter AI">
+  <meta property="og:description" content="Access free guides on context windows, model rate limits, and prompt tracking to optimize your AI developer workflows.">
+  <meta property="og:url" content="https://getmeterai.vercel.app/learn">
+  <meta property="og:image" content="https://getmeterai.vercel.app/og-image.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Meter AI">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Learn | Meter AI">
+  <meta name="twitter:description" content="Access free guides on context windows, model rate limits, and prompt tracking to optimize your AI developer workflows.">
+  <meta name="twitter:image" content="https://getmeterai.vercel.app/og-image.png">
+
+  <!-- JSON-LD Entity Graph -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://getmeterai.vercel.app/#website",
+        "url": "https://getmeterai.vercel.app",
+        "name": "Meter AI"
+      },
+      {
+        "@type": "CollectionPage",
+        "@id": "https://getmeterai.vercel.app/learn/#webpage",
+        "url": "https://getmeterai.vercel.app/learn",
+        "name": "Learning Center Hub",
+        "isPartOf": {
+          "@id": "https://getmeterai.vercel.app/#website"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://getmeterai.vercel.app/learn/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://getmeterai.vercel.app"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Learning Center",
+            "item": "https://getmeterai.vercel.app/learn"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ═══ Navigation ═══ -->
+  <nav class="nav" id="nav">
+    <a href="/" class="nav-brand">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" class="nav-logo-icon">
+        <path d="M5.5 18a7.6 7.6 0 1 1 13 0" />
+        <line x1="12" y1="14" x2="16.5" y2="9.5" />
+        <circle cx="12" cy="14" r="2" fill="currentColor" stroke="none" />
+      </svg>
+      <span class="nav-logo-text">Meter<span class="brand-ai">AI</span></span>
+    </a>
+    
+    <div class="nav-tabs">
+      <div class="nav-tab-container">
+        <a href="/features" class="nav-tab" data-section="features">
+          <span class="animated-roll">Features</span>
+        </a>
+      </div>
+      <div class="nav-tab-container">
+        <a href="/pricing" class="nav-tab" data-section="pricing">
+          <span class="animated-roll">Pricing</span>
+        </a>
+      </div>
+      <div class="nav-tab-container">
+        <a href="/install" class="nav-tab" data-section="install">
+          <span class="animated-roll">Install</span>
+        </a>
+      </div>
+      <div class="nav-tab-container">
+        <a href="/faq" class="nav-tab" data-section="faq">
+          <span class="animated-roll">FAQ</span>
+        </a>
+      </div>
+      <div class="nav-tab-container">
+        <a href="/changelog" class="nav-tab" data-section="changelog">
+          <span class="animated-roll">Changelog</span>
+        </a>
+      </div>
+      <div class="nav-tab-container">
+        <a href="/about" class="nav-tab" data-section="about">
+          <span class="animated-roll">About</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="nav-actions">
+      <a href="https://chromewebstore.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary nav-btn">
+        <span class="animated-roll">Install for Chrome</span>
+      </a>
+      <div id="auth-status-container"></div>
+    </div>
+  </nav>
+
+  <!-- ═══ Content ═══ -->
+  <main class="subpage-container">
+    <a href="/" class="subpage-back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      Back to Home
+    </a>
+
+    <h1>Meter AI Learning Center</h1>
+    <p>Understand the mechanics of Large Language Model quotas, token usage, context limits, and rate calculation. Building clear workflows is the best way to remain productive.</p>
+
+    <!-- Product specification card -->
+    <div class="subpage-cta-box" style="text-align: left; padding: 24px; margin: 24px 0;">
+      <h4 style="margin-bottom: 12px; font-family: var(--font-heading); font-size: 18px;">Product Core Values</h4>
+      <ul style="list-style: none; margin: 0; padding: 0;">
+        <li style="margin-bottom: 6px;"><strong>Value:</strong> Education &amp; Transparency</li>
+        <li style="margin-bottom: 6px;"><strong>Topic Focus:</strong> Context Windows, Rate Limits, Token Economics, Handoff Optimization</li>
+        <li style="margin-bottom: 0;"><strong>Primary Goal:</strong> Stop workflow disruption through predictive analytics</li>
+      </ul>
+    </div>
+
+    <h2>Learning Modules</h2>
+    <ul>
+      <li><a href="/learn/what-is-ai-usage-tracking" style="color: var(--accent); text-decoration: underline;">What is AI Usage Tracking?</a> — An introduction to local tracking metrics, prompt allocations, and cost forecasting.</li>
+      <li><a href="/learn/how-claude-limits-work" style="color: var(--accent); text-decoration: underline;">How Claude Session Limits Work</a> — A detailed look at hourly restrictions, subscription quotas, and reset times.</li>
+      <li><a href="/learn/how-context-windows-work" style="color: var(--accent); text-decoration: underline;">Understanding AI Context Windows</a> — Explaining how document lengths, thread context, and message counts scale prompt consumption.</li>
+    </ul>
+  </main>
+
+  <!-- ═══ Footer ═══ -->
+  <footer class="footer">
+    <div class="container footer-content-centered">
+      <span class="footer-logo">Meter<span class="brand-ai">AI</span></span>
+      <p class="footer-tagline">Built for people who spend serious time with AI.</p>
+      
+      <button id="footer-feedback-trigger" class="btn-feedback-footer">Give Feedback</button>
+      
+      <div class="footer-links-row">
+        <a href="/features">Features</a>
+        <span>·</span>
+        <a href="/pricing">Pricing</a>
+        <span>·</span>
+        <a href="/install">Install</a>
+        <span>·</span>
+        <a href="/faq">FAQ</a>
+        <span>·</span>
+        <a href="/changelog">Changelog</a>
+        <span>·</span>
+        <a href="/about">About</a>
+        <span>·</span>
+        <a href="/privacy">Privacy Policy</a>
+        <span>·</span>
+        <a href="/terms">Terms of Service</a>
+      </div>
+      
+      <div class="footer-copy-row" style="margin-top: 24px; font-size: 13px; color: var(--text-muted);">
+        &copy; 2026 Meter AI. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Supabase CDN & scripting -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/script.js?v=1.0.1"></script>
+</body>
+</html>

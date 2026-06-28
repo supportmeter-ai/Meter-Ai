@@ -3590,6 +3590,20 @@ section {
   }
 }
 
+/* Fix excessive section padding gaps on subpages */
+.subpage-container section {
+  padding: 0 !important;
+  border-bottom: none !important;
+  margin-bottom: 24px !important;
+}
+
+/* Adjust heading top margins to keep page flow compact and clean */
+.subpage-container h2 {
+  margin-top: 24px !important;
+  margin-bottom: 10px !important;
+}
+
+
 
 
 

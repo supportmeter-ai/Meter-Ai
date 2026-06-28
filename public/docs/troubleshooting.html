@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Common Questions &amp; Fixes | Meter AI</title>
+  <meta name="description" content="Troubleshooting guide for Meter AI. Resolve usage bar display, countdown syncing, license authentication, and settings issues in under two minutes.">
+  <link rel="canonical" href="https://getmeterai.vercel.app/docs/troubleshooting" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/styles.css?v=1.0.2">
+  <link rel="icon" type="image/svg+xml" href="/assets/logo.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Common Questions &amp; Fixes | Meter AI">
+  <meta property="og:description" content="Troubleshooting guide for Meter AI. Resolve usage bar display, countdown syncing, license authentication, and settings issues in under two minutes.">
+  <meta property="og:url" content="https://getmeterai.vercel.app/docs/troubleshooting">
+  <meta property="og:image" content="https://getmeterai.vercel.app/og-image.png">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Meter AI">
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://getmeterai.vercel.app/#website",
+        "url": "https://getmeterai.vercel.app",
+        "name": "Meter AI"
+      },
+      {
+        "@type": "TechArticle",
+        "@id": "https://getmeterai.vercel.app/docs/troubleshooting/#webpage",
+        "url": "https://getmeterai.vercel.app/docs/troubleshooting",
+        "name": "Common Questions &amp; Fixes | Meter AI",
+        "headline": "Common Questions & Fixes",
+        "description": "Troubleshooting guide for Meter AI. Resolve usage bar display, countdown syncing, license authentication, and settings issues in under two minutes.",
+        "isPartOf": {
+          "@id": "https://getmeterai.vercel.app/#website"
+        },
+        "author": {
+          "@type": "Organization",
+          "name": "Meter AI",
+          "url": "https://getmeterai.vercel.app"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .subpage-container h2 {
+      margin-top: 36px !important;
+      margin-bottom: 12px !important;
+      font-size: 20px !important;
+    }
+    .subpage-container h3 {
+      margin-top: 24px !important;
+      margin-bottom: 8px !important;
+      font-size: 16px !important;
+      font-family: var(--font-heading) !important;
+    }
+    .subpage-container p, .subpage-container li {
+      margin-bottom: 16px !important;
+      line-height: 1.6 !important;
+      font-size: 14.5px !important;
+    }
+    summary {
+      font-weight: 600;
+      cursor: pointer;
+      padding: 12px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      font-size: 14.5px;
+      outline: none;
+    }
+    details {
+      margin: 16px 0;
+    }
+    details[open] summary {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      border-bottom: none;
+    }
+    .details-content {
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-top: none;
+      border-bottom-left-radius: var(--radius-md);
+      border-bottom-right-radius: var(--radius-md);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <a href="/" class="nav-brand">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" class="nav-logo-icon">
+        <path d="M5.5 18a7.6 7.6 0 1 1 13 0" />
+        <line x1="12" y1="14" x2="16.5" y2="9.5" />
+        <circle cx="12" cy="14" r="2" fill="currentColor" stroke="none" />
+      </svg>
+      <span class="nav-logo-text">Meter<span class="brand-ai">AI</span></span>
+    </a>
+    
+    <div class="nav-tabs">
+      <div class="nav-tab-container"><a href="/features" class="nav-tab"><span class="animated-roll">Features</span></a></div>
+      <div class="nav-tab-container"><a href="/pricing" class="nav-tab"><span class="animated-roll">Pricing</span></a></div>
+      <div class="nav-tab-container"><a href="/install" class="nav-tab"><span class="animated-roll">Install</span></a></div>
+      <div class="nav-tab-container"><a href="/faq" class="nav-tab"><span class="animated-roll">FAQ</span></a></div>
+      <div class="nav-tab-container"><a href="/changelog" class="nav-tab"><span class="animated-roll">Changelog</span></a></div>
+      <div class="nav-tab-container"><a href="/about" class="nav-tab"><span class="animated-roll">About</span></a></div>
+    </div>
+
+    <div class="nav-actions">
+      <a href="https://chromewebstore.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary nav-btn">
+        <span class="animated-roll">Install for Chrome</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Content -->
+  <main class="subpage-container">
+    <a href="/docs" class="subpage-back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      Back to Knowledge Center
+    </a>
+
+    <h1>Common Questions &amp; Fixes</h1>
+
+    <section>
+      <p>Most minor anomalies, interface sync delays, or warning state issues can be resolved quickly using the options panel directly inside the extension popup.</p>
+    </section>
+
+    <section>
+      <h2>Common Scenarios &amp; Fixes</h2>
+      
+      <details>
+        <summary>The usage bar is not showing on the page</summary>
+        <div class="details-content">
+          <p style="margin-bottom: 0; font-size: 14.5px; color: var(--text-secondary); line-height: 1.6;">If the color-coded progress bar is missing from the top of your AI workspace tab, refresh the page. If it still does not appear, open the extension popup in your toolbar and verify that tracking is active for the current workspace URL.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>The countdown timer looks incorrect</summary>
+        <div class="details-content">
+          <p style="margin-bottom: 0; font-size: 14.5px; color: var(--text-secondary); line-height: 1.6;">Rate limits reset dynamically based on provider load. If the extension countdown doesn't align with your actual limit reset, open the extension popup and click the <strong>Reset Timer</strong> button. This clears the local estimation loop and synchronizes the countdown with your active session.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>The extension is not detecting my messages</summary>
+        <div class="details-content">
+          <p style="margin-bottom: 0; font-size: 14.5px; color: var(--text-secondary); line-height: 1.6;">If the prompt count does not increase after you submit a query, click the <strong>Resync</strong> button inside the extension menu. This refreshes the local history check on the active tab and recalculates your message stats.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>My premium features are not unlocked</summary>
+        <div class="details-content">
+          <p style="margin-bottom: 0; font-size: 14.5px; color: var(--text-secondary); line-height: 1.6;">Verify that you are signed into the browser profile where you installed the extension. If you recently purchased Pro, open the settings menu and click <strong>Verify License Key</strong> to ensure your license status check completes.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>My settings disappeared</summary>
+        <div class="details-content">
+          <p style="margin-bottom: 0; font-size: 14.5px; color: var(--text-secondary); line-height: 1.6;">Meter AI stores preferences locally in your browser's isolated profile settings. If you cleared your browser cookies and site data, or if you are using an incognito tab, your local settings and usage charts will reset to defaults.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>The extension popup won't open</summary>
+        <div class="details-content">
+          <p style="margin-bottom: 0; font-size: 14.5px; color: var(--text-secondary); line-height: 1.6;">If clicking the extension icon in your browser toolbar displays an empty box or remains unresponsive, reload the tab. If the issue persists, restarting your browser will refresh the extension's local bindings.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- Collapsible Advanced Section -->
+    <details>
+      <summary>Advanced Diagnostics</summary>
+      <div class="details-content">
+        <p style="margin-bottom: 8px; font-size: 13.5px;">For persistent issues requiring deeper diagnostic state checks:</p>
+        <ol style="margin-bottom: 0; padding-left: 20px; font-size: 13.5px; line-height: 1.6;">
+          <li style="margin-bottom: 6px;">Open <code>chrome://extensions</code> in your URL bar.</li>
+          <li style="margin-bottom: 6px;">Find the Meter AI card and ensure the toggle switch is enabled.</li>
+          <li style="margin-bottom: 0;">Click the **Details** button to verify the extension is allowed to access and read state on your target AI workspace domain.</li>
+        </ol>
+      </div>
+    </details>
+
+    <!-- Next Step Box -->
+    <div style="border-top: 1px solid var(--border); padding-top: 24px; margin-top: 36px; margin-bottom: 24px;">
+      <h3 style="margin-top: 0; font-family: var(--font-heading); font-size: 16px;">Next Step</h3>
+      <p style="font-size: 14.5px; margin-bottom: 0;">
+        Have broader questions about how your metrics and permissions are handled? Read our <a href="/trust" style="color: var(--accent); text-decoration: underline; font-weight: 500;">Trust &amp; Security Hub &rarr;</a>
+      </p>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content-centered">
+      <span class="footer-logo">Meter<span class="brand-ai">AI</span></span>
+      <p class="footer-tagline">Built for people who spend serious time with AI.</p>
+      
+      <div class="footer-links-row">
+        <a href="/features">Features</a>
+        <span>&middot;</span>
+        <a href="/pricing">Pricing</a>
+        <span>&middot;</span>
+        <a href="/install">Install</a>
+        <span>&middot;</span>
+        <a href="/faq">FAQ</a>
+        <span>&middot;</span>
+        <a href="/changelog">Changelog</a>
+        <span>&middot;</span>
+        <a href="/about">About</a>
+        <span>&middot;</span>
+        <a href="/specs">Specs</a>
+        <span>&middot;</span>
+        <a href="/research">Research</a>
+        <span>&middot;</span>
+        <a href="/privacy">Privacy Policy</a>
+        <span>&middot;</span>
+        <a href="/terms">Terms of Service</a>
+      </div>
+      
+      <div class="footer-copy-row" style="margin-top: 24px; font-size: 13px; color: var(--text-muted);">
+        &copy; 2026 Meter AI. All rights reserved.
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

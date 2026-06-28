@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Managing Long AI Conversations | Meter AI</title>
+  <meta name="description" content="Learn how long conversations affect AI model performance. Get practical recommendations on when to start fresh or use the Context Bridge.">
+  <link rel="canonical" href="https://getmeterai.vercel.app/research/context-window-decay-benchmarks" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/styles.css?v=1.0.2">
+  <link rel="icon" type="image/svg+xml" href="/assets/logo.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Managing Long AI Conversations | Meter AI">
+  <meta property="og:description" content="Learn how long conversations affect AI model performance. Get practical recommendations on when to start fresh or use the Context Bridge.">
+  <meta property="og:url" content="https://getmeterai.vercel.app/research/context-window-decay-benchmarks">
+  <meta property="og:image" content="https://getmeterai.vercel.app/og-image.png">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Meter AI">
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://getmeterai.vercel.app/#website",
+        "url": "https://getmeterai.vercel.app",
+        "name": "Meter AI"
+      },
+      {
+        "@type": "TechArticle",
+        "@id": "https://getmeterai.vercel.app/research/context-window-decay-benchmarks/#webpage",
+        "url": "https://getmeterai.vercel.app/research/context-window-decay-benchmarks",
+        "name": "Managing Long AI Conversations | Meter AI",
+        "headline": "Managing Long AI Conversations",
+        "description": "Learn how long conversations affect AI model performance. Get practical recommendations on when to start fresh or use the Context Bridge.",
+        "isPartOf": {
+          "@id": "https://getmeterai.vercel.app/#website"
+        },
+        "author": {
+          "@type": "Organization",
+          "name": "Meter AI",
+          "url": "https://getmeterai.vercel.app"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .subpage-container h2 {
+      margin-top: 36px !important;
+      margin-bottom: 12px !important;
+      font-size: 20px !important;
+    }
+    .subpage-container p, .subpage-container li {
+      margin-bottom: 16px !important;
+      line-height: 1.6 !important;
+      font-size: 14.5px !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <a href="/" class="nav-brand">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" class="nav-logo-icon">
+        <path d="M5.5 18a7.6 7.6 0 1 1 13 0" />
+        <line x1="12" y1="14" x2="16.5" y2="9.5" />
+        <circle cx="12" cy="14" r="2" fill="currentColor" stroke="none" />
+      </svg>
+      <span class="nav-logo-text">Meter<span class="brand-ai">AI</span></span>
+    </a>
+    
+    <div class="nav-tabs">
+      <div class="nav-tab-container"><a href="/features" class="nav-tab"><span class="animated-roll">Features</span></a></div>
+      <div class="nav-tab-container"><a href="/pricing" class="nav-tab"><span class="animated-roll">Pricing</span></a></div>
+      <div class="nav-tab-container"><a href="/install" class="nav-tab"><span class="animated-roll">Install</span></a></div>
+      <div class="nav-tab-container"><a href="/faq" class="nav-tab"><span class="animated-roll">FAQ</span></a></div>
+      <div class="nav-tab-container"><a href="/changelog" class="nav-tab"><span class="animated-roll">Changelog</span></a></div>
+      <div class="nav-tab-container"><a href="/about" class="nav-tab"><span class="animated-roll">About</span></a></div>
+    </div>
+
+    <div class="nav-actions">
+      <a href="https://chromewebstore.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary nav-btn">
+        <span class="animated-roll">Install for Chrome</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Content -->
+  <main class="subpage-container">
+    <a href="/research" class="subpage-back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      Back to Engineering Notes
+    </a>
+
+    <h1>Managing Long AI Conversations</h1>
+
+    <section>
+      <p>As you add more messages and files to a conversation, processing the thread demands more compute capacity. This accumulation of history has practical implications for model performance: responses may take longer to begin, and the model's ability to follow complex details can degrade.</p>
+    </section>
+
+    <!-- Workflow diagram in SVG -->
+    <div style="background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; margin: 24px 0; text-align: center;">
+      <svg viewBox="0 0 600 120" style="max-width: 100%; height: auto;">
+        <!-- Card 1: Active Session -->
+        <rect x="10" y="30" width="120" height="60" rx="6" fill="#1E1E1E" stroke="#A8A29B" stroke-width="1.5"/>
+        <text x="70" y="65" fill="#F5F1ED" font-family="var(--font-heading)" font-size="11" font-weight="600" text-anchor="middle">Active Session</text>
+
+        <!-- Arrow 1 -->
+        <path d="M 140 60 L 160 60" stroke="#A8A29B" stroke-width="1.5"/>
+        <polygon points="160,60 155,57 155,63" fill="#A8A29B"/>
+
+        <!-- Card 2: Warning Zone -->
+        <rect x="170" y="30" width="120" height="60" rx="6" fill="#1E1E1E" stroke="#D85A30" stroke-width="1.5"/>
+        <text x="230" y="65" fill="#F5F1ED" font-family="var(--font-heading)" font-size="11" font-weight="600" text-anchor="middle">Warning Zone</text>
+
+        <!-- Arrow 2 -->
+        <path d="M 300 60 L 320 60" stroke="#A8A29B" stroke-width="1.5"/>
+        <polygon points="320,60 315,57 315,63" fill="#A8A29B"/>
+
+        <!-- Card 3: Context Bridge -->
+        <rect x="330" y="30" width="120" height="60" rx="6" fill="#1E1E1E" stroke="#A8A29B" stroke-width="1.5"/>
+        <text x="390" y="65" fill="#F5F1ED" font-family="var(--font-heading)" font-size="11" font-weight="600" text-anchor="middle">Context Bridge</text>
+
+        <!-- Arrow 3 -->
+        <path d="M 460 60 L 480 60" stroke="#A8A29B" stroke-width="1.5"/>
+        <polygon points="480,60 475,57 475,63" fill="#A8A29B"/>
+
+        <!-- Card 4: Fresh Tab -->
+        <rect x="490" y="30" width="100" height="60" rx="6" fill="#1E1E1E" stroke="#A8A29B" stroke-width="1.5"/>
+        <text x="540" y="65" fill="#F5F1ED" font-family="var(--font-heading)" font-size="11" font-weight="600" text-anchor="middle">Fresh Tab</text>
+      </svg>
+    </div>
+
+    <section>
+      <h2>Signs It's Time to Start Fresh</h2>
+      <p>When a conversation grows too large, you may notice distinct warning signs:</p>
+      <ul style="padding-left: 20px; line-height: 1.7; margin-bottom: 24px;">
+        <li style="margin-bottom: 10px;"><strong>Increased latency:</strong> There is a visible, growing delay before the AI starts outputting character replies.</li>
+        <li style="margin-bottom: 10px;"><strong>Instruction drift:</strong> The model begins to ignore negative constraints or formatting instructions specified earlier in the thread.</li>
+        <li style="margin-bottom: 10px;"><strong>Repetitive formatting:</strong> The replies reiterate blocks of code or summaries that have already been resolved.</li>
+        <li style="margin-bottom: 0;"><strong>Context loss:</strong> The model fails to reference parameters or goals defined at the start of your workspace session.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Deciding to Continue vs. Starting Fresh</h2>
+      <p>Depending on your current task, your workflow approach should adapt:</p>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 20px 0;">
+        <div style="background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px;">
+          <h3 style="margin-top: 0; font-size: 16px; font-family: var(--font-heading); color: var(--accent);">When to Continue</h3>
+          <p style="font-size: 13.5px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 0;">
+            You are debugging a single compile error, running sequential logic trials, or refining a specific draft where the immediate context is highly dependent on the last two messages.
+          </p>
+        </div>
+        <div style="background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px;">
+          <h3 style="margin-top: 0; font-size: 16px; font-family: var(--font-heading); color: var(--accent);">When to Start Fresh</h3>
+          <p style="font-size: 13.5px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 0;">
+            You have resolved the compiler bug and are moving to a new feature, or you are changing the target audience of an article. Starting fresh keeps model response speeds high.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Practical Workflow Habits</h2>
+      <p>To get the most out of your AI tools without constant rate limit lockout interruptions, try these habits:</p>
+      <ul style="padding-left: 20px; line-height: 1.7; margin-bottom: 24px;">
+        <li style="margin-bottom: 10px;"><strong>Track your warning levels:</strong> Pay attention when the progress indicator turns amber or red, and plan your next transition before you hit the limit.</li>
+        <li style="margin-bottom: 10px;"><strong>Transition context selectively:</strong> Use the Context Bridge to copy only active code versions or outlines, leaving resolved diagnostic steps behind.</li>
+        <li style="margin-bottom: 0;"><strong>Isolate complex scripts:</strong> Do not paste massive utility files unless the active task specifically requires reading their parameters.</li>
+      </ul>
+    </section>
+
+    <!-- Next Step Box -->
+    <div style="border-top: 1px solid var(--border); padding-top: 24px; margin-top: 36px; margin-bottom: 24px;">
+      <h3 style="margin-top: 0; font-family: var(--font-heading); font-size: 16px;">Next Step</h3>
+      <p style="font-size: 14.5px; margin-bottom: 0;">
+        Ready to preserve your work? Learn how to transition active threads with minimal disruption in our <a href="/docs/context-bridge" style="color: var(--accent); text-decoration: underline; font-weight: 500;">Context Bridge Guide &rarr;</a>
+      </p>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content-centered">
+      <span class="footer-logo">Meter<span class="brand-ai">AI</span></span>
+      <p class="footer-tagline">Built for people who spend serious time with AI.</p>
+      
+      <div class="footer-links-row">
+        <a href="/features">Features</a>
+        <span>&middot;</span>
+        <a href="/pricing">Pricing</a>
+        <span>&middot;</span>
+        <a href="/install">Install</a>
+        <span>&middot;</span>
+        <a href="/faq">FAQ</a>
+        <span>&middot;</span>
+        <a href="/changelog">Changelog</a>
+        <span>&middot;</span>
+        <a href="/about">About</a>
+        <span>&middot;</span>
+        <a href="/specs">Specs</a>
+        <span>&middot;</span>
+        <a href="/research">Research</a>
+        <span>&middot;</span>
+        <a href="/privacy">Privacy Policy</a>
+        <span>&middot;</span>
+        <a href="/terms">Terms of Service</a>
+      </div>
+      
+      <div class="footer-copy-row" style="margin-top: 24px; font-size: 13px; color: var(--text-muted);">
+        &copy; 2026 Meter AI. All rights reserved.
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

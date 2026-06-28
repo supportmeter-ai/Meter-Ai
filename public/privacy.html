@@ -3,16 +3,60 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Privacy Policy — Meter AI</title>
-  <meta name="description" content="Privacy Policy for Meter AI — we do not collect, transmit, or store any of your data outside your browser.">
+  <title>Privacy Policy | Meter AI</title>
+  <meta name="description" content="Our clear, plain-English summary of how we handle your settings and preferences. Your conversation text never leaves your device.">
   <link rel="canonical" href="https://getmeterai.vercel.app/privacy" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://checkout.razorpay.com">
+  <link rel="preconnect" href="https://ojlamxgpcgchqrmpuugl.supabase.co">
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+  <link rel="dns-prefetch" href="https://checkout.razorpay.com">
+  <link rel="dns-prefetch" href="https://ojlamxgpcgchqrmpuugl.supabase.co">
   <link rel="stylesheet" href="styles.css?v=1.0.2">
   <link rel="manifest" href="/manifest.json">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D85A30' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'><path d='M5.5 18a7.6 7.6 0 1 1 13 0'/><line x1='12' y1='14' x2='16.5' y2='9.5'/><circle cx='12' cy='14' r='2' fill='%23D85A30' stroke='none'/></svg>">
+  <link rel="icon" type="image/svg+xml" href="/assets/logo.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon-16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Privacy Policy | Meter AI">
+  <meta property="og:description" content="Our clear, plain-English summary of how we handle your settings and preferences. Your conversation text never leaves your device.">
+  <meta property="og:url" content="https://getmeterai.vercel.app/privacy">
+  <meta property="og:image" content="https://getmeterai.vercel.app/og-image.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Meter AI">
+  <meta property="og:locale" content="en_US">
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://getmeterai.vercel.app/#website",
+        "url": "https://getmeterai.vercel.app",
+        "name": "Meter AI"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://getmeterai.vercel.app/privacy/#webpage",
+        "url": "https://getmeterai.vercel.app/privacy",
+        "name": "Privacy Policy | Meter AI",
+        "isPartOf": {
+          "@id": "https://getmeterai.vercel.app/#website"
+        }
+      }
+    ]
+  }
+  </script>
+
   <style>
     .legal-content {
-      max-width: 600px;
+      max-width: 680px;
       margin: 120px auto 80px auto;
       padding: 0 24px;
     }
@@ -21,7 +65,7 @@
       font-size: 36px;
       font-weight: 400;
       color: var(--text-primary);
-      margin-bottom: 24px;
+      margin-bottom: 8px;
     }
     .legal-content h2 {
       font-size: 18px;
@@ -30,14 +74,18 @@
       margin-top: 32px;
       margin-bottom: 12px;
     }
+    .legal-content h3 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-top: 20px;
+      margin-bottom: 8px;
+      font-family: var(--font-heading);
+    }
     .legal-content p, .legal-content li {
       font-size: 14.5px;
       color: var(--text-secondary);
       line-height: 1.6;
-      margin-bottom: 16px;
-    }
-    .legal-content ul {
-      margin-left: 20px;
       margin-bottom: 16px;
     }
     .legal-back-link {
@@ -46,31 +94,43 @@
       gap: 6px;
       color: var(--accent);
       font-weight: 500;
-      margin-bottom: 40px;
+      margin-bottom: 24px;
       font-size: 14px;
       cursor: pointer;
     }
     .legal-back-link:hover {
       text-decoration: underline;
     }
+    summary {
+      font-weight: 600;
+      cursor: pointer;
+      padding: 12px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      font-size: 14.5px;
+      outline: none;
+    }
+    details {
+      margin: 16px 0;
+    }
+    details[open] summary {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      border-bottom: none;
+    }
+    .details-content {
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-top: none;
+      border-bottom-left-radius: var(--radius-md);
+      border-bottom-right-radius: var(--radius-md);
+    }
   </style>
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="Privacy Policy — Meter AI">
-  <meta property="og:description" content="Privacy Policy for Meter AI — we do not collect, transmit, or store any of your data outside your browser.">
-  <meta property="og:url" content="https://getmeterai.vercel.app/privacy">
-  <meta property="og:image" content="https://getmeterai.vercel.app/og-image.png">
-  <meta property="og:type" content="website">
-
-  <!-- Twitter Cards -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Privacy Policy — Meter AI">
-  <meta name="twitter:description" content="Privacy Policy for Meter AI — we do not collect, transmit, or store any of your data outside your browser.">
-  <meta name="twitter:image" content="https://getmeterai.vercel.app/og-image.png">
 </head>
 <body>
 
-  <!-- ═══ Navigation ═══ -->
+  <!-- Navigation -->
   <nav class="nav" id="nav">
     <a href="/" class="nav-brand">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" class="nav-logo-icon">
@@ -82,36 +142,12 @@
     </a>
     
     <div class="nav-tabs">
-      <div class="nav-tab-container">
-        <a href="/features" class="nav-tab" data-section="features">
-          <span class="animated-roll">Features</span>
-        </a>
-      </div>
-      <div class="nav-tab-container">
-        <a href="/pricing" class="nav-tab" data-section="pricing">
-          <span class="animated-roll">Pricing</span>
-        </a>
-      </div>
-      <div class="nav-tab-container">
-        <a href="/install" class="nav-tab" data-section="install">
-          <span class="animated-roll">Install</span>
-        </a>
-      </div>
-      <div class="nav-tab-container">
-        <a href="/faq" class="nav-tab" data-section="faq">
-          <span class="animated-roll">FAQ</span>
-        </a>
-      </div>
-      <div class="nav-tab-container">
-        <a href="/changelog" class="nav-tab" data-section="changelog">
-          <span class="animated-roll">Changelog</span>
-        </a>
-      </div>
-      <div class="nav-tab-container">
-        <a href="/about" class="nav-tab" data-section="about">
-          <span class="animated-roll">About</span>
-        </a>
-      </div>
+      <div class="nav-tab-container"><a href="/features" class="nav-tab"><span class="animated-roll">Features</span></a></div>
+      <div class="nav-tab-container"><a href="/pricing" class="nav-tab"><span class="animated-roll">Pricing</span></a></div>
+      <div class="nav-tab-container"><a href="/install" class="nav-tab"><span class="animated-roll">Install</span></a></div>
+      <div class="nav-tab-container"><a href="/faq" class="nav-tab"><span class="animated-roll">FAQ</span></a></div>
+      <div class="nav-tab-container"><a href="/changelog" class="nav-tab"><span class="animated-roll">Changelog</span></a></div>
+      <div class="nav-tab-container"><a href="/about" class="nav-tab"><span class="animated-roll">About</span></a></div>
     </div>
 
     <div class="nav-actions">
@@ -122,37 +158,154 @@
     </div>
   </nav>
 
-  <!-- ═══ Content ═══ -->
+  <!-- Content -->
   <div class="legal-content">
     <a href="/" class="legal-back-link">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
       Back to Home
     </a>
-    <h1>Privacy Policy</h1>
-    <p>Last updated: June 20, 2026</p>
-    
-    <p>Meter AI does not collect, transmit, or store any of your data outside your browser. We value your privacy and believe your usage data belongs to you.</p>
-    
-    <h2>What Meter Reads</h2>
-    <ul>
-      <li>Usage percentages and reset timestamps that Claude.ai's own page already loads into your browser, in order to display them in a more useful format.</li>
-      <li>The visible text of your current conversation, solely to estimate token counts locally when live usage data isn't yet available. This text is never transmitted, logged, or stored — it is processed in memory and discarded immediately after the estimate is computed.</li>
-      <li>The name of your active Claude Project (if any), to let you set usage budgets per project.</li>
+    <h1>Privacy Center</h1>
+    <p style="margin-bottom: 24px;">Privacy is one of the reasons Meter AI exists. Many AI tools ask users to trust another cloud service with their conversations. Meter AI was designed differently. Most of the information needed to power the extension stays inside your browser so you remain in control of your own workflow.</p>
+
+    <!-- Summary Box -->
+    <div style="background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; margin: 24px 0;">
+      <h3 style="margin-top: 0; margin-bottom: 12px; font-size: 16px;">Privacy Center &mdash; At a Glance</h3>
+      <ul style="padding-left: 20px; line-height: 1.7; margin-bottom: 0;">
+        <li style="margin-bottom: 8px;">✓ Your conversations are not uploaded to Meter AI.</li>
+        <li style="margin-bottom: 8px;">✓ Your settings and configurations remain on your device.</li>
+        <li style="margin-bottom: 8px;">✓ We don't sell personal data.</li>
+        <li style="margin-bottom: 8px;">✓ We don't build advertising or tracking profiles.</li>
+        <li style="margin-bottom: 0;">✓ You control your local history and metrics data.</li>
+      </ul>
+    </div>
+
+    <h2>Our Privacy Principles</h2>
+    <p>Rather than relying on legal definitions, our product decisions are guided by simple principles:</p>
+    <ul style="padding-left: 20px; line-height: 1.7;">
+      <li style="margin-bottom: 10px;"><strong>Local-first by design:</strong> We run analysis directly on your computer. Your files and workspace inputs stay isolated inside your browser tab.</li>
+      <li style="margin-bottom: 10px;"><strong>Collect only what is necessary:</strong> We do not track metrics, collect performance logs, or send analytics back to our systems.</li>
+      <li style="margin-bottom: 10px;"><strong>Explain every permission:</strong> We document exactly why the extension requests standard browser features and how they improve your workflow.</li>
+      <li style="margin-bottom: 0;"><strong>Never monetize personal information:</strong> We generate revenue solely through paid Pro licenses, keeping our business aligned with your privacy.</li>
     </ul>
 
-    <h2>What Meter Stores</h2>
-    <p>Your settings (currency, notification preferences, budgets) and activity logs are stored locally in your browser via <code>chrome.storage.local</code>. This data never leaves your device and is deleted if you uninstall the extension or use "Reset all data" in settings.</p>
+    <h2>What Meter AI Uses While Running</h2>
+    <p>To provide usage estimates and workflow features, Meter AI needs access to limited information that is already available inside supported AI websites:</p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 20px 0;">
+      <div style="background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px;">
+        <h3 style="margin-top: 0;">Conversation Length</h3>
+        <p style="font-size: 13.5px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 0;">
+          The extension checks the text length of your prompts and responses in memory to estimate active token usage, discarding the text immediately after calculation.
+        </p>
+      </div>
+      <div style="background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px;">
+        <h3 style="margin-top: 0;">Workspace Projects</h3>
+        <p style="font-size: 13.5px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 0;">
+          The name of your active Claude Project is read solely to let you organize and track usage budgets per project locally.
+        </p>
+      </div>
+    </div>
 
-    <h2>What Meter Does NOT Do</h2>
-    <ul>
-      <li>No analytics, tracking pixels, or third-party scripts.</li>
-      <li>No data is ever sold, shared, or transmitted anywhere.</li>
+    <h2>What Meter AI Saves</h2>
+    <p>We save configuration and history metrics directly to your browser's local sandbox profile. This data stays on your machine and includes:</p>
+    <ul style="padding-left: 20px; line-height: 1.7;">
+      <li style="margin-bottom: 8px;">Your custom warning limits and notification settings.</li>
+      <li style="margin-bottom: 8px;">Activity histories (message counts, local sync states).</li>
+      <li style="margin-bottom: 0;">Active reset timer parameters.</li>
     </ul>
+
+    <h2>Data We Never Access</h2>
+    <p>The extension ignores data outside your active AI workspace and never intercepts:</p>
+    <ul style="padding-left: 20px; line-height: 1.7;">
+      <li style="margin-bottom: 8px;">✓ Conversation content (the raw text of your prompts or AI replies).</li>
+      <li style="margin-bottom: 8px;">✓ Uploaded files, codebase imports, images, or documents.</li>
+      <li style="margin-bottom: 8px;">✓ Your browser history, cookies, or activity outside supported AI tabs.</li>
+      <li style="margin-bottom: 8px;">✓ Input forms, credentials, passwords, or credit card numbers.</li>
+      <li style="margin-bottom: 0;">✓ Advertising cookies or browser-level tracking IDs.</li>
+    </ul>
+
+    <h2>When We Communicate With Our Servers</h2>
+    <p>Meter AI is designed to run locally. The only times the extension makes outbound network requests are:</p>
+    <ul style="padding-left: 20px; line-height: 1.7;">
+      <li style="margin-bottom: 8px;"><strong>License checking:</strong> To verify if a Pro subscription key is active.</li>
+      <li style="margin-bottom: 0;"><strong>Extension updates:</strong> Standard browser checks to download version updates.</li>
+    </ul>
+
+    <h2>Third-Party Services</h2>
+    <p>We partner with a limited list of external services to verify licensing and payment operations securely:</p>
+    <ul style="padding-left: 20px; line-height: 1.7;">
+      <li style="margin-bottom: 8px;"><strong>Razorpay:</strong> Handles subscription payments. Payment data remains isolated on their secure site.</li>
+      <li style="margin-bottom: 8px;"><strong>Chrome Web Store:</strong> Manages extension distribution and user installation channels.</li>
+      <li style="margin-bottom: 0;"><strong>Supabase:</strong> Checks the valid key list to confirm Pro subscriptions.</li>
+    </ul>
+
+    <h2>Your Controls &amp; Data Retention</h2>
+    <p>Your local stats, configuration states, and budgets remain on your browser tab profile. This data is saved until you choose to clear it. You can reset your configurations, clear your metrics, or delete all statistics instantly via the settings. When you uninstall the extension, the browser deletes all associated local settings automatically.</p>
+
+    <h2>Frequently Asked Questions</h2>
     
-    <p>Meter is not affiliated with or endorsed by Anthropic.</p>
+    <details>
+      <summary>Can Meter AI read my conversations?</summary>
+      <div class="details-content">
+        <p style="margin-bottom: 0; font-size: 14px; color: var(--text-secondary); line-height: 1.6;">No. The extension estimates text length in memory to calculate progress bars but never stores or transmits the text of your conversations.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Where is my information stored?</summary>
+      <div class="details-content">
+        <p style="margin-bottom: 0; font-size: 14px; color: var(--text-secondary); line-height: 1.6;">All your settings, preferences, and local stats are stored securely in your browser's isolated local profile on your own computer. None of this data is uploaded to our servers.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Can I use Meter AI without creating an account?</summary>
+      <div class="details-content">
+        <p style="margin-bottom: 0; font-size: 14px; color: var(--text-secondary); line-height: 1.6;">Yes. The free core tracking features require no signup, registration, or email verification. You can use it immediately after installation.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Can I remove everything later?</summary>
+      <div class="details-content">
+        <p style="margin-bottom: 0; font-size: 14px; color: var(--text-secondary); line-height: 1.6;">Yes. You can clear all settings, reset countdown parameters, and delete local stats history instantly using the extension's settings panel.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Does Meter AI work offline?</summary>
+      <div class="details-content">
+        <p style="margin-bottom: 0; font-size: 14px; color: var(--text-secondary); line-height: 1.6;">Yes. Because all logic and estimation code run locally on your device, the tracking features continue to function without an active internet connection.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Does Meter AI share information with advertisers?</summary>
+      <div class="details-content">
+        <p style="margin-bottom: 0; font-size: 14px; color: var(--text-secondary); line-height: 1.6;">No. We do not place trackers, build profiling cookies, or collect search analytics. We generate revenue exclusively through premium Pro subscriptions.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>What happens if I uninstall?</summary>
+      <div class="details-content">
+        <p style="margin-bottom: 0; font-size: 14px; color: var(--text-secondary); line-height: 1.6;">If you uninstall the extension, the browser deletes all local settings, daily statistics, and customized configurations immediately.</p>
+      </div>
+    </details>
+
+    <h2>Keeping This Policy Up to Date</h2>
+    <p>Our privacy center details will adapt as the product evolves. When we update features, we will reflect updates on this page with an updated revision date.</p>
+
+    <div style="border-top: 1px solid var(--border); padding-top: 24px; margin-top: 32px; margin-bottom: 24px;">
+      <p style="font-size: 14.5px; color: var(--text-primary); line-height: 1.6; margin-bottom: 12px; font-weight: 500;">
+        Meter AI was designed around a simple belief: your conversations belong to you. Every privacy decision we make starts from that principle, and this page exists so you always know how your information is handled.
+      </p>
+      <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 0;">
+        Need more information? <a href="mailto:support.meterai@gmail.com" style="color: var(--accent); text-decoration: underline;">Contact Support &rarr;</a>
+      </p>
+    </div>
   </div>
 
-  <!-- ═══ Footer ═══ -->
+  <!-- Footer -->
   <footer class="footer">
     <div class="container footer-content-centered">
       <span class="footer-logo">Meter<span class="brand-ai">AI</span></span>
@@ -162,19 +315,19 @@
       
       <div class="footer-links-row">
         <a href="/features">Features</a>
-        <span>·</span>
+        <span>&middot;</span>
         <a href="/pricing">Pricing</a>
-        <span>·</span>
+        <span>&middot;</span>
         <a href="/install">Install</a>
-        <span>·</span>
+        <span>&middot;</span>
         <a href="/faq">FAQ</a>
-        <span>·</span>
+        <span>&middot;</span>
         <a href="/changelog">Changelog</a>
-        <span>·</span>
+        <span>&middot;</span>
         <a href="/about">About</a>
-        <span>·</span>
+        <span>&middot;</span>
         <a href="/privacy">Privacy Policy</a>
-        <span>·</span>
+        <span>&middot;</span>
         <a href="/terms">Terms of Service</a>
       </div>
       
@@ -224,7 +377,7 @@
     </div>
   </footer>
 
-  <!-- ═══ Modals ═══ -->
+  <!-- Modals -->
   <!-- Feedback Modal -->
   <div id="feedback-modal" class="feedback-modal-overlay" style="display: none;">
     <div class="feedback-modal-card">

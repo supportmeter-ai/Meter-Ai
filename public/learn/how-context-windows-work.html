@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Context Windows Work | Meter AI</title>
+  <meta name="description" content="A comprehensive guide explaining context windows, LLM token sizes, sequence limits, and prompt accumulation behavior.">
+  <link rel="canonical" href="https://getmeterai.vercel.app/learn/how-context-windows-work" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://checkout.razorpay.com">
+  <link rel="preconnect" href="https://ojlamxgpcgchqrmpuugl.supabase.co">
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+  <link rel="dns-prefetch" href="https://checkout.razorpay.com">
+  <link rel="dns-prefetch" href="https://ojlamxgpcgchqrmpuugl.supabase.co">
+  <link rel="stylesheet" href="/styles.css?v=1.0.2">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" type="image/svg+xml" href="/assets/logo.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="How Context Windows Work | Meter AI">
+  <meta property="og:description" content="A comprehensive guide explaining context windows, LLM token sizes, sequence limits, and prompt accumulation behavior.">
+  <meta property="og:url" content="https://getmeterai.vercel.app/learn/how-context-windows-work">
+  <meta property="og:image" content="https://getmeterai.vercel.app/og-image.png">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Meter AI">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="How Context Windows Work | Meter AI">
+  <meta name="twitter:description" content="A comprehensive guide explaining context windows, LLM token sizes, sequence limits, and prompt accumulation behavior.">
+  <meta name="twitter:image" content="https://getmeterai.vercel.app/og-image.png">
+
+  <!-- JSON-LD Entity Graph -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://getmeterai.vercel.app/#website",
+        "url": "https://getmeterai.vercel.app",
+        "name": "Meter AI"
+      },
+      {
+        "@type": "Article",
+        "@id": "https://getmeterai.vercel.app/learn/how-context-windows-work/#webpage",
+        "url": "https://getmeterai.vercel.app/learn/how-context-windows-work",
+        "name": "Understanding Context Windows & Token Math",
+        "headline": "Understanding Context Windows & Token Math",
+        "description": "A comprehensive educational guide explaining context windows, LLM token sizes, sequence limits, and prompt accumulator curves.",
+        "isPartOf": {
+          "@id": "https://getmeterai.vercel.app/#website"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Harsha Parisha",
+          "url": "https://getmeterai.vercel.app/author/harsha-parisha"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://getmeterai.vercel.app/learn/how-context-windows-work/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://getmeterai.vercel.app"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Learning Center",
+            "item": "https://getmeterai.vercel.app/learn"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Understanding Token Math",
+            "item": "https://getmeterai.vercel.app/learn/how-context-windows-work"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ═══ Navigation ═══ -->
+  <nav class="nav" id="nav">
+    <a href="/" class="nav-brand">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" class="nav-logo-icon">
+        <path d="M5.5 18a7.6 7.6 0 1 1 13 0" />
+        <line x1="12" y1="14" x2="16.5" y2="9.5" />
+        <circle cx="12" cy="14" r="2" fill="currentColor" stroke="none" />
+      </svg>
+      <span class="nav-logo-text">Meter<span class="brand-ai">AI</span></span>
+    </a>
+    
+    <div class="nav-tabs">
+      <div class="nav-tab-container"><a href="/features" class="nav-tab"><span class="animated-roll">Features</span></a></div>
+      <div class="nav-tab-container"><a href="/pricing" class="nav-tab"><span class="animated-roll">Pricing</span></a></div>
+      <div class="nav-tab-container"><a href="/install" class="nav-tab"><span class="animated-roll">Install</span></a></div>
+      <div class="nav-tab-container"><a href="/faq" class="nav-tab"><span class="animated-roll">FAQ</span></a></div>
+      <div class="nav-tab-container"><a href="/changelog" class="nav-tab"><span class="animated-roll">Changelog</span></a></div>
+      <div class="nav-tab-container"><a href="/about" class="nav-tab"><span class="animated-roll">About</span></a></div>
+    </div>
+
+    <div class="nav-actions">
+      <a href="https://chromewebstore.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary nav-btn">
+        <span class="animated-roll">Install for Chrome</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- ═══ Content ═══ -->
+  <main class="subpage-container">
+    <a href="/learn" class="subpage-back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      Back to Learning Center
+    </a>
+
+    <h1>Understanding Context Windows &amp; Token Math</h1>
+    
+    <p class="article-meta" style="color: var(--text-secondary); font-size: 14px; margin-bottom: 32px;">
+      Last updated: June 2026 &middot; 10 min read &middot; By <a href="/author/harsha-parisha" style="color: var(--accent); text-decoration: underline;">Harsha Parisha</a>
+    </p>
+
+    <section>
+      <h2>What is a Context Window?</h2>
+      <p>A context window is the total memory capacity a Large Language Model (LLM) utilizes to evaluate inputs and generate outputs during a single conversation thread. In neural transformer architectures, the context represents the range of data the model can access when predicting the next text character. Managing context windown parameters is critical for developers maintaining coding workspaces.</p>
+    </section>
+
+    <section>
+      <h2>1. The Token Math: How Text is Mapped</h2>
+      <p>Models do not process plain character strings. Instead, text is parsed into integers called **tokens** using byte-pair encoding (BPE). In English text, a general rule of thumb is that 1 token corresponds to approximately 4 characters (or 0.75 words). For codebase files containing multiple symbols, brackets, or indentations, the character-to-token ratio drops, increasing the token count per line.</p>
+      
+      <!-- SVG Context Stack -->
+      <div style="text-align: center; margin: 32px 0;">
+        <svg viewBox="0 0 600 220" style="background: var(--bg-secondary); border-radius: var(--radius-md); border: 1px solid rgba(255,255,255,0.05); max-width: 100%; height: auto;">
+          <!-- Graph Title -->
+          <text x="300" y="24" fill="#F5F1ED" font-family="var(--font-heading)" font-size="13" text-anchor="middle" font-weight="600">Structure of an Active Context Window</text>
+          
+          <!-- Stack blocks -->
+          <!-- Block 1: System prompt -->
+          <rect x="150" y="50" width="300" height="30" rx="4" fill="#1A1816" stroke="#A8A29B" stroke-width="1"/>
+          <text x="300" y="69" fill="#F5F1ED" font-family="var(--font-body)" font-size="11" text-anchor="middle">System Prompt &amp; Settings (~5k tokens)</text>
+
+          <!-- Block 2: Conversation history -->
+          <rect x="150" y="85" width="300" height="50" rx="4" fill="#1A1816" stroke="#D85A30" stroke-width="1.5"/>
+          <text x="300" y="114" fill="#F5F1ED" font-family="var(--font-body)" font-size="11" text-anchor="middle" font-weight="600">Conversation History (Grows with each turn)</text>
+
+          <!-- Block 3: User current prompt -->
+          <rect x="150" y="140" width="300" height="30" rx="4" fill="#1A1816" stroke="#A8A29B" stroke-width="1"/>
+          <text x="300" y="159" fill="#F5F1ED" font-family="var(--font-body)" font-size="11" text-anchor="middle">Current User Prompt &amp; Attachments</text>
+        </svg>
+      </div>
+    </section>
+
+    <section>
+      <h2>2. Model Context Budget Comparisons</h2>
+      <p>Different models allocate varying context budgets. In the table below, we compare context capacities and latency metrics across leading models:</p>
+      
+      <div style="overflow-x: auto; margin: 24px 0;">
+        <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 14px;">
+          <thead>
+            <tr style="border-bottom: 2px solid var(--bg-secondary); color: var(--text-primary);">
+              <th style="padding: 10px; font-weight: 600;">Model Name</th>
+              <th style="padding: 10px; font-weight: 600;">Advertised Context Budget</th>
+              <th style="padding: 10px; font-weight: 600;">Avg. Coding Thread Limit</th>
+              <th style="padding: 10px; font-weight: 600;">Empirical Latency Penalty</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--bg-secondary); color: var(--text-secondary);">
+              <td style="padding: 10px; font-weight: 500; color: var(--text-primary);">Claude 3.5 Sonnet</td>
+              <td style="padding: 10px;">200,000 tokens</td>
+              <td style="padding: 10px;">~80,000 tokens</td>
+              <td style="padding: 10px;">Moderate (TTFT scales above 60k tokens)</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--bg-secondary); color: var(--text-secondary);">
+              <td style="padding: 10px; font-weight: 500; color: var(--text-primary);">GPT-4o</td>
+              <td style="padding: 10px;">128,000 tokens</td>
+              <td style="padding: 10px;">~60,000 tokens</td>
+              <td style="padding: 10px;">Low</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--bg-secondary); color: var(--text-secondary);">
+              <td style="padding: 10px; font-weight: 500; color: var(--text-primary);">Gemini 1.5 Pro</td>
+              <td style="padding: 10px;">2,000,000 tokens</td>
+              <td style="padding: 10px;">~300,000 tokens</td>
+              <td style="padding: 10px;">High (TTFT increases for large codebases)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>3. Methodology &amp; Latency</h2>
+      <p>These context comparisons are based on findings from the Context Window Decay Study, which benchmarked response latency across 120 professional developer sessions. The data indicates that processing latency (Time-To-First-Token) increases significantly once conversation context size exceeds 50,000 tokens, as the server must process a larger sequence length before output generation can begin.</p>
+    </section>
+
+    <section>
+      <h2>4. Context Optimization Heuristics</h2>
+      <p>To keep conversation threads responsive and avoid sudden rate limits, developers can apply these optimization heuristics:</p>
+      <ul>
+        <li><strong>Trim History:</strong> Clear past messages or open a fresh tab when switching between unrelated coding tasks.</li>
+        <li><strong>Exclude Node Modules:</strong> When attaching codebase structures, exclude build directories (`node_modules`, `dist`, `.git`) to conserve token capacity.</li>
+        <li><strong>Use Context Handoff:</strong> When thread context approaches critical limits (e.g. 70% of model capacity), use the **Context Bridge** to hand off the conversation to another provider, preserving continuity.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>References &amp; Standards</h2>
+      <p style="font-size: 13.5px; line-height: 1.6; color: var(--text-secondary);">
+        1. Transformer Architecture Fundamentals: <a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: underline;">Attention Is All You Need paper</a><br>
+        2. Chrome Extensions Storage API: <a href="https://developer.chrome.com/docs/extensions/reference/api/storage" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: underline;">Developer Chrome storage API</a><br>
+        3. Web DOM Node specifications: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: underline;">MDN Web Docs Node reference</a>
+      </p>
+    </section>
+
+
+
+    <h2>Related Reading</h2>
+    <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 16px;">
+      <a href="/learn/how-claude-limits-work" style="color: var(--accent); text-decoration: underline;">Understanding Claude Limits — Heuristics &amp; Math Models</a>
+      <a href="/research/context-window-decay-benchmarks" style="color: var(--accent); text-decoration: underline;">Research Study — Context Window Decay and Latency Benchmarks</a>
+      <a href="/docs/usage-tracker" style="color: var(--accent); text-decoration: underline;">Technical Guide — Usage Tracker Token Calculations</a>
+    </div>
+  </main>
+
+  <!-- ═══ Footer ═══ -->
+  <footer class="footer">
+    <div class="container footer-content-centered">
+      <span class="footer-logo">Meter<span class="brand-ai">AI</span></span>
+      <p class="footer-tagline">Built for people who spend serious time with AI.</p>
+      
+      <div class="footer-links-row">
+        <a href="/features">Features</a>
+        <span>·</span>
+        <a href="/pricing">Pricing</a>
+        <span>·</span>
+        <a href="/install">Install</a>
+        <span>·</span>
+        <a href="/faq">FAQ</a>
+        <span>·</span>
+        <a href="/changelog">Changelog</a>
+        <span>·</span>
+        <a href="/about">About</a>
+        <span>·</span>
+        <a href="/specs">Specs</a>
+        <span>·</span>
+        <a href="/research">Research</a>
+        <span>·</span>
+        <a href="/privacy">Privacy Policy</a>
+        <span>·</span>
+        <a href="/terms">Terms of Service</a>
+      </div>
+      
+      <div class="footer-copy-row" style="margin-top: 24px; font-size: 13px; color: var(--text-muted);">
+        &copy; 2026 Meter AI. All rights reserved.
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
